@@ -5,6 +5,7 @@ function Signup() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+	const [passwordToggle, setPasswordToggle] = useState(true);
 
     const handleSubmit = () => {
         if (email === "" || password === "") {
@@ -49,12 +50,14 @@ function Signup() {
                 <div className="mt-6  w-full">
                     <lable className="text-sm font-medium leading-none text-gray-800">Password</lable>
                     <div className="">
-                        <input aria-label="enter Password" role="input" type="password" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2 pr-10"
-                            value={password} onChange={(e) => setPassword(e.target.value)}
+                        <input aria-label="enter Password" role="input" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2 pr-10"
+                            value={password} type={passwordToggle ? 'password' : ''} onChange={(e) => setPassword(e.target.value)}
                         />
-                        <div class="float-right mt-1.5 flex items-center text-sm">
-                            <input type="checkbox" name="passswordToggle" id="passswordToggle" class="px-1 mr-2 cursor-pointer h-3.5 w-3.5" />
-                            <label htmlFor="passswordToggle">Show Password</label>
+                        <div class="float-right mt-1.5 flex items-center">
+                            <input type="checkbox" name="passswordToggle" id="passswordToggle" class="px-1 mr-1/2 cursor-pointer h-3 w-3"
+                                onChange={() => setPasswordToggle(!passwordToggle)}
+                            />
+                            <label htmlFor="passswordToggle" className="text-xs cursor-pointer">Show Password</label>
                         </div>
                     </div>
                 </div>

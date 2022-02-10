@@ -5,6 +5,7 @@ function Login() {
 
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [passwordToggle, setPasswordToggle] = useState(true);
 
 	const handleSubmit = () => {
 		if (email === "" || password === "") {
@@ -49,12 +50,21 @@ function Login() {
 				<div className="mt-6  w-full">
 					<lable className="text-sm font-medium leading-none text-gray-800">Password</lable>
 					<div className="">
-						<input aria-label="enter Password" role="input" type="password" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2 pr-10"
-							value={password} onChange={(e) => setPassword(e.target.value)}
+						<input aria-label="enter Password" role="input" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2 pr-10"
+							value={password} type={passwordToggle ? 'password' : ''} onChange={(e) => setPassword(e.target.value)}
 						/>
-						<div class="float-right mt-1.5 flex items-center text-sm">
-							<input type="checkbox" name="passswordToggle" id="passswordToggle" class="px-1 mr-2 cursor-pointer h-3.5 w-3.5" />
-							<label htmlFor="passswordToggle">Show Password</label>
+						<div className="float-left">
+							<Link href="/forgetPassword">
+								<a className="px-1 mr-2 text-xs float-right font-display font-semibold text-indigo-600 hover:text-indigo-800 cursor-pointer">
+									Forgot Password?
+								</a>
+							</Link>
+						</div>
+						<div class="float-right mt-1.5 flex items-center">
+							<input type="checkbox" name="passswordToggle" id="passswordToggle" class="px-1 mr-1/2 cursor-pointer h-3 w-3" 
+								onChange={() => setPasswordToggle(!passwordToggle)}
+							/>
+							<label htmlFor="passswordToggle" className="text-xs cursor-pointer">Show Password</label>
 						</div>
 					</div>
 				</div>
@@ -62,7 +72,7 @@ function Login() {
 					<button role="button" aria-label="create my account" className="focus:ring-2 focus:ring-offset focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded-lg hover:bg-indigo-600 py-4 w-full"
 						onClick={handleSubmit}
 					>
-						Create my account
+						Log In
 					</button>
 				</div>
 			</div>

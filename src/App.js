@@ -3,10 +3,9 @@ import {
 	Switch,
 	Route,
 } from "react-router-dom";
-import Login from "./components/Login";
-import Navbar from "./components/Navbar";
 import PageLayout from "./components/PageLayout";
-import Signup from "./components/Signup";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 function App() {
 	return (
@@ -19,7 +18,7 @@ function App() {
 					</PageLayout>
 				</Route>
 				<Route path="/login">
-					<Login />
+					<Login/>
 				</Route>
 				<Route path="/signup">
 					<Signup />
