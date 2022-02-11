@@ -4,6 +4,7 @@ import {
 	Route,
 } from "react-router-dom";
 import PageLayout from "./components/PageLayout";
+import PostCard from "./components/PostCard";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
@@ -15,6 +16,7 @@ function App() {
 					{/* Page Layput already having navbar */}
 					<PageLayout>	
 						<div>This is Home - Put your component here!</div>
+						<PostCard/>
 					</PageLayout>
 				</Route>
 				<Route path="/login">
