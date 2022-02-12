@@ -9,6 +9,7 @@ import {
   XIcon,
 } from "@heroicons/react/outline";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const navigation = [
   //   { name: 'Dashboard', href: '#', current: true },
@@ -22,8 +23,8 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
-  const [hidden,setHidden]=useState(true);
-  function showSearchBox () {
+  const [hidden, setHidden] = useState(true);
+  function showSearchBox() {
     setHidden(!hidden);
   }
   return (
@@ -34,30 +35,32 @@ export default function Navbar() {
             <div className="relative flex items-center justify-between h-16">
               <div className="absolute inset-y-0 left-0 flex sm:hidden"></div>
               <div className="flex-1 flex items-center justify-between sm:items-stretch sm:justify-start">
-                <div className="flex-shrink-0 flex items-center">
-                  <img
-                    className="block  h-8 w-auto rounded-full"
-                    src="/images/logo.jpg"
-                    alt="Dream Shelter"
-                  />
-                  <div className="hidden sm:block font-bold text-xl font-size cursor-pointer flex items-center font-[Poppins] text-gray-800 pr-3">
-                    <span className="text-5x1 text-blue-600 mr-1 pt-2">
-                      <ion-icon name="logo-ionic"></ion-icon>
-                    </span>
-                    Dream Shelter
-                  </div>
-                  <button
-                    type="button"
-                    className="bg-gray-200 p-1 rounded-sm text-gray-800  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white block sm:hidden ml-2 " 
-                    onClick={showSearchBox}
-                  >
-                    <span className="sr-only">Chat-Box</span>
-                    <SearchIcon
-                      className="h-5 w-5 hover:stroke-cyan-800"
-                      aria-hidden="true"
+                <Link to={"/"}>
+                  <div className="flex-shrink-0 flex items-center">
+                    <img
+                      className="block  h-8 w-auto rounded-full"
+                      src="/images/logo.jpg"
+                      alt="Dream Shelter"
                     />
-                  </button>
-                </div>
+                    <div className="hidden sm:block font-bold text-xl font-size cursor-pointer flex items-center font-[Poppins] text-gray-800 pr-3">
+                      <span className="text-5x1 text-blue-600 mr-1 pt-2">
+                        <ion-icon name="logo-ionic"></ion-icon>
+                      </span>
+                      Dream Shelter
+                    </div>
+                    <button
+                      type="button"
+                      className="bg-gray-200 p-1 rounded-sm text-gray-800  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white block sm:hidden ml-2 "
+                      onClick={showSearchBox}
+                    >
+                      <span className="sr-only">Chat-Box</span>
+                      <SearchIcon
+                        className="h-5 w-5 hover:stroke-cyan-800"
+                        aria-hidden="true"
+                      />
+                    </button>
+                  </div>
+                </Link>
                 <div class="pt-2 relative mx-auto text-gray-600 hidden sm:block">
                   <input
                     class=" bg-gray-200 h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none w-60 md:w-96 "
@@ -94,36 +97,44 @@ export default function Navbar() {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
-                  type="button"
-                  className="bg-gray-200 p-1 rounded-full text-gray-800 mr-1 ml-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                >
-                  <span className="sr-only">Blog-Post</span>
-                  <NewspaperIcon
-                    className="h-6 w-6 hover:stroke-cyan-800"
-                    aria-hidden="true"
-                  />
-                </button>
-                <button
-                  type="button"
-                  className="bg-gray-200  p-1 rounded-full text-gray-800 mr-1  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                >
-                  <span className="sr-only">Notifications</span>
-                  <BellIcon
-                    className="h-6 w-6  hover:stroke-cyan-800"
-                    aria-hidden="true"
-                  />
-                </button>
-                <button
-                  type="button"
-                  className="bg-gray-200 p-1 rounded-full text-gray-800  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                >
-                  <span className="sr-only">Chat-Box</span>
-                  <ChatAltIcon
-                    className="h-6 w-6 hover:stroke-cyan-800"
-                    aria-hidden="true"
-                  />
-                </button>
+                <Link to={"/blogs"} >
+                  <button
+                    type="button"
+                    className="bg-gray-200 p-1 rounded-full text-gray-800 mr-1 ml-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                  >
+                    <span className="sr-only">Blog-Post</span>
+                    <NewspaperIcon
+                      className="h-6 w-6 hover:stroke-cyan-800"
+                      aria-hidden="true"
+                    />
+                  </button>
+                </Link>
+
+                <Link to={"/notifications"} >
+                  <button
+                    type="button"
+                    className="bg-gray-200  p-1 rounded-full text-gray-800 mr-1  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                  >
+                    <span className="sr-only">Notifications</span>
+                    <BellIcon
+                      className="h-6 w-6  hover:stroke-cyan-800"
+                      aria-hidden="true"
+                    />
+                  </button>
+                </Link>
+
+                <Link to={"/messages"} >
+                  <button
+                    type="button"
+                    className="bg-gray-200 p-1 rounded-full text-gray-800  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                  >
+                    <span className="sr-only">Chat-Box</span>
+                    <ChatAltIcon
+                      className="h-6 w-6 hover:stroke-cyan-800"
+                      aria-hidden="true"
+                    />
+                  </button>
+                </Link>
 
                 {/* Profile dropdown */}
                 <Menu as="div" className="ml-3 relative">

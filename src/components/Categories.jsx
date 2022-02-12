@@ -2,8 +2,6 @@ import { XCircleIcon } from "@heroicons/react/outline"
 import { useState } from "react"
 import { categories } from "../dummy-data/data"
 
-
-
 const Categories = () => {
 
     const [myCategories, setMyCategories] = useState(categories);
@@ -16,7 +14,7 @@ const Categories = () => {
     }
 
     return (
-        <section className="max-w-xs px-3 py-5 m-2 border border-gray-200 rounded-lg overflow-hidden shadow-lg">
+        <section className="w-80 hidden lg:block  h-max px-3 py-5 m-2 border border-gray-200 rounded-lg overflow-hidden shadow-lg">
 
             <h1 className="pb-3 font-semibold text-lg">Categories</h1>
 

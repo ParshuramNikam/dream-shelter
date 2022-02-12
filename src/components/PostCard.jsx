@@ -35,9 +35,9 @@ const PostCard = () => {
     }
 
     return (
-        <div className="pt-2 flex justify-center">
+        <div className="pt-2 flex justify-center h-max">
             {/* CARD */}
-            <div className="lg:min-w-fit max-w-xl rounded-lg overflow-hidden shadow-lg py-2 border border-gray-200">
+            <div className="post_card max-w-2xl rounded-lg overflow-hidden shadow-lg py-2 border border-gray-200">
                 {/* Post header 👇 */}
                 <div className="flex  items-center justify-between px-4 pt-2">
                     <div className="flex  items-center">
