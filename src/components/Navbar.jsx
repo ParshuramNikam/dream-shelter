@@ -1,55 +1,78 @@
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
+import { Fragment } from "react";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import {
+  BellIcon,
+  ChatAltIcon,
+  MenuIcon,
+  NewspaperIcon,
+  SearchIcon,
+  XIcon,
+} from "@heroicons/react/outline";
+import { useState } from "react";
 
 const navigation = [
-//   { name: 'Dashboard', href: '#', current: true },
-//   { name: 'Team', href: '#', current: false },
-//   { name: 'Projects', href: '#', current: false },
-//   { name: 'Calendar', href: '#', current: false },
-]
+  //   { name: 'Dashboard', href: '#', current: true },
+  //   { name: 'Team', href: '#', current: false },
+  //   { name: 'Projects', href: '#', current: false },
+  //   { name: 'Calendar', href: '#', current: false },
+];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
 export default function Navbar() {
+  const [hidden,setHidden]=useState(true);
+  function showSearchBox () {
+    setHidden(!hidden);
+  }
   return (
-    <Disclosure as="nav" className="bg-gray-200">
+    <Disclosure as="nav" className="bg-white border-2 border-red-600">
       {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
             <div className="relative flex items-center justify-between h-16">
-              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                {/* Mobile menu button*/}
-                <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                  <span className="sr-only">Open main menu</span>
-                  {open ? (
-                    <XIcon className="block h-6 w-6" aria-hidden="true" />
-                  ) : (
-                    <MenuIcon className="block h-6 w-6" aria-hidden="true" />
-                  )}
-                </Disclosure.Button>
-              </div>
-              <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+              <div className="absolute inset-y-0 left-0 flex sm:hidden"></div>
+              <div className="flex-1 flex items-center justify-between sm:items-stretch sm:justify-start">
                 <div className="flex-shrink-0 flex items-center">
                   <img
-                    className="block lg:hidden h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
+                    className="block  h-8 w-auto rounded-full"
+                    src="/images/logo.jpg"
                     alt="Dream Shelter"
                   />
-                  {/* <img
-                    className="hidden lg:block h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
-                    alt="Dream Shelter"
-                  /> */}
-                  <div className='font-bold text-3x2 font-size cursor-pointer flex items-center font-[Poppins] text-gray-800'>
-                      <span className='text-5x1 text-blue-600 mr-1 pt-2'>
-                          <ion-icon name="logo-ionic"></ion-icon>
-                      </span>
-                      Dream Shelter
+                  <div className="hidden sm:block font-bold text-xl font-size cursor-pointer flex items-center font-[Poppins] text-gray-800 pr-3">
+                    <span className="text-5x1 text-blue-600 mr-1 pt-2">
+                      <ion-icon name="logo-ionic"></ion-icon>
+                    </span>
+                    Dream Shelter
                   </div>
+                  <button
+                    type="button"
+                    className="bg-gray-200 p-1 rounded-sm text-gray-800  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white block sm:hidden ml-2 " 
+                    onClick={showSearchBox}
+                  >
+                    <span className="sr-only">Chat-Box</span>
+                    <SearchIcon
+                      className="h-5 w-5 hover:stroke-cyan-800"
+                      aria-hidden="true"
+                    />
+                  </button>
                 </div>
+                <div class="pt-2 relative mx-auto text-gray-600 hidden sm:block">
+                  <input
+                    class=" bg-gray-200 h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none w-60 md:w-96 "
+                    type="search"
+                    name="search"
+                    placeholder="Search"
+                  />
+                  <button
+                    type="submit"
+                    class="absolute right-0 top-0 mt-5 mr-4 "
+                  >
+                    <SearchIcon class="text-gray-600 h-4 w-4 stroke-gray-800"></SearchIcon>
+                  </button>
+                </div>
+
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
@@ -57,10 +80,12 @@ export default function Navbar() {
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'px-3 py-2 rounded-md text-sm font-medium'
+                          item.current
+                            ? "bg-gray-900 text-white"
+                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                          "px-3 py-2 rounded-md text-sm font-medium"
                         )}
-                        aria-current={item.current ? 'page' : undefined}
+                        aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}
                       </a>
@@ -71,16 +96,39 @@ export default function Navbar() {
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <button
                   type="button"
-                  className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                  className="bg-gray-200 p-1 rounded-full text-gray-800 mr-1 ml-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                 >
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
+                  <span className="sr-only">Blog-Post</span>
+                  <NewspaperIcon
+                    className="h-6 w-6 hover:stroke-cyan-800"
+                    aria-hidden="true"
+                  />
+                </button>
+                <button
+                  type="button"
+                  className="bg-gray-200  p-1 rounded-full text-gray-800 mr-1  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                >
+                  <span className="sr-only">Notifications</span>
+                  <BellIcon
+                    className="h-6 w-6  hover:stroke-cyan-800"
+                    aria-hidden="true"
+                  />
+                </button>
+                <button
+                  type="button"
+                  className="bg-gray-200 p-1 rounded-full text-gray-800  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                >
+                  <span className="sr-only">Chat-Box</span>
+                  <ChatAltIcon
+                    className="h-6 w-6 hover:stroke-cyan-800"
+                    aria-hidden="true"
+                  />
                 </button>
 
                 {/* Profile dropdown */}
                 <Menu as="div" className="ml-3 relative">
                   <div>
-                    <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                    <Menu.Button className="bg-gray-200 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
@@ -103,7 +151,10 @@ export default function Navbar() {
                         {({ active }) => (
                           <a
                             href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            className={classNames(
+                              active ? "bg-gray-100" : "",
+                              "block px-4 py-2 text-sm text-gray-700"
+                            )}
                           >
                             Your Profile
                           </a>
@@ -113,7 +164,10 @@ export default function Navbar() {
                         {({ active }) => (
                           <a
                             href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            className={classNames(
+                              active ? "bg-gray-100" : "",
+                              "block px-4 py-2 text-sm text-gray-700"
+                            )}
                           >
                             Settings
                           </a>
@@ -123,7 +177,10 @@ export default function Navbar() {
                         {({ active }) => (
                           <a
                             href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            className={classNames(
+                              active ? "bg-gray-100" : "",
+                              "block px-4 py-2 text-sm text-gray-700"
+                            )}
                           >
                             Sign out
                           </a>
@@ -144,10 +201,12 @@ export default function Navbar() {
                   as="a"
                   href={item.href}
                   className={classNames(
-                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                    'block px-3 py-2 rounded-md text-base font-medium'
+                    item.current
+                      ? "bg-gray-900 text-white"
+                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                    "block px-3 py-2 rounded-md text-base font-medium"
                   )}
-                  aria-current={item.current ? 'page' : undefined}
+                  aria-current={item.current ? "page" : undefined}
                 >
                   {item.name}
                 </Disclosure.Button>
@@ -157,6 +216,5 @@ export default function Navbar() {
         </>
       )}
     </Disclosure>
-  )
+  );
 }
-
