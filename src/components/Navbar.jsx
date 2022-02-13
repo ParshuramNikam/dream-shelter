@@ -64,7 +64,7 @@ export default function Navbar() {
 										className={` ${hidden ? 'hidden' : ''} bg-gray-200 p-1 rounded-sm text-gray-800  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white block sm:hidden ml-2 `}
 										onClick={showSearchBox}
 									>
-										<span className="sr-only">Searc-Bar</span>
+										<span className="sr-only">Search-Bar</span>
 										<SearchIcon
 											className="h-5 w-5 hover:stroke-cyan-800"
 											aria-hidden="true"
