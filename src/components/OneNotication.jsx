@@ -20,7 +20,7 @@ const OneNotication = () => {
                 <p className="text-sm leading-none">
                     <span className="text-indigo-700">James Doe</span> favourited an <span className="text-indigo-700">item</span>
                 </p>
-                {/* <p className="text-xs leading-3 pt-1 text-gray-500">2 hours ago</p> */}
+                <p className="text-xs leading-3 pt-1 text-gray-500">2 hours ago</p>
             </div>
         </div>
     )

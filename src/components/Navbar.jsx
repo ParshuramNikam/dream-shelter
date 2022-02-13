@@ -5,9 +5,11 @@ import {
 	ChatAltIcon,
 	MenuIcon,
 	NewspaperIcon,
+	PlusCircleIcon,
 	SearchIcon,
 	XIcon,
 } from "@heroicons/react/outline";
+import { HomeIcon } from '@heroicons/react/solid';
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -62,7 +64,7 @@ export default function Navbar() {
 										className={` ${hidden ? 'hidden' : ''} bg-gray-200 p-1 rounded-sm text-gray-800  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white block sm:hidden ml-2 `}
 										onClick={showSearchBox}
 									>
-										<span className="sr-only">Chat-Box</span>
+										<span className="sr-only">Searc-Bar</span>
 										<SearchIcon
 											className="h-5 w-5 hover:stroke-cyan-800"
 											aria-hidden="true"
@@ -87,14 +89,55 @@ export default function Navbar() {
 								<button onClick={hideSearchBox} className={` ${!hidden ? 'hidden' : ''}`}>
 									<XIcon className="h-5 w-5" />
 								</button>
-
-
 							</div>
 							<div className={`${hidden ? 'hidden' : ''} absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0`}>
-								<Link to={"/blogs"} >
+
+              <Link to={"/"} >
+                  
 									<button
 										type="button"
 										className="bg-gray-200 p-1 rounded-full text-gray-800 mr-1 ml-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+									>
+										<span className="sr-only">Home</span>
+										<HomeIcon
+											className="h-6 w-6 hover:stroke-gray-800 solid-fill"
+											aria-hidden="true"
+										/>
+									</button>
+								</Link>
+
+                <Link to={"/messages"} >
+									<button
+										type="button"
+										className="bg-gray-200 p-1 rounded-full text-gray-800 mr-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+									>
+										<span className="sr-only">Chat-Box</span>
+										<ChatAltIcon
+											className="h-6 w-6 hover:stroke-cyan-800"
+											aria-hidden="true"
+										/>
+									</button>
+								</Link>
+
+                <Link to={"/createPost"} >
+                  
+									<button
+										type="button"
+										className="bg-gray-200 p-1 rounded-full text-gray-800 mr-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+									>
+										<span className="sr-only">Create-A-Post</span>
+										<PlusCircleIcon
+											className="h-6 w-6 hover:stroke-cyan-800"
+											aria-hidden="true"
+										/>
+									</button>
+								</Link>
+
+								<Link to={"/blogPost"} >
+                  
+									<button
+										type="button"
+										className="bg-gray-200 p-1 rounded-full text-gray-800 mr-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
 									>
 										<span className="sr-only">Blog-Post</span>
 										<NewspaperIcon
@@ -107,24 +150,11 @@ export default function Navbar() {
 								<Link to={"/notifications"} >
 									<button
 										type="button"
-										className="bg-gray-200  p-1 rounded-full text-gray-800 mr-1  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+										className="bg-gray-200  p-1 rounded-full text-gray-800   focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
 									>
 										<span className="sr-only">Notifications</span>
 										<BellIcon
 											className="h-6 w-6  hover:stroke-cyan-800"
-											aria-hidden="true"
-										/>
-									</button>
-								</Link>
-
-								<Link to={"/messages"} >
-									<button
-										type="button"
-										className="bg-gray-200 p-1 rounded-full text-gray-800  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-									>
-										<span className="sr-only">Chat-Box</span>
-										<ChatAltIcon
-											className="h-6 w-6 hover:stroke-cyan-800"
 											aria-hidden="true"
 										/>
 									</button>
@@ -136,7 +166,7 @@ export default function Navbar() {
 										<Menu.Button className="bg-gray-200 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
 											<span className="sr-only">Open user menu</span>
 											<img
-												className="h-8 w-8 rounded-full"
+												className="h-10 w-10 rounded-full"
 												src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
 												alt=""
 											/>

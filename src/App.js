@@ -11,7 +11,7 @@ function App() {
 	return (
 		<Router>
 			<Switch>
-				{/* Page Layput already having navbar */}
+				{/* Page Layout already having navbar */}
 				<Route exact path="/">
 					<PageLayout>
 						<HomePage />
