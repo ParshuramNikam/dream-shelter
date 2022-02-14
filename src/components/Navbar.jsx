@@ -41,7 +41,7 @@ export default function Navbar() {
 						<div className="relative flex items-center justify-between h-16">
 							<div className="absolute inset-y-0 left-0 flex sm:hidden"></div>
 							<div className="flex-1 flex items-center justify-between sm:items-stretch sm:justify-start">
-								<div className="flex ">
+								<div className="flex items-center">
 									<Link to={"/"}>
 										<div className={` ${hidden ? 'hidden' : ''} flex-shrink-0 flex items-center`}>
 											<img
@@ -49,7 +49,7 @@ export default function Navbar() {
 												src="/images/logo.jpg"
 												alt="Dream Shelter"
 											/>
-											<div className="hidden sm:block font-bold text-xl font-size cursor-pointer flex items-center font-[Poppins] text-gray-800 pr-3">
+											<div className="hidden sm:block whitespace-nowrap font-bold text-xl font-size cursor-pointer flex items-center font-[Poppins] text-gray-800 pr-3 mr-2">
 												<span className="text-5x1 text-blue-600 mr-1 pt-2">
 													<ion-icon name="logo-ionic"></ion-icon>
 												</span>
@@ -69,9 +69,9 @@ export default function Navbar() {
 										/>
 									</button>
 								</div>
-								<div class={` ${!hidden ? 'hidden' : 'block'} pt-2 relative mx-auto text-gray-600`}>
+								<div class={`hidden sm:block pt-2 relative mx-auto text-gray-600`}>
 									<input
-										class=" bg-gray-200 h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none w-60 md:w-96 "
+										class=" bg-gray-200 h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none w-52 md:w-60 lg:w-72 "
 										type="search"
 										name="search"
 										placeholder="Search"
