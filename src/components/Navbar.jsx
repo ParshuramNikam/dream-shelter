@@ -61,7 +61,7 @@ export default function Navbar() {
 									</Link>
 									<button
 										type="button"
-										className={` ${hidden ? 'hidden' : ''} bg-gray-200 p-1 rounded-sm text-gray-800  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white block sm:hidden ml-2 `}
+										className={` ${hidden ? 'hidden' : ''} bg-gray-200 p-1 rounded-sm text-gray-800  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white block md:hidden ml-2 `}
 										onClick={showSearchBox}
 									>
 										<span className="sr-only">Search-Bar</span>
@@ -71,7 +71,7 @@ export default function Navbar() {
 										/>
 									</button>
 								</div>
-								<div class={`hidden sm:block pt-2 relative mx-auto text-gray-600`}>
+								<div class={`hidden md:block pt-2 relative mx-auto text-gray-600`}>
 									<input
 										class=" bg-gray-200 h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none w-52 md:w-60 lg:w-72 "
 										type="search"
@@ -90,10 +90,10 @@ export default function Navbar() {
 									<XIcon className="h-5 w-5" />
 								</button>
 							</div>
-							<div className={`${hidden ? 'hidden' : ''} absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0`}>
+							<div className={`${hidden ? 'hidden' : ''} absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-2 sm:pr-0`}>
 
-              <Link to={"/"} >
-                  
+								<Link to={"/"} >
+
 									<button
 										type="button"
 										className="bg-gray-200 p-1 rounded-full text-gray-800 mr-1 ml-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
@@ -106,7 +106,7 @@ export default function Navbar() {
 									</button>
 								</Link>
 
-                <Link to={"/messages"} >
+								<Link to={"/messages"} >
 									<button
 										type="button"
 										className="bg-gray-200 p-1 rounded-full text-gray-800 mr-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
@@ -119,8 +119,8 @@ export default function Navbar() {
 									</button>
 								</Link>
 
-                <Link to={"/createPost"} >
-                  
+								<Link to={"/createPost"} >
+
 									<button
 										type="button"
 										className="bg-gray-200 p-1 rounded-full text-gray-800 mr-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
@@ -134,7 +134,7 @@ export default function Navbar() {
 								</Link>
 
 								<Link to={"/blogPost"} >
-                  
+
 									<button
 										type="button"
 										className="bg-gray-200 p-1 rounded-full text-gray-800 mr-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
