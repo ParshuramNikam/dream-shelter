@@ -21,6 +21,7 @@ function App() {
 				<Route exact path="/blogs">
 					<PageLayout>
 						<BlogsPage />
+						<h1>HHHHHHHHHHH</h1>
 					</PageLayout>
 				</Route>
 

@@ -133,7 +133,7 @@ export default function Navbar() {
 									</button>
 								</Link>
 
-								<Link to={"/blogPost"} >
+								<Link to={"/blogs"} >
 
 									<button
 										type="button"

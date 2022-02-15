@@ -1,7 +1,9 @@
+import SearchBar from '../components/blogspot/SearchBar.jsx';
+
 const BlogsPage = () => {
     return (
         <div>
-            THIS IS BLOG-SPOT PAGE
+            <SearchBar.jsx/>
         </div>
     )
 }
