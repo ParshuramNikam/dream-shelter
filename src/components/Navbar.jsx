@@ -44,7 +44,7 @@ export default function Navbar() {
 							<div className="absolute inset-y-0 left-0 flex sm:hidden"></div>
 							<div className="flex-1 flex items-center justify-between sm:items-stretch sm:justify-start">
 								<div className="flex items-center">
-									<Link to={"/"}>
+									<Link to={"/aboutus"}>
 										<div className={` ${hidden ? 'hidden' : ''} flex-shrink-0 flex items-center`}>
 											<img
 												className="block  h-8 w-auto rounded-full"

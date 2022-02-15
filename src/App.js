@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
 import PageLayout from './components/PageLayout';
+import AboutUsPage from './pages/AboutUsPage';
 import BlogsPage from './pages/BlogsPage';
 import HomePage from './pages/HomePage';
 import Login from './pages/Login';
@@ -15,6 +17,12 @@ function App() {
 				<Route exact path="/">
 					<PageLayout>
 						<HomePage />
+					</PageLayout>
+				</Route>
+
+				<Route exact path="/aboutus">
+					<PageLayout>
+						<AboutUsPage />
 					</PageLayout>
 				</Route>
 
