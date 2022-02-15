@@ -21,7 +21,6 @@ function App() {
 				<Route exact path="/blogs">
 					<PageLayout>
 						<BlogsPage />
-						<h1>HHHHHHHHHHH</h1>
 					</PageLayout>
 				</Route>
 
@@ -30,7 +29,7 @@ function App() {
 						<NoticationPage />
 					</PageLayout>
 				</Route>
-				
+
 				<Route exact path="/messages">
 					<PageLayout>
 						<MessagesPage />
@@ -40,6 +39,7 @@ function App() {
 				<Route path="/login">
 					<Login />
 				</Route>
+
 				<Route path="/signup">
 					<Signup />
 				</Route>
