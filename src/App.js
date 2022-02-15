@@ -37,7 +37,7 @@ function App() {
 						<NoticationPage />
 					</PageLayout>
 				</Route>
-				
+
 				<Route exact path="/messages">
 					<PageLayout>
 						<MessagesPage />
@@ -47,6 +47,7 @@ function App() {
 				<Route path="/login">
 					<Login />
 				</Route>
+
 				<Route path="/signup">
 					<Signup />
 				</Route>
