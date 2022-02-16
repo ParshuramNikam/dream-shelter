@@ -53,8 +53,8 @@ function Signup() {
                         <input aria-label="enter Password" role="input" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2 pr-10"
                             value={password} type={passwordToggle ? 'password' : ''} onChange={(e) => setPassword(e.target.value)}
                         />
-                        <div class="float-right mt-1.5 flex items-center">
-                            <input type="checkbox" name="passswordToggle" id="passswordToggle" class="px-1 mr-1/2 cursor-pointer h-3 w-3"
+                        <div className="float-right mt-1.5 flex items-center">
+                            <input type="checkbox" name="passswordToggle" id="passswordToggle" className="px-1 mr-1/2 cursor-pointer h-3 w-3"
                                 onChange={() => setPasswordToggle(!passwordToggle)}
                             />
                             <label htmlFor="passswordToggle" className="text-xs cursor-pointer">Show Password</label>

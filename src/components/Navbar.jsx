@@ -71,9 +71,9 @@ export default function Navbar() {
 										/>
 									</button>
 								</div>
-								<div class={`hidden md:block pt-2 relative mx-auto text-gray-600`}>
+								<div className={`hidden md:block pt-2 relative mx-auto text-gray-600`}>
 									<input
-										class=" bg-gray-200 h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none w-52 md:w-60 lg:w-72 "
+										className=" bg-gray-200 h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none w-52 md:w-60 lg:w-72 "
 										type="search"
 										name="search"
 										placeholder="Search"
@@ -81,9 +81,9 @@ export default function Navbar() {
 									/>
 									<button
 										type="submit"
-										class="absolute right-0 top-0 mt-5 mr-4 "
+										className="absolute right-0 top-0 mt-5 mr-4 "
 									>
-										<SearchIcon class="text-gray-600 h-4 w-4 stroke-gray-800"></SearchIcon>
+										<SearchIcon className="text-gray-600 h-4 w-4 stroke-gray-800"></SearchIcon>
 									</button>
 								</div>
 								<button onClick={hideSearchBox} className={` ${!hidden ? 'hidden' : ''}`}>

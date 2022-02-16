@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 import Login from './pages/Login';
 import MessagesPage from './pages/MessagesPage';
 import NoticationPage from './pages/NoticationPage';
+import OneBlogPage from './pages/OneBlogPage';
 import Signup from './pages/Signup';
 
 function App() {
@@ -21,6 +22,12 @@ function App() {
 				<Route exact path="/blogs">
 					<PageLayout>
 						<BlogsPage />
+					</PageLayout>
+				</Route>
+
+				<Route exact path="/blog/:id">
+					<PageLayout>
+						<OneBlogPage />
 					</PageLayout>
 				</Route>
 

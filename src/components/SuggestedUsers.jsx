@@ -24,7 +24,7 @@ const SuggestedUsers = () => {
       >
         <div className="w-8 h-8  flex items-center justify-center">
           <img
-            class="h-8 w-12 rounded-full"
+            className="h-8 w-12 rounded-full"
             src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
             alt=""
           />
@@ -55,7 +55,7 @@ const SuggestedUsers = () => {
       >
         <div className="w-8 h-8  flex items-center justify-center">
           <img
-            class="h-8 w-12 rounded-full"
+            className="h-8 w-12 rounded-full"
             src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
             alt=""
           />
@@ -86,7 +86,7 @@ const SuggestedUsers = () => {
       >
         <div className="w-8 h-8 flex items-center justify-center">
           <img
-            class="h-8 w-12 rounded-full"
+            className="h-8 w-12 rounded-full"
             src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
             alt=""
           />

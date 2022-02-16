@@ -11,7 +11,7 @@ function ChatBox() {
   };
 
   return (
-    <section className="w-75 hidden lg:block  h-max px-1 py-2 m-2 border border-gray-200 rounded-lg overflow-hidden shadow-lg">
+    <section className="sticky top-2 w-75 hidden lg:block  h-max px-1 py-2 m-2 border border-gray-200 rounded-lg overflow-hidden shadow-lg">
       <div className="flex justify-between pr-2 ">
         <h1 className="pl-2 font-semibold text-base">Messages</h1>
         <button
@@ -25,10 +25,10 @@ function ChatBox() {
           />
         </button>
       </div>
-      <div class="pt-2 relative mx-auto text-gray-600">
-        <input class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+      <div className="pt-2 relative mx-auto text-gray-600">
+        <input className="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
           type="search" name="search" placeholder="Search"/>
-        <button type="submit" class="absolute right-0 top-0 mt-5 mr-4">
+        <button type="submit" className="absolute right-0 top-0 mt-5 mr-4">
           <SearchIcon className="h-5 w-5 hover:stroke-cyan-800"
 											aria-hidden="true"/>
         </button>
@@ -39,7 +39,7 @@ function ChatBox() {
       >
         <div className="w-8 h-8  flex items-center justify-center">
           <img
-            class="h-8 w-12 rounded-full"
+            className="h-8 w-12 rounded-full"
             src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80"
             alt=""
           />
@@ -60,7 +60,7 @@ function ChatBox() {
       >
         <div className="w-8 h-8  flex items-center justify-center relative ">
           <img
-            class="h-8 w-12 rounded-full "
+            className="h-8 w-12 rounded-full "
             src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
             alt=""
           />
@@ -82,7 +82,7 @@ function ChatBox() {
       >
         <div className="w-8 h-8 flex items-center justify-center">
           <img
-            class="h-8 w-12 rounded-full"
+            className="h-8 w-12 rounded-full"
             src="https://images.pexels.com/photos/428364/pexels-photo-428364.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
             alt=""
           />
@@ -103,7 +103,7 @@ function ChatBox() {
       >
         <div className="w-8 h-8 flex items-center justify-center relative">
           <img
-            class="h-8 w-12 rounded-full"
+            className="h-8 w-12 rounded-full"
             src="https://images.pexels.com/photos/634021/pexels-photo-634021.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
             alt=""
           />
@@ -125,7 +125,7 @@ function ChatBox() {
       >
         <div className="w-8 h-8 flex items-center justify-center">
           <img
-            class="h-8 w-12 rounded-full"
+            className="h-8 w-12 rounded-full"
             src="https://images.pexels.com/photos/262391/pexels-photo-262391.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
             alt=""
           />
@@ -146,7 +146,7 @@ function ChatBox() {
       >
         <div className="w-8 h-8 flex items-center justify-center">
           <img
-            class="h-8 w-12 rounded-full"
+            className="h-8 w-12 rounded-full"
             src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80"
             alt=""
           />
@@ -167,7 +167,7 @@ function ChatBox() {
       >
         <div className="w-8 h-8 flex items-center justify-center relative">
           <img
-            class="h-8 w-12 rounded-full"
+            className="h-8 w-12 rounded-full"
             src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
             alt=""
           />
