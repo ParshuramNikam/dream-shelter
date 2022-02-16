@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
 import PageLayout from './components/PageLayout';
+import AboutUsPage from './pages/AboutUsPage';
 import BlogsPage from './pages/BlogsPage';
 import HomePage from './pages/HomePage';
 import Login from './pages/Login';
@@ -7,6 +9,7 @@ import MessagesPage from './pages/MessagesPage';
 import NoticationPage from './pages/NoticationPage';
 import OneBlogPage from './pages/OneBlogPage';
 import Signup from './pages/Signup';
+import SuggestionsPage from "./pages/SuggestionsPage";
 
 function App() {
 	return (
@@ -16,6 +19,18 @@ function App() {
 				<Route exact path="/">
 					<PageLayout>
 						<HomePage />
+					</PageLayout>
+				</Route>
+
+				<Route exact path="/aboutus">
+					<PageLayout>
+						<AboutUsPage />
+					</PageLayout>
+				</Route>
+
+				<Route exact path="/SuggestionPage">
+					<PageLayout>
+						<SuggestionsPage />
 					</PageLayout>
 				</Route>
 
