@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import MessagesPage from './pages/MessagesPage';
 import NoticationPage from './pages/NoticationPage';
 import Signup from './pages/Signup';
+import SuggestionsPage from "./pages/SuggestionsPage";
 
 function App() {
 	return (
@@ -23,6 +24,12 @@ function App() {
 				<Route exact path="/aboutus">
 					<PageLayout>
 						<AboutUsPage />
+					</PageLayout>
+				</Route>
+
+				<Route exact path="/SuggestionPage">
+					<PageLayout>
+						<SuggestionsPage />
 					</PageLayout>
 				</Route>
 
