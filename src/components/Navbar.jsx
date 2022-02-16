@@ -36,64 +36,6 @@ export default function Navbar() {
     setHidden(false);
   }
 
-<<<<<<< HEAD
-	return (
-		<Disclosure as="nav" className="bg-white border-2 ">
-			{({ open }) => (
-				<>
-					<div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-						<div className="relative flex items-center justify-between h-16">
-							<div className="absolute inset-y-0 left-0 flex sm:hidden"></div>
-							<div className="flex-1 flex items-center justify-between sm:items-stretch sm:justify-start">
-								<div className="flex items-center">
-									<Link to={"/"}>
-										<div className={` ${hidden ? 'hidden' : ''} flex-shrink-0 flex items-center`}>
-											<img
-												className="block  h-8 w-auto rounded-full"
-												src="/images/logo.jpg"
-												alt="Dream Shelter"
-											/>
-											<div className="hidden sm:block whitespace-nowrap font-bold text-xl font-size cursor-pointer flex items-center font-[Poppins] text-gray-800 pr-3 mr-2">
-												<span className="text-5x1 text-blue-600 mr-1 pt-2">
-													<ion-icon name="logo-ionic"></ion-icon>
-												</span>
-												Dream Shelter
-											</div>
-										</div>
-									</Link>
-									<button
-										type="button"
-										className={` ${hidden ? 'hidden' : ''} bg-gray-200 p-1 rounded-sm text-gray-800  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white block md:hidden ml-2 `}
-										onClick={showSearchBox}
-									>
-										<span className="sr-only">Search-Bar</span>
-										<SearchIcon
-											className="h-5 w-5 hover:stroke-cyan-800"
-											aria-hidden="true"
-										/>
-									</button>
-								</div>
-								<div className={`hidden md:block pt-2 relative mx-auto text-gray-600`}>
-									<input
-										className=" bg-gray-200 h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none w-52 md:w-60 lg:w-72 "
-										type="search"
-										name="search"
-										placeholder="Search"
-										onBlur={hideSearchBox} /* event pccurs when focus gets out of input box */
-									/>
-									<button
-										type="submit"
-										className="absolute right-0 top-0 mt-5 mr-4 "
-									>
-										<SearchIcon className="text-gray-600 h-4 w-4 stroke-gray-800"></SearchIcon>
-									</button>
-								</div>
-								<button onClick={hideSearchBox} className={` ${!hidden ? 'hidden' : ''}`}>
-									<XIcon className="h-5 w-5" />
-								</button>
-							</div>
-							<div className={`${hidden ? 'hidden' : ''} absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-2 sm:pr-0`}>
-=======
   return (
     <Disclosure as="nav" className="bg-white border-2 ">
       {({ open }) => (
@@ -179,7 +121,6 @@ export default function Navbar() {
                     />
                   </button>
                 </Link>
->>>>>>> 265772bec1e36324642251febf777c6be5270da8
 
 				<Link to={"/SuggestionPage"}>
                   <button
