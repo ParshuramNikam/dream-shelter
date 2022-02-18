@@ -4,18 +4,18 @@ import { useState } from "react";
 const BlogPost = ({ cover, subCategory, title, description, authorAvatar, authorName, createdAt }) => {
     const [image] = useState("https://media.istockphoto.com/photos/millennial-male-team-leader-organize-virtual-workshop-with-employees-picture-id1300972574?b=1&k=20&m=1300972574&s=170667a&w=0&h=2nBGC7tr0kWIU8zRQ3dMg-C5JLo9H2sNUuDjQ5mlYfo=");
     return (
-        <div class="rounded overflow-hidden shadow-lg">
-            <img class="object-cover w-full h-56 rounded-xl" src={cover} alt="post image" />
-            <div class="px-0.5 pt-2 pb-2">
+        <div className="rounded overflow-hidden shadow h-full">
+            <img className="object-cover w-full h-56 rounded-xl" src={cover} alt="post image" />
+            <div className="px-0.5 pt-2 pb-2">
                 {
                     subCategory.map((category, index) =>
-                        <span key={index} class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{"#" + category}</span>
+                        <span key={index} className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{"#" + category}</span>
                     )
                 }
             </div>
-            <div class="px-1 py-2.5">
-                <div class="font-bold text-xl mb-3">{title}</div>
-                <p class="text-gray-700 text-base">
+            <div className="px-1 py-2.5">
+                <div className="font-bold text-xl mb-3">{title}</div>
+                <p className="text-gray-700 text-base">
                     {description.slice(200) + "..."}
                 </p>
             </div>
@@ -23,7 +23,7 @@ const BlogPost = ({ cover, subCategory, title, description, authorAvatar, author
             <div className="w-100 p-1 m-2 rounded flex justify-between cursor-pointer">
                 <div className="w-max h-8  flex flex-row items-center justify-center">
                     <img
-                        class="h-8 w-8 object-cover rounded-full"
+                        className="h-8 w-8 object-cover rounded-full"
                         src={image}
                         alt=""
                     />

@@ -3,7 +3,7 @@ import HorizontalBlog from "./HorizontalBlog"
 
 const ExploreBlogs = () => {
     return (
-        <section className="sticky top-2 w-80 hidden lg:block  h-max px-3 pt-3 m-2 border border-gray-200 rounded-lg overflow-hidden shadow-lg">
+        <section className="sticky top-2 w-72 xl:w-80  hidden md:block  h-max px-3 pt-3 m-2 bg-white border border-gray-200 rounded-lg overflow-hidden shadow-lg">
             
             <div className="flex flex-wrap justify-between items-center pb-3">
                 <div className="text-cyan-900 font-semibold">Explore Blogs</div>

@@ -5,7 +5,13 @@ body {
 		"Helvetica Neue", sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+<<<<<<< HEAD
 	background: rgb(241, 242, 242);
+=======
+
+	/* background: rgb(241, 242, 242); */
+	background: #eef2ff;
+>>>>>>> 1075f719eee77c00326409f07d5f14ec2655c493
 }
 
 code {
@@ -20,8 +26,6 @@ code {
 .primary-bg {
 	background-color: rgb(13, 103, 181);
 }
-
-
 
 /* Tailwind css below */
 

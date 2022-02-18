@@ -14,7 +14,7 @@ const SuggestedUsers = () => {
   };
 
   return (
-    <section className="w-75 hidden lg:block  h-max px-1 py-2 m-2 border border-gray-200 rounded-lg overflow-hidden shadow-lg">
+    <section className="w-75 hidden lg:block  h-max px-1 py-2 m-2 bg-white border border-gray-200 rounded-lg overflow-hidden shadow-lg">
       <Link to={"/SuggestionPage"}>
         <div className="flex justify-between pr-2 ">
           <h1 className="pl-2 font-semibold text-base">Suggestions For You</h1>
@@ -32,7 +32,7 @@ const SuggestedUsers = () => {
       >
         <div className="w-8 h-8  flex items-center justify-center">
           <img
-            class="h-8 w-12 rounded-full"
+            className="h-8 w-12 rounded-full"
             src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
             alt=""
           />
@@ -63,7 +63,7 @@ const SuggestedUsers = () => {
       >
         <div className="w-8 h-8  flex items-center justify-center">
           <img
-            class="h-8 w-12 rounded-full"
+            className="h-8 w-12 rounded-full"
             src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
             alt=""
           />
@@ -94,7 +94,7 @@ const SuggestedUsers = () => {
       >
         <div className="w-8 h-8 flex items-center justify-center">
           <img
-            class="h-8 w-12 rounded-full"
+            className="h-8 w-12 rounded-full"
             src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
             alt=""
           />

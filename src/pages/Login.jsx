@@ -60,8 +60,8 @@ function Login() {
 								</a>
 							</Link>
 						</div>
-						<div class="float-right mt-1.5 flex items-center">
-							<input type="checkbox" name="passswordToggle" id="passswordToggle" class="px-1 mr-1/2 cursor-pointer h-3 w-3" 
+						<div className="float-right mt-1.5 flex items-center">
+							<input type="checkbox" name="passswordToggle" id="passswordToggle" className="px-1 mr-1/2 cursor-pointer h-3 w-3" 
 								onChange={() => setPasswordToggle(!passwordToggle)}
 							/>
 							<label htmlFor="passswordToggle" className="text-xs cursor-pointer">Show Password</label>
