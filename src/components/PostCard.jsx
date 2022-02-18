@@ -2,6 +2,8 @@ import { Fragment, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, BookmarkIcon, ChatIcon, HeartIcon, LinkIcon, MenuIcon, ShareIcon, XCircleIcon, XIcon } from '@heroicons/react/outline'
 import classNames from 'classnames';
+import { Link } from "react-router-dom";
+
 
 const PostCard = () => {
 
@@ -41,8 +43,9 @@ const PostCard = () => {
                 {/* Post header 👇 */}
                 <div className="flex  items-center justify-between px-4 pt-2">
                     <div className="flex  items-center">
+                    <Link to={"/OtherProfilePage"}>
                         <img class="w-10 mt-1 rounded-full" src="https://shortner-urls.herokuapp.com/BeKgZyu" alt="Avatar" />
-
+                    </Link>            
                         <div className="text-xs ml-2">
                             <p className="font-bold ">John Doe</p>
                             <p>Khopoli - Maharashtra</p>

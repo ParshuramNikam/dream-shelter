@@ -22,7 +22,7 @@ const OneSuggestedUserCard = () => {
 
   return (
     <div
-      className="w-80 p-2 m-3 bg-gray-100 rounded flex cursor-pointer flex justify-between"
+      className="w-100 p-2 m-3 bg-gray-100 rounded flex cursor-pointer flex justify-between"
       onClick={() => noticationClickListner()}
     >
       <div className="flex items-center ">
@@ -45,7 +45,7 @@ const OneSuggestedUserCard = () => {
         <div>
         <button
           type="button"
-          className="bg-gray-200 p-1.5 rounded-full text-gray-800 ml-7 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+          className="bg-gray-200 p-1.5 mt-3 mr-1 rounded-full text-gray-800 ml-7 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
         >
           <span className="sr-only">Suggestions</span>
           <UserAddIcon

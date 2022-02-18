@@ -11,16 +11,14 @@ import {
   XCircleIcon,
 } from "@heroicons/react/outline";
 
-// Only one notication component :-
-const OneNotication = () => {
+const OneBookmark =() => {
   const noticationClickListner = () => {
     alert("Notication cliked!");
   };
 
   const [postOptions, setPostOptions] = useState([
-    "Delete",
-    "Mark As Read",
-    "Turn Off",
+    "Unsave",
+    "Copy link",
   ]);
 
   return (
@@ -94,6 +92,6 @@ const OneNotication = () => {
       </Menu>
     </div>
   );
-};
+}
 
-export default OneNotication;
+export default OneBookmark;

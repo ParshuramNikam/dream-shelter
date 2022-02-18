@@ -1,3 +1,4 @@
+import React from "react"
 import OneNotication from "../components/OneNotication"
 
 const NoticationPage = () => {
@@ -9,7 +10,7 @@ const NoticationPage = () => {
             <OneNotication/>
             <OneNotication/>
             <OneNotication/>
-            <OneNotication/>
+            <OneNotication/> 
             <OneNotication/>
         </section>
     )

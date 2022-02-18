@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
+import OtherUserDetailedInfo from './components/OtherUserDetailedInfo';
 import PageLayout from './components/PageLayout';
 import AboutUsPage from './pages/AboutUsPage';
 import BlogsPage from './pages/BlogsPage';
@@ -7,8 +7,12 @@ import HomePage from './pages/HomePage';
 import Login from './pages/Login';
 import MessagesPage from './pages/MessagesPage';
 import NoticationPage from './pages/NoticationPage';
+import OtherProfilePage from './pages/OtherProfilePage';
+import ProfilePage from './pages/ProfilePage';
 import Signup from './pages/Signup';
 import SuggestionsPage from "./pages/SuggestionsPage";
+// import NoticationPage from './pages/NoticationPage';
+
 
 function App() {
 	return (
@@ -33,6 +37,24 @@ function App() {
 					</PageLayout>
 				</Route>
 
+				<Route exact path="/OtherProfilePage">
+					<PageLayout>
+						<OtherProfilePage />
+					</PageLayout>
+				</Route>
+
+				<Route exact path="/OtherProfileDetailedInfoPage">
+					<PageLayout>
+						<OtherUserDetailedInfo />
+					</PageLayout>
+				</Route>
+
+				<Route exact path="/ProfilePage">
+					<PageLayout>
+						<ProfilePage />
+					</PageLayout>
+				</Route>
+
 				<Route exact path="/blogs">
 					<PageLayout>
 						<BlogsPage />
@@ -40,6 +62,12 @@ function App() {
 				</Route>
 
 				<Route exact path="/notifications">
+					<PageLayout>
+						<NoticationPage />
+					</PageLayout>
+				</Route>
+
+				<Route exact path="/bookmarks">
 					<PageLayout>
 						<NoticationPage />
 					</PageLayout>
