@@ -1,5 +1,5 @@
 import OneSuggestedUserCard from "../components/OneSuggestedUserCard";
-import SuggestedUsers from "../components/SuggestedUsers"
+import SuggestedUsers from "../components/home/SuggestedUsers"
 
 const SuggestionsPage = () => {
     return (

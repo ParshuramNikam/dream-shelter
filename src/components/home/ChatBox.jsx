@@ -11,7 +11,7 @@ function ChatBox() {
   };
 
   return (
-    <section className="sticky top-2 w-75 hidden lg:block  h-max px-1 py-2 m-2 border border-gray-200 rounded-lg overflow-hidden shadow-lg">
+    <section className="sticky top-2 w-75 hidden lg:block  h-max px-1 py-2 m-2 bg-white border border-gray-200 rounded-lg overflow-hidden shadow-lg">
       <div className="flex justify-between pr-2 ">
         <h1 className="pl-2 font-semibold text-base">Messages</h1>
         <button
@@ -26,7 +26,7 @@ function ChatBox() {
         </button>
       </div>
       <div className="pt-2 relative mx-auto text-gray-600">
-        <input className="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+        <input className="border-2 border-gray-300 bg-gray-50 mb-3 h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
           type="search" name="search" placeholder="Search"/>
         <button type="submit" className="absolute right-0 top-0 mt-5 mr-4">
           <SearchIcon className="h-5 w-5 hover:stroke-cyan-800"

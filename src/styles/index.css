@@ -5,6 +5,9 @@ body {
 		"Helvetica Neue", sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+
+	/* background: rgb(241, 242, 242); */
+	background: #eef2ff;
 }
 
 code {
@@ -19,8 +22,6 @@ code {
 .primary-bg {
 	background-color: rgb(13, 103, 181);
 }
-
-
 
 /* Tailwind css below */
 

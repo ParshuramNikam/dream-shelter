@@ -35,9 +35,9 @@ const PostCard = () => {
     }
 
     return (
-        <div className="pt-2 flex justify-center h-max">
+        <div className="pt-2 flex justify-center h-ma">
             {/* CARD */}
-            <div className="post_card max-w-2xl rounded-lg overflow-hidden shadow-lg py-2 border border-gray-200">
+            <div className="post_card max-w-2xl rounded-lg overflow-hidden shadow-lg py-2 bg-white border border-gray-200">
                 {/* Post header 👇 */}
                 <div className="flex  items-center justify-between px-4 pt-2">
                     <div className="flex  items-center">
@@ -119,19 +119,19 @@ const PostCard = () => {
                         onClick={() => postBtnClickAction("like")}
                     >
                         <HeartIcon className={`h-6 w-6 text-indigo-500 ${postBtnClick.like ? 'fill-indigo-300' : ''} `} />
-                        <p className='mr-1'>Like</p>
+                        <p className='ml-2'>Like</p>
                     </button>
                     <button className='flex items-center justify-center hover:bg-gray-100 px-3 py-2 rounded-md cursor-pointer'
                         onClick={() => postBtnClickAction("comment")}
                     >
                         <ChatIcon className='h-6 w-6 text-indigo-500' />
-                        <p className='mr-1'>Comment</p>
+                        <p className='ml-2'>Comment</p>
                     </button>
                     <button className='flex items-center justify-center hover:bg-gray-100 px-3 py-2 rounded-md cursor-pointer'
                         onClick={() => postBtnClickAction("share")}
                     >
                         <ShareIcon className='h-6 w-6 text-indigo-500' />
-                        <p className='mr-1'>Share</p>
+                        <p className='ml-2'>Share</p>
                     </button>
                 </div>
 

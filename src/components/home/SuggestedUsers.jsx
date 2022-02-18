@@ -14,7 +14,7 @@ const SuggestedUsers = () => {
   };
 
   return (
-    <section className="w-75 hidden lg:block  h-max px-1 py-2 m-2 border border-gray-200 rounded-lg overflow-hidden shadow-lg">
+    <section className="w-75 hidden lg:block  h-max px-1 py-2 m-2 bg-white border border-gray-200 rounded-lg overflow-hidden shadow-lg">
       <Link to={"/SuggestionPage"}>
         <div className="flex justify-between pr-2 ">
           <h1 className="pl-2 font-semibold text-base">Suggestions For You</h1>

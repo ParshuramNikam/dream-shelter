@@ -1,8 +1,10 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import PageLayout from './components/PageLayout';
+import Navbar from './components/navbar/Navbar';
+import PageLayout from './components/layout/PageLayout';
 import AboutUsPage from './pages/AboutUsPage';
 import BlogsPage from './pages/BlogsPage';
+import BookmarksPage from './pages/BookmarksPage';
+import CreatePostPage from './pages/CreatePostPage';
 import HomePage from './pages/HomePage';
 import Login from './pages/Login';
 import MessagesPage from './pages/MessagesPage';
@@ -40,6 +42,12 @@ function App() {
 					</PageLayout>
 				</Route>
 
+				<Route exact path="/create-post">
+					<PageLayout>
+						<CreatePostPage />
+					</PageLayout>
+				</Route>
+
 				<Route exact path="/blog/:id">
 					<PageLayout>
 						<OneBlogPage />
@@ -55,6 +63,12 @@ function App() {
 				<Route exact path="/messages">
 					<PageLayout>
 						<MessagesPage />
+					</PageLayout>
+				</Route>
+
+				<Route exact path="/bookmarks">
+					<PageLayout>
+						<BookmarksPage />
 					</PageLayout>
 				</Route>
 
