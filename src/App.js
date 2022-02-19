@@ -12,10 +12,12 @@ import NoticationPage from './pages/NoticationPage';
 import OneBlogPage from './pages/OneBlogPage';
 import Signup from './pages/Signup';
 import SuggestionsPage from "./pages/SuggestionsPage";
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
 	return (
 		<Router>
+			<ScrollToTop />	{/*  👈 Imp : To always scroll page to top */}
 			<Switch>
 				{/* Page Layout already having navbar */}
 				<Route exact path="/">

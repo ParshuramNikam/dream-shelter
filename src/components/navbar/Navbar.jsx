@@ -28,7 +28,7 @@ const Navbar = () => {
                 <div className=" py-2 max-w-7xl mx-auto flex items-center justify-between">
 
                     <div className={`flex items-center ${toggleSearchBox ? 'hidden' : ''}`}>
-                    {/* navbar logo and company name */} 
+                        {/* navbar logo and company name */}
                         <Link to={"/aboutus"}>
                             <div
                                 className={` flex-shrink-0 flex items-center`}
@@ -48,11 +48,13 @@ const Navbar = () => {
                         </Link>
 
                         {/* toggle navbar button in mobile device */}
-                        <button onClick={() => { setToggleSearchBox(!toggleSearchBox); console.log("toggle search box is "+ (!toggleSearchBox));}}
-                            className={`lg:hidden ${toggleSearchBox ? 'hidden' : ''} bg-gray-200 ml-2  p-1.5 rounded border-2 bordler-gray-500 text-gray-800 m-1.5 focus:outline-none`}
-                        >
-                            <SearchIcon className=" text-gray-600 h-4 w-4 stroke-2 stroke-black k" />
-                        </button>
+                        <label htmlFor="search_bar">
+                            <button onClick={() => { setToggleSearchBox(!toggleSearchBox); console.log("toggle search box is " + (!toggleSearchBox)); }}
+                                className={`lg:hidden ${toggleSearchBox ? 'hidden' : ''} bg-gray-200 ml-2  p-1.5 rounded border-2 bordler-gray-500 text-gray-800 m-1.5 focus:outline-none`}
+                            >
+                                <SearchIcon className=" text-gray-600 h-4 w-4 stroke-2 stroke-black k" />
+                            </button>
+                        </label>
                     </div>
 
                     <div className={`my-auto ${toggleSearchBox ? 'block w-100 mx-auto' : 'hidden'} lg:block`}>
@@ -137,7 +139,7 @@ const Navbar = () => {
             <div className="z-20 block sm:hidden max-w-7xl mx-auto py-2 sticky top-0 bg-white shadow">
                 <div className="grid grid-row grid-cols-7 items-center justify-center sticky top-0">
                     {
-                        navBarItems.map((item, index) => <OneNavItem key={index} title={item.title} icon={item.icon} path={item.path}  />)
+                        navBarItems.map((item, index) => <OneNavItem key={index} title={item.title} icon={item.icon} path={item.path} />)
                     }
                 </div>
             </div>

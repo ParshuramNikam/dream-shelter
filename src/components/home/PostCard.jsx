@@ -13,7 +13,7 @@ const PostCard = () => {
         share: false
     });
 
-    const [postOptions, setPostOptions] = useState(["Save", "Copy link", "unfollow"])
+    const [postOptions, setPostOptions] = useState(["bookmark", "Copy link", "unfollow"])
 
     const postBtnClickAction = (btn) => {
         btn = btn.toLowerCase();
@@ -74,7 +74,7 @@ const PostCard = () => {
                                             {({ active }) => (
                                                 <button className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 w-full')}>
                                                     {
-                                                        option.toLowerCase() === "save" ?<BookmarkIcon className='h-4 w-4 flex float-left mr-3 stroke-1 stroke-indigo-800' /> : null
+                                                        option.toLowerCase() === "bookmark" ?<BookmarkIcon className='h-4 w-4 flex float-left mr-3 stroke-1 stroke-indigo-800' /> : null
 
                                                     }
                                                     {
@@ -95,7 +95,7 @@ const PostCard = () => {
                 </div>
 
                 {/* Post image 👇 */}
-                {/* <img className="mt-3 w-full rounded-lg" src="https://shortner-urls.herokuapp.com/OxyrAsn" alt="Nature" /> */}
+                <img className="mt-3 object-cover w-full h-56 rounded-sm" src="https://shortner-urls.herokuapp.com/OxyrAsn" alt="Nature" />
 
                 {/* Post Question answer */}
                 <div className="px-6 py-4">

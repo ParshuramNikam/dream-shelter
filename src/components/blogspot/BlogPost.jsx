@@ -4,7 +4,7 @@ import { useState } from "react";
 const BlogPost = ({ cover, subCategory, title, description, authorAvatar, authorName, createdAt }) => {
     const [image] = useState("https://media.istockphoto.com/photos/millennial-male-team-leader-organize-virtual-workshop-with-employees-picture-id1300972574?b=1&k=20&m=1300972574&s=170667a&w=0&h=2nBGC7tr0kWIU8zRQ3dMg-C5JLo9H2sNUuDjQ5mlYfo=");
     return (
-        <div className="rounded overflow-hidden shadow h-full">
+        <div className="rounded-lg overflow-hidden shadow-lg h-full bg-white">
             <img className="object-cover w-full h-56 rounded-xl" src={cover} alt="post image" />
             <div className="px-0.5 pt-2 pb-2">
                 {
