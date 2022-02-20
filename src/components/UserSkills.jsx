@@ -2,7 +2,7 @@ import React from "react";
 
 function UserSkills() {
   return (
-    <div className="w-96 hidden lg:block  px-3 py-5 m-2 border border-gray-200 rounded-lg overflow-hidden shadow-lg">
+    <div className="grow block bg-white  px-3 py-5 m-2 border border-gray-200 rounded-lg overflow-hidden shadow-lg">
       <div className="">
         <div className="">
           <h1 className="flex justify-center pb-2 font-semibold text-xl">

@@ -7,18 +7,20 @@ import UserSkills from "../components/UserSkills";
 
 const ProfilePage = () => {
   return (
-    <section className="xl:w-11/12 mx-auto flex flex-row">
-      <section>
-        <UserProfileCard />
-        <Activity />
-        {/* <UserLinks/> */}
-      </section>
-      <section>
+    <section className=" mx-auto lg:flex flex-row overflow-x-hidden">
+      <div className="sm:flex">
+        <section className="">
+          <UserProfileCard />
+          <UserLinks />
+          {/* <UserLinks/> */}
+        </section>
+        <section >
+          <Activity />
+          <AboutUserDetail />
+        </section>
+      </div>
+      <section className="sm:flex lg:block">
         <UserDetailedInfo />
-        <AboutUserDetail />
-      </section>
-      <section>
-        <UserLinks/>
         <UserSkills />
       </section>
     </section>

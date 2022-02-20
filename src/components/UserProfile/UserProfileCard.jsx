@@ -4,7 +4,7 @@ import { categories } from "../../dummy-data/data";
 
 const UserProfileCard = () => {
   return (
-    <section className="w-80  lg:block  h-max px-3 py-5 m-2 border border-gray-200 rounded-lg  overflow-hidden shadow-lg">
+    <section className=" max-w:sm lg:block bg-white  h-max px-3 py-5 m-2 border border-gray-200 rounded-lg  overflow-hidden shadow-lg">
       {/* <div className=" justify-center items-center"> */}
       <div className="flex flex-wrap justify-end ">
         <button
