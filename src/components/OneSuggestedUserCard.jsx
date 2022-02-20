@@ -20,13 +20,23 @@ const OneSuggestedUserCard = () => {
     "Turn Off",
   ]);
 
+  const addUserToFollowList = () => {
+    alert("User added to your follow list!!")
+  }
+
   return (
     <div className="max-w-max sm:max-w-xs bg-white shadow-lg rounded-lg overflow-hidden my-2">
       <img className="w-full h-52 object-cover object-center" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" alt="avatar" />
+      <button className="p-2 bg-gray-300 rounded-full w-max relative bottom-4 float-right mx-2"
+        onClick={addUserToFollowList}
+      >
+        <span className="hidden">follow user</span>
+        <UserAddIcon className="h-6 w-6 stroke stroke-gray-700 hover:stroke-gray-900" />
+      </button>
       <div className="py-4 px-6">
         <h1 className="text-lg font-semibold text-gray-800">Patterson johnson</h1>
         <p className="py-2 text-gray-700">Full Stack maker & UI / UX Designer , love hip hop music Author of Building UI.</p>
-        <div className="flex items-center mt-4 text-gray-700">
+        <div className="flex items-center mt-1 text-gray-700">
           <svg className="h-6 w-6 fill-current" viewBox="0 0 512 512">
             <path d="M256 32c-88.004 0-160 70.557-160 156.801C96 306.4 256 480 256 480s160-173.6 160-291.199C416 102.557 344.004 32 256 32zm0 212.801c-31.996 0-57.144-24.645-57.144-56 0-31.357 25.147-56 57.144-56s57.144 24.643 57.144 56c0 31.355-25.148 56-57.144 56z" />
           </svg>

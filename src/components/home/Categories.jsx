@@ -22,11 +22,11 @@ const Categories = () => {
                 myCategories.map((category, index) =>
                     <button key={index} className="inline-block w-max rounded-full px-3 py-1 text-sm font-semibold bg-gray-100 text-gray-700 mr-2 mb-2 hover:bg-indigo-200">
                         <div className="inline mr-2">{"#" + category}</div>
-                        <button className="inline relative top-1"
+                        <div className="inline relative top-1"
                             onClick={() => crossClickListner(category)}
                         >
                             <XCircleIcon className="h-4 w-4 float-right stroke-1 hover:stroke-black" />
-                        </button>
+                        </div>
                     </button>
                 )
             }
