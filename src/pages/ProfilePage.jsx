@@ -5,12 +5,12 @@ import UserDetailedInfo from "../components/UserDetailedInfo";
 import AboutUserDetail from "../components/AboutUserDetail";
 import UserSkills from "../components/UserSkills";
 
-const ProfilePage = () => {
+const ProfilePage = ({edit}) => {
   return (
     <section className=" mx-auto lg:flex flex-row overflow-x-hidden">
       <div className="sm:flex">
         <section className="">
-          <UserProfileCard />
+          <UserProfileCard edit={edit} />
           <UserLinks />
           {/* <UserLinks/> */}
         </section>
@@ -20,7 +20,7 @@ const ProfilePage = () => {
         </section>
       </div>
       <section className="sm:flex lg:block">
-        <UserDetailedInfo />
+        <UserDetailedInfo edit={edit} />
         <UserSkills />
       </section>
     </section>

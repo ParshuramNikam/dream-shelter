@@ -2,7 +2,7 @@ import { ShareIcon, SearchIcon } from "@heroicons/react/outline";
 import { useState } from "react";
 import { categories } from "../../dummy-data/data";
 
-const UserProfileCard = () => {
+const UserProfileCard = ({edit}) => {
   return (
     <section className=" max-w:sm lg:block bg-white  h-max px-3 py-5 m-2 border border-gray-200 rounded-lg  overflow-hidden shadow-lg">
       {/* <div className=" justify-center items-center"> */}
@@ -34,16 +34,20 @@ const UserProfileCard = () => {
       <div className="flex justify-center text-gray-700 items-center font-normal text-base">
         <p>Bay Area, San Francisco, CA</p>
       </div>
-      <div className="flex justify-center items-center pt-3">
-        {/* <div className="px-3 py-1 grid grid-cols-2 ">
+      {
+        !edit ? <>
+          <div className="flex justify-center items-center pt-3">
+        <div className="px-3 py-1 grid grid-cols-2 ">
           <button className="flex items-center text-lg text-white bg-blue-800 justify-center hover:bg-blue-900  rounded-md cursor-pointer mr-2">
             <p className="">Follow</p>
           </button>
           <button className="flex items-center text-lg justify-center hover:bg-blue-800 hover:text-white text-blue-800 px-2 py-1.5 rounded-md cursor-pointer rounded-lg border-2 border-solid border-blue-800">
             <p className="mr-1">Message</p>
           </button>
-        </div> */}
+        </div>
       </div>
+        </> :null
+      }
       {/* </div> */}
     </section>
   );

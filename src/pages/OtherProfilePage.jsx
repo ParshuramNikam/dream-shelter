@@ -1,31 +1,30 @@
-import UserProfilePage from "../components/UserProfile/UserProfileCard";
+import UserProfileCard from "../components/UserProfile/UserProfileCard";
 import Activity from "../components/UserProfile/Activity";
 import UserLinks from "../components/UserLinks";
 import UserDetailedInfo from "../components/UserDetailedInfo";
 import AboutUserDetail from "../components/AboutUserDetail";
 import UserSkills from "../components/UserSkills";
-import OtherUser from "./OtherUserProfilePage";
-import OtherUserProfilePage from "./OtherUserProfilePage";
-import OtherUserDetailedInfo from "../components/OtherUserDetailedInfo";
 
-const OtherProfilePage = () => {
+const ProfilePage = () => {
   return (
-    <section className="xl:w-11/12 mx-auto flex flex-row">
-      <section>
-        <OtherUserProfilePage />
-        <Activity />
-        {/* <UserLinks/> */}
-      </section>
-      <section>
-        <OtherUserDetailedInfo />
-        <AboutUserDetail />
-      </section>
-      <section>
-        <UserLinks/>
+    <section className=" mx-auto lg:flex flex-row overflow-x-hidden">
+      <div className="sm:flex">
+        <section className="">
+          <UserProfileCard edit={true} />
+          <UserLinks />
+          {/* <UserLinks/> */}
+        </section>
+        <section >
+          <Activity />
+          <AboutUserDetail />
+        </section>
+      </div>
+      <section className="sm:flex lg:block">
+        <UserDetailedInfo edit={false} />
         <UserSkills />
       </section>
     </section>
   );
 };
 
-export default OtherProfilePage;
+export default ProfilePage;
