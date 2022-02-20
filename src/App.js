@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import PageLayout from './components/layout/PageLayout';
 import AboutUsPage from './pages/AboutUsPage';
 import BlogsPage from './pages/BlogsPage';
-import BookmarkPage from './pages/BookmarkPage';
+import BookmarksPage from './pages/BookmarksPage';
 import CreatePostPage from './pages/CreatePostPage';
 import HomePage from './pages/HomePage';
 import Login from './pages/Login';
@@ -87,7 +87,7 @@ function App() {
 
 				<Route exact path="/bookmarks">
 					<PageLayout>
-						<BookmarkPage />
+						<BookmarksPage />
 					</PageLayout>
 				</Route>
 
