@@ -15,89 +15,45 @@ import ProfilePage from "./pages/ProfilePage";
 import OtherProfilePage from "./pages/OtherProfilePage";
 import Messenger from './pages/Messenger';
 
-// import NoticationPage from './pages/NoticationPage';
-
 import ScrollToTop from './components/ScrollToTop';
+
+const compoentsList = [
+	{ path: "/", component: <HomePage /> },
+	{ path: "/aboutus", component: <AboutUsPage /> },
+	{ path: "/SuggestionPage", component: <SuggestionsPage /> },
+	{ path: "/OtherProfilePage", component: <OtherProfilePage /> },
+	{ path: "/OtherProfileDetailedInfoPage", component: <OtherUserDetailedInfo /> },
+	{ path: "/myprofile", component: <ProfilePage /> },
+	{ path: "/blogs", component: <BlogsPage /> },
+	{ path: "/create-post", component: <CreatePostPage /> },
+	{ path: "/blog/:id", component: <OneBlogPage /> },
+	{ path: "/notifications", component: <NoticationPage /> },
+	{ path: "/notifications", component: <NoticationPage /> },
+	{ path: "/bookmarks", component: <BookmarksPage /> },
+	{ path: "/messenger", component: <Messenger /> }
+]
 
 function App() {
 	return (
 		<Router>
 			<ScrollToTop />	{/*  👈 Imp : To always scroll page to top */}
+
 			<Switch>
+
 				{/* Page Layout already having navbar */}
-				<Route exact path="/">
-					<PageLayout>
-						<HomePage />
-					</PageLayout>
-				</Route>
 
-				<Route exact path="/aboutus">
-					<PageLayout>
-						<AboutUsPage />
-					</PageLayout>
-				</Route>
+				{/* Components with page layout */}
+				{
+					compoentsList.map((component, index) =>
+						<Route exact path={component.path} key={index}>
+							<PageLayout>
+								{component.component}
+							</PageLayout>
+						</Route>
+					)
+				}
 
-				<Route exact path="/SuggestionPage">
-					<PageLayout>
-						<SuggestionsPage />
-					</PageLayout>
-				</Route>
-
-				<Route exact path="/OtherProfilePage">
-					<PageLayout>
-						<OtherProfilePage />
-					</PageLayout>
-				</Route>
-
-				<Route exact path="/OtherProfileDetailedInfoPage">
-					<PageLayout>
-						<OtherUserDetailedInfo />
-					</PageLayout>
-				</Route>
-
-				<Route exact path="/myprofile">
-					<PageLayout>
-						<ProfilePage />
-					</PageLayout>
-				</Route>
-
-				<Route exact path="/blogs">
-					<PageLayout>
-						<BlogsPage />
-					</PageLayout>
-				</Route>
-
-				<Route exact path="/create-post">
-					<PageLayout>
-						<CreatePostPage />
-					</PageLayout>
-				</Route>
-
-				<Route exact path="/blog/:id">
-					<PageLayout>
-						<OneBlogPage />
-					</PageLayout>
-				</Route>
-
-				<Route exact path="/notifications">
-					<PageLayout>
-						<NoticationPage />
-					</PageLayout>
-				</Route>
-
-				<Route exact path="/bookmarks">
-					<PageLayout>
-						<BookmarksPage />
-					</PageLayout>
-				</Route>
-
-				<Route exact path="/messenger">
-					<PageLayout>
-						<Messenger />
-					</PageLayout>
-				</Route>
-
-
+				{/* Components without page layout */}
 				<Route path="/login">
 					<Login />
 				</Route>
@@ -105,6 +61,7 @@ function App() {
 				<Route path="/signup">
 					<Signup />
 				</Route>
+
 			</Switch>
 		</Router>
 	);
