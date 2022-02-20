@@ -4,6 +4,7 @@ import EditorToolbar, { modules, formats } from "./EditorToolbar";
 import "react-quill/dist/quill.snow.css";
 import "./TextEditor.css";
 import { useHistory } from "react-router-dom";
+import UploadImage from "./UploadImage";
 // import axios from 'axios';
 
 function Add() {
@@ -70,8 +71,9 @@ function Add() {
                             <select name="post_type" id="post_type"
                                 onChange={(e) => setPostType(e.target.value)}
                                 className="px-2 py-1.5 text-gary-800 bg-gray-300 "
+                                defaultValue={"select"}
                             >
-                                <option value="select" className="text-center bg-gray-200" selected disabled> --- Select Option --- </option>
+                                <option value="select" className="text-center bg-gray-200" disabled> --- Select Option --- </option>
                                 <option value="question" className="text-center bg-gray-200" >Question</option>
                                 <option value="blog" className="text-center bg-gray-200" >Blog</option>
                             </select>
@@ -87,6 +89,12 @@ function Add() {
                                             />
                                             <label for="title" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-indigo-600 peer-focus:dark:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{postType === "question" ? "Question" : "Post Title"}</label>
                                         </div>
+
+                                        {
+                                            postType === "blog"
+                                            ? <UploadImage />
+                                            : null
+                                        }
 
                                         <div className="clearfix"></div>
                                         <div className="form-group col-md-12 editor">
