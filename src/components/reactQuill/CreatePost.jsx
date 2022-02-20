@@ -62,7 +62,7 @@ function Add() {
     return (
         <div>
             <div className="max-w-6xl mx-auto">
-                <div className="container">
+                <div className="container mx-auto">
                     <div className="row mt-3">
                         <form onSubmit={addDetails} className="update__forms">
                             <span className="font-semibold">Select Post Type : </span>

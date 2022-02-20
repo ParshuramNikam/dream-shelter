@@ -17,10 +17,12 @@ import Messenger from './pages/Messenger';
 
 // import NoticationPage from './pages/NoticationPage';
 
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
 	return (
 		<Router>
+			<ScrollToTop />	{/*  👈 Imp : To always scroll page to top */}
 			<Switch>
 				{/* Page Layout already having navbar */}
 				<Route exact path="/">

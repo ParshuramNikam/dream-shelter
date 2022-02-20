@@ -22,6 +22,57 @@ export const categories = [
     "part time jobs",
 ]
 
+export const notifications = [
+  {
+    id: "1",
+    img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    timestamp: "Fri, 16 May 2015",
+    title: "Lorem ipsum dolor sit amet.",
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. A consequatur explicabo sunt modi, reiciendis maxime.",
+    read: false,
+  },
+  {
+    id: "2",
+    img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    timestamp: "Fri, 16 May 2015",
+    title: "Lorem ipsum dolor sit amet.",
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. A consequatur explicabo sunt modi, reiciendis maxime.",
+    read: false,
+  },
+  {
+    id: "3",
+    img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    timestamp: "Fri, 16 May 2015",
+    title: "Lorem ipsum dolor sit amet.",
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. A consequatur explicabo sunt modi, reiciendis maxime.",
+    read: false,
+  },
+  {
+    id: "4",
+    img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    timestamp: "Fri, 16 May 2015",
+    title: "Lorem ipsum dolor sit amet.",
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. A consequatur explicabo sunt modi, reiciendis maxime.",
+    read: false,
+  },
+  {
+    id: "5",
+    img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    timestamp: "Fri, 16 May 2015",
+    title: "Lorem ipsum dolor sit amet.",
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. A consequatur explicabo sunt modi, reiciendis maxime.",
+    read: false,
+  },
+  {
+    id: "6",
+    img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    timestamp: "Fri, 16 May 2015",
+    title: "Lorem ipsum dolor sit amet.",
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. A consequatur explicabo sunt modi, reiciendis maxime.",
+    read: false,
+  },
+]
+
 
 export const blogList = [
     {
