@@ -2,10 +2,10 @@ import React from "react";
 
 function Activity() {
   return (
-    <div className=" w-80 hidden lg:block  h-max ml-2 mt-3   overflow-hidden shadow-lg bg-blue-500">
+    <div className=" w-80   h-max ml-2 mt-3   overflow-hidden shadow-lg bg-blue-500">
       <div className="grid grid-cols-2 gap-0">
         <div className="  bg-blue-500 py-1 hover:border-2">
-          <div className="flex justify-center font-medium text-2xl text-base text-white  bg-blue-500 ">
+          <div className="flex  justify-center font-medium text-2xl text-base text-white  bg-blue-500 ">
             3
           </div>
           <div className="flex justify-center font-medium text-base text-white  bg-blue-500 ">

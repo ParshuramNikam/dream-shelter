@@ -1,8 +1,5 @@
 import OneSuggestedUserCard from "../components/OneSuggestedUserCard";
-<<<<<<< HEAD
-=======
 import SuggestedUsers from "../components/home/SuggestedUsers"
->>>>>>> 1075f719eee77c00326409f07d5f14ec2655c493
 
 const SuggestionsPage = () => {
     return (

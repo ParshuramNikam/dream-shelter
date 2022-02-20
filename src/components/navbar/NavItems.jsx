@@ -31,7 +31,7 @@ const NavItems = () => {
                 </button>
             </Link>
 
-            <Link to={"/messages"}>
+            <Link to={"/messenger"}>
                 <button
                     type="button"
                     className="bg-gray-200 p-1 rounded-full text-gray-800 mr-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"

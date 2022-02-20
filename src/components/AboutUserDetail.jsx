@@ -2,7 +2,7 @@ import React from "react";
 
 function AboutUserDetail() {
   return (
-    <div className="w-96 hidden lg:block  px-3 py-5 m-2 border border-gray-200 rounded-lg overflow-hidden shadow-lg">
+    <div className="w-96  px-3 py-5 m-2 border border-gray-200 rounded-lg overflow-hidden shadow-lg">
       <h1 className="flex justify-center pb-3 font-semibold text-lg">
         About Me✨
       </h1>

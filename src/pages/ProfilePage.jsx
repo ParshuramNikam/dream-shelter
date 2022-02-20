@@ -1,5 +1,5 @@
-import UserProfilePage from "./UserProfilePage";
-import Activity from "../components/Activity";
+import UserProfileCard from "../components/UserProfile/UserProfileCard";
+import Activity from "../components/UserProfile/Activity";
 import UserLinks from "../components/UserLinks";
 import UserDetailedInfo from "../components/UserDetailedInfo";
 import AboutUserDetail from "../components/AboutUserDetail";
@@ -9,7 +9,7 @@ const ProfilePage = () => {
   return (
     <section className="xl:w-11/12 mx-auto flex flex-row">
       <section>
-        <UserProfilePage />
+        <UserProfileCard />
         <Activity />
         {/* <UserLinks/> */}
       </section>

@@ -1,5 +1,5 @@
-import UserProfilePage from "./UserProfilePage";
-import Activity from "../components/Activity";
+import UserProfilePage from "../components/UserProfile/UserProfileCard";
+import Activity from "../components/UserProfile/Activity";
 import UserLinks from "../components/UserLinks";
 import UserDetailedInfo from "../components/UserDetailedInfo";
 import AboutUserDetail from "../components/AboutUserDetail";

@@ -5,19 +5,22 @@ body {
 		"Helvetica Neue", sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-<<<<<<< HEAD
-	background: rgb(241, 242, 242);
-=======
 
 	/* background: rgb(241, 242, 242); */
 	background: #eef2ff;
->>>>>>> 1075f719eee77c00326409f07d5f14ec2655c493
 }
+
+
 
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
 		monospace;
 }
+
+.chatMessageHeight{
+	height: calc(100vh - 5rem);
+}
+
 
 .primary-text {
 	color: rgb(13, 103, 181);
@@ -25,6 +28,26 @@ code {
 
 .primary-bg {
 	background-color: rgb(13, 103, 181);
+}
+
+
+
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 5px;
+}
+ 
+::-webkit-scrollbar-track {
+    background-color: #ebebeb;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #b6b5b5; 
 }
 
 /* Tailwind css below */

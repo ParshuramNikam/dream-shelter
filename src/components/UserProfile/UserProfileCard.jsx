@@ -1,12 +1,12 @@
 import { ShareIcon, SearchIcon } from "@heroicons/react/outline";
 import { useState } from "react";
-import { categories } from "../dummy-data/data";
+import { categories } from "../../dummy-data/data";
 
-const UserProfilePage = () => {
+const UserProfileCard = () => {
   return (
-    <section className="w-80 hidden lg:block  h-max px-3 py-5 m-2 border border-gray-200 rounded-lg  overflow-hidden shadow-lg">
+    <section className="w-80  lg:block  h-max px-3 py-5 m-2 border border-gray-200 rounded-lg  overflow-hidden shadow-lg">
       {/* <div className=" justify-center items-center"> */}
-      <div className="flex justify-end ">
+      <div className="flex flex-wrap justify-end ">
         <button
           type="button"
           className=" p-1 rounded-full text-gray-800  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
@@ -18,7 +18,7 @@ const UserProfilePage = () => {
           />
         </button>
       </div>
-      <div className="flex mx-auto text-gray-600 justify-center items-center">
+      <div className="flex  mx-auto text-gray-600 justify-center items-center">
         <img
           className="flex h-60 w-40 rounded-lg"
           src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZSUyMHBpY3R1cmV8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60"
@@ -49,4 +49,4 @@ const UserProfilePage = () => {
   );
 };
 
-export default UserProfilePage;
+export default UserProfileCard;

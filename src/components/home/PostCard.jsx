@@ -43,14 +43,8 @@ const PostCard = () => {
                 {/* Post header 👇 */}
                 <div className="flex  items-center justify-between px-4 pt-2">
                     <div className="flex  items-center">
-<<<<<<< HEAD:src/components/PostCard.jsx
-                    <Link to={"/OtherProfilePage"}>
-                        <img class="w-10 mt-1 rounded-full" src="https://shortner-urls.herokuapp.com/BeKgZyu" alt="Avatar" />
-                    </Link>            
-=======
                         <img className="w-10 mt-1 rounded-full" src="https://shortner-urls.herokuapp.com/BeKgZyu" alt="Avatar" />
 
->>>>>>> 1075f719eee77c00326409f07d5f14ec2655c493:src/components/home/PostCard.jsx
                         <div className="text-xs ml-2">
                             <p className="font-bold ">John Doe</p>
                             <p>Khopoli - Maharashtra</p>

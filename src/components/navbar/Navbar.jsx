@@ -11,7 +11,7 @@ import { SearchIcon } from '@heroicons/react/outline';
 const navBarItems = [
     { title: "Home", icon: "HomeIcon", path: "/" },
     { title: "Add Friends", icon: "UsersIcon", path: "/SuggestionPage" },
-    { title: "Chat-Box", icon: "ChatAltIcon", path: "/messages" },
+    { title: "Chat-Box", icon: "ChatAltIcon", path: "/messenger" },
     { title: "Create-A-Post", icon: "PlusCircleIcon", path: "/create-post" },
     { title: "Blog-Post", icon: "NewspaperIcon", path: "/blogs" },
     { title: "Notifications", icon: "BellIcon", path: "/notifications" },
@@ -91,15 +91,15 @@ const Navbar = () => {
                                 <Menu.Items className="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                                     <Menu.Item>
                                         {({ active }) => (
-                                            <a
-                                                href="#"
+                                            <Link
+                                                to="/myprofile"
                                                 className={classNames(
                                                     active ? "bg-gray-100" : "",
                                                     "block px-4 py-2 text-sm text-gray-700"
                                                 )}
                                             >
                                                 Your Profile
-                                            </a>
+                                            </Link>
                                         )}
                                     </Menu.Item>
                                     <Menu.Item>

@@ -1,27 +1,20 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-<<<<<<< HEAD
-import OtherUserDetailedInfo from './components/OtherUserDetailedInfo';
-import PageLayout from './components/PageLayout';
-=======
-import Navbar from './components/navbar/Navbar';
 import PageLayout from './components/layout/PageLayout';
->>>>>>> 1075f719eee77c00326409f07d5f14ec2655c493
 import AboutUsPage from './pages/AboutUsPage';
 import BlogsPage from './pages/BlogsPage';
-import BookmarksPage from './pages/BookmarksPage';
+import BookmarkPage from './pages/BookmarkPage';
 import CreatePostPage from './pages/CreatePostPage';
 import HomePage from './pages/HomePage';
 import Login from './pages/Login';
-import MessagesPage from './pages/MessagesPage';
 import NoticationPage from './pages/NoticationPage';
-<<<<<<< HEAD
-import OtherProfilePage from './pages/OtherProfilePage';
-import ProfilePage from './pages/ProfilePage';
-=======
 import OneBlogPage from './pages/OneBlogPage';
->>>>>>> 1075f719eee77c00326409f07d5f14ec2655c493
 import Signup from './pages/Signup';
 import SuggestionsPage from "./pages/SuggestionsPage";
+import OtherUserDetailedInfo from './components/OtherUserDetailedInfo';
+import ProfilePage from "./pages/ProfilePage";
+import OtherProfilePage from "./pages/OtherProfilePage";
+import Messenger from './pages/Messenger';
+
 // import NoticationPage from './pages/NoticationPage';
 
 
@@ -60,7 +53,7 @@ function App() {
 					</PageLayout>
 				</Route>
 
-				<Route exact path="/ProfilePage">
+				<Route exact path="/myprofile">
 					<PageLayout>
 						<ProfilePage />
 					</PageLayout>
@@ -92,21 +85,16 @@ function App() {
 
 				<Route exact path="/bookmarks">
 					<PageLayout>
-						<NoticationPage />
+						<BookmarkPage />
 					</PageLayout>
 				</Route>
 
-				<Route exact path="/messages">
+				<Route exact path="/messenger">
 					<PageLayout>
-						<MessagesPage />
+						<Messenger />
 					</PageLayout>
 				</Route>
 
-				<Route exact path="/bookmarks">
-					<PageLayout>
-						<BookmarksPage />
-					</PageLayout>
-				</Route>
 
 				<Route path="/login">
 					<Login />

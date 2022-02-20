@@ -2,7 +2,7 @@ import React from "react";
 
 function OtherUserDetailedInfo() {
   return (
-    <div className="w-96 hidden lg:block  px-3 py-5 m-2 border border-gray-200 rounded-lg overflow-hidden shadow-lg">
+    <div className="w-96   px-3 py-5 m-2 border border-gray-200 rounded-lg  shadow-lg">
       <div className="flex justify-start border-b  border-gray-600 pb-1">
         <div className="flex">
           <div>
