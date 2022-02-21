@@ -10,9 +10,7 @@ import NoticationPage from './pages/NoticationPage';
 import OneBlogPage from './pages/OneBlogPage';
 import Signup from './pages/Signup';
 import SuggestionsPage from "./pages/SuggestionsPage";
-import OtherUserDetailedInfo from './components/OtherUserDetailedInfo';
 import ProfilePage from "./pages/ProfilePage";
-import OtherProfilePage from "./pages/OtherProfilePage";
 import Messenger from './pages/Messenger';
 
 import ScrollToTop from './components/ScrollToTop';
@@ -21,9 +19,8 @@ const compoentsList = [
 	{ path: "/", component: <HomePage /> },
 	{ path: "/aboutus", component: <AboutUsPage /> },
 	{ path: "/SuggestionPage", component: <SuggestionsPage /> },
-	{ path: "/OtherProfilePage", component: <OtherProfilePage /> },
-	{ path: "/OtherProfileDetailedInfoPage", component: <OtherUserDetailedInfo /> },
-	{ path: "/myprofile", component: <ProfilePage /> },
+	{ path: "/OtherProfilePage", component: <ProfilePage edit={false} /> },
+	{ path: "/myprofile", component: <ProfilePage edit={true} /> },
 	{ path: "/blogs", component: <BlogsPage /> },
 	{ path: "/create-post", component: <CreatePostPage /> },
 	{ path: "/blog/:id", component: <OneBlogPage /> },

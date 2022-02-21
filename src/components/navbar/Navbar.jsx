@@ -15,7 +15,7 @@ const navBarItems = [
     { title: "Create-A-Post", icon: "PlusCircleIcon", path: "/create-post" },
     { title: "Blog-Post", icon: "NewspaperIcon", path: "/blogs" },
     { title: "Notifications", icon: "BellIcon", path: "/notifications" },
-    { title: "BooksMarks", icon: "BookmarkAltIcon", path: "/bookmarks" },
+    { title: "BookMarks", icon: "BookmarkAltIcon", path: "/bookmarks" },
 ]
 
 const Navbar = () => {

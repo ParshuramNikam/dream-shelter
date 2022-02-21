@@ -5,7 +5,7 @@ import React from "react";
 
 const UserLinks = () => {
   return (
-    <div className="w-80 hidden lg:block  h-max px-3 py-5 m-2 border border-gray-200 rounded-lg  overflow-hidden shadow-lg">
+    <div className="max-w:sm block bg-white  h-max px-3 py-5 m-2 border border-gray-200 rounded-lg  overflow-hidden shadow-lg">
       <div className="flex justify-between border-b  border-gray-600 pb-1">
         <div className="flex">
           <div className="mr-2 ">

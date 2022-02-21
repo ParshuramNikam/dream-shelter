@@ -1,8 +1,8 @@
 import React from "react";
 
-function UserDetailedInfo() {
+function UserDetailedInfo({edit}) {
   return (
-    <div className="w-96 hidden lg:block  px-3 py-5 m-2 border border-gray-200 rounded-lg overflow-hidden shadow-lg">
+    <div className="grow block bg-white  px-3 py-5 m-2 border border-gray-200 rounded-lg overflow-hidden shadow-lg">
       <div className="flex justify-start border-b  border-gray-600 pb-1">
         <div className="flex">
           <div>
@@ -53,13 +53,17 @@ function UserDetailedInfo() {
           <p>Bay Area, San Francisco, CA Bay Area, San Francisco, CA</p>
         </div>
       </div>
-      <div className="flex justify-center pt-2">
+      {/* {
+        edit ? <>
+          <div className="flex justify-center pt-2">
         <div className="flex">
           <button className="flex items-center text-lg text-white bg-blue-800 justify-center hover:bg-blue-900  rounded-md cursor-pointer px-3 py-1">
             <p className="">Edit</p>
           </button>
         </div>
       </div>
+        </> :null
+      } */}
     </div>
   );
 }

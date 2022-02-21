@@ -58,7 +58,7 @@ const OneNavItem = ({ title, icon, path }) => {
             : <>
                 <button
                     type="button"
-                    className="bg-gray-200 w-max inline-block mx-auto p-1 rounded-full text-gray-800 m-1.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                    className="bg-gray-200 w-max inline-block sm:hidden mx-auto p-1 rounded-full text-gray-800 m-1.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                     onClick={openModal}
                 >
                     <span className="sr-only">{title}</span>

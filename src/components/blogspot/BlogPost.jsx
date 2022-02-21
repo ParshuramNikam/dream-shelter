@@ -6,14 +6,14 @@ const BlogPost = ({ cover, subCategory, title, description, authorAvatar, author
     return (
         <div className="rounded-lg overflow-hidden shadow-lg h-full bg-white">
             <img className="object-cover w-full h-56 rounded-xl" src={cover} alt="post image" />
-            <div className="px-0.5 pt-2 pb-2">
+            <div className="px-2 pt-2 pb-2">
                 {
                     subCategory.map((category, index) =>
                         <span key={index} className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{"#" + category}</span>
                     )
                 }
             </div>
-            <div className="px-1 py-2.5">
+            <div className="px-3 py-2.5">
                 <div className="font-bold text-xl mb-3">{title}</div>
                 <p className="text-gray-700 text-base">
                     {description.slice(200) + "..."}
