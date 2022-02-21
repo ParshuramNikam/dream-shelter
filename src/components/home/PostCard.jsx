@@ -1,5 +1,7 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState,useEffect } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { useLocation } from 'react-router-dom';
+
 import {
   BellIcon,
   BookmarkIcon,
@@ -14,7 +16,9 @@ import {
 import classNames from "classnames";
 import { Link } from "react-router-dom";
 
+
 const PostCard = () => {
+  const location = useLocation();
   const [like, setLike] = useState(false);
 
   const [postBtnClick, setPostBtnClick] = useState({
@@ -23,11 +27,24 @@ const PostCard = () => {
     share: false,
   });
 
-  const [postOptions, setPostOptions] = useState([
-    "bookmark",
-    "Copy link",
-    "unfollow",
-  ]);
+  const [postOptions, setPostOptions] = useState([]);
+
+  useState(()=>{
+    console.log(console.log(location.pathname));
+    if(location.pathname=="/bookmarks"){
+      setPostOptions([
+        "unsave",
+        "copy link",
+      ])
+      }else if(location.pathname=="/"){
+        setPostOptions([
+          "save",
+          "copy link",
+          "unfollow",
+        ])
+      }
+    },[])
+
 
   const postBtnClickAction = (btn) => {
     btn = btn.toLowerCase();
@@ -47,6 +64,8 @@ const PostCard = () => {
         break;
     }
   };
+
+  
 
   return (
     <div className="pt-2 flex justify-center h-ma">
@@ -99,7 +118,10 @@ const PostCard = () => {
                           "block px-4 py-2 text-sm text-gray-700 w-full"
                         )}
                       >
-                        {option.toLowerCase() === "bookmark" ? (
+                        {option.toLowerCase() === "save" ? (
+                          <BookmarkIcon className="h-4 w-4 flex float-left mr-3 stroke-1 stroke-indigo-800" />
+                        ) : null}
+                        {option.toLowerCase() === "unsave" ? (
                           <BookmarkIcon className="h-4 w-4 flex float-left mr-3 stroke-1 stroke-indigo-800" />
                         ) : null}
                         {option.toLowerCase() === "copy link" ? (

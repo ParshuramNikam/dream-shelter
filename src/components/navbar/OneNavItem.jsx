@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const OneNavItem = ({ title, icon, path }) => {
     return (
-        <Link to={path} className="w-max inline-block mx-auto">
+        <Link to={path} className={`${title==="Create-A-Post" ? "sm:hidden": "inline-block" } w-max  mx-auto`} >
             <button
                 type="button"
                 className="bg-gray-200 p-1 rounded-full text-gray-800 m-1.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"

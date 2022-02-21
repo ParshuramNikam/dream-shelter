@@ -7,7 +7,7 @@ import PostsContainer from '../components/home/PostsContainer'
 
 const BookmarksPage = () => {
   return (
-    <section className='p-1'>
+    <section className='px-10'>
       <h1 className="py-2 mx-3 font-semibold text-lg">
         <BookmarkAltIcon className="mr-1 h-7 w-7 fill-gray-300 stroke stroke-indigo-80 inline-block relative bottom-0.5" />
         BookMark Questions : 
