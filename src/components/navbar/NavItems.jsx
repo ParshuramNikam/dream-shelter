@@ -1,8 +1,21 @@
 import { Disclosure } from '@headlessui/react';
 import { BellIcon, ChatAltIcon, HomeIcon, NewspaperIcon, PlusCircleIcon, UsersIcon } from '@heroicons/react/outline';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 const NavItems = () => {
+    
+  let [isOpen, setIsOpen] = useState(false)
+
+  function closeModal() {
+    setIsOpen(false)
+  }
+
+  function openModal() {
+    setIsOpen(true)
+  }
+
+    
     return (
         <div>
             <Link to={"/"}>
@@ -48,7 +61,7 @@ const NavItems = () => {
                 <button
                     type="button"
                     className="bg-gray-200 p-1 rounded-full text-gray-800 mr-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                >
+                > 
                     <span className="sr-only">Create-A-Post</span>
                     <PlusCircleIcon
                         className="h-6 w-6 hover:stroke-cyan-800"
