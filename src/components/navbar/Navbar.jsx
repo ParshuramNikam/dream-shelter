@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { Menu, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import classNames from 'classnames';
-import NavItems from './NavItems';
 import OneNavItem from './OneNavItem';
 import NavSearchBar from './NavSearchBar';
 import { SearchIcon } from '@heroicons/react/outline';
