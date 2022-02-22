@@ -15,7 +15,7 @@ const ProfilePage = ({edit}) => {
           {/* <UserLinks/> */}
         </section>
         <section >
-          <Activity />
+          {/* <Activity /> */}
           <AboutUserDetail />
         </section>
       </div>
