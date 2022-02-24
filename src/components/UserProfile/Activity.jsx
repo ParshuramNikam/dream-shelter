@@ -2,56 +2,61 @@ import React from "react";
 
 function Activity() {
   return (
-    <div className="grow   h-max m-2 mt-3   overflow-hidden shadow-lg bg-blue-500">
-      <div className="grid grid-cols-2 gap-0">
-        <div className="  bg-blue-500 py-1 hover:border-2">
-          <div className="flex  justify-center font-medium text-2xl text-base text-white  bg-blue-500 ">
-            3
-          </div>
-          <div className="flex justify-center font-medium text-base text-white  bg-blue-500 ">
-            Questions
-          </div>
-        </div>
-        <div className="  bg-blue-600 py-1 hover:border-2">
-          <div className="flex justify-center font-medium text-2xl text-base text-white  bg-blue-600 ">
-            7
-          </div>
-          <div className="flex justify-center font-medium text-base text-white  bg-blue-600 ">
-            Answers
-          </div>
-        </div>
+    <div className="grow px-3 py-5 m-2 bg-white border border-gray-200 rounded-lg overflow-hidden shadow-lg">
+      {/* <h1 className="flex justify-center pb-3 font-semibold text-lg">
+        About Me✨
+      </h1> */}
+      <div className="flex justify-start pb-1">
+        <div className="flex">
+          <div>
+            <header>
+              <div class="container">
+                <div class="profile">
+                  {/* <div class="profile-image">
+                    <img
+                      src="https://images.unsplash.com/photo-1513721032312-6a18a42c8763?w=152&h=152&fit=crop&crop=faces"
+                      alt=""
+                    />
+                  </div> */}
 
-        <div className="  bg-blue-600 py-1 hover:border-2">
-          <div className="flex justify-center font-medium text-2xl text-base text-white  bg-blue-600 ">
-            255
-          </div>
-          <div className="flex justify-center font-medium text-base text-white  bg-blue-600 ">
-            Followers
-          </div>
-        </div>
-        <div className="  bg-blue-500 py-1 hover:border-2">
-          <div className="flex justify-center font-medium text-2xl text-base text-white  bg-blue-500 ">
-            65
-          </div>
-          <div className="flex justify-center font-medium text-base text-white  bg-blue-500 ">
-            Following
-          </div>
-        </div>
+                  {/* <div class="profile-user-settings">
+                    <h1 class="profile-user-name">janedoe_</h1>
 
-        <div className="  bg-blue-500 py-1 hover:border-2">
-          <div className="flex justify-center font-medium text-2xl text-base text-white  bg-blue-500 ">
-            3
-          </div>
-          <div className="flex justify-center font-medium text-base text-white  bg-blue-500 ">
-            Posts
-          </div>
-        </div>
-        <div className="  bg-blue-600 py-1 hover:border-2">
-          <div className="flex justify-center font-medium text-2xl text-base text-white  bg-blue-600 ">
-            5
-          </div>
-          <div className="flex justify-center font-medium text-base text-white  bg-blue-600 ">
-            Edits
+                    <button class="btn profile-edit-btn">Edit Profile</button>
+
+                    <button
+                      class="btn profile-settings-btn"
+                      aria-label="profile settings"
+                    >
+                      <i class="fas fa-cog" aria-hidden="true"></i>
+                    </button>
+                  </div> */}
+
+                  <div class="profile-stats">
+                    <ul>
+                      <li>
+                        <span class="profile-stat-count">164</span> posts
+                      </li>
+                      <li>
+                        <span class="profile-stat-count">188</span> followers
+                      </li>
+                      <li>
+                        <span class="profile-stat-count">206</span> following
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="profile-bio">
+                    <p>
+                      <span class="profile-real-name">Jane Doe</span> Lorem
+                      ipsum dolor sit, amet consectetur adipisicing elit 📷✈️🏕️
+                    </p>
+                  </div>
+                </div>
+                {/* <!-- End of profile section --> */}
+              </div>
+              {/* <!-- End of container --> */}
+            </header>
           </div>
         </div>
       </div>

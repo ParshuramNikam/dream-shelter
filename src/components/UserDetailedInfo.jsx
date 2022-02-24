@@ -23,7 +23,7 @@ function UserDetailedInfo({edit}) {
           <p>@kshitighelani.com</p>
         </div>
       </div>
-      <div className="flex justify-start border-b  border-gray-600 pb-1">
+      <div className="flex justify-start">
         <div className="flex">
           <div>
             <p className="text-base font-semibold   w-28">Mobile</p>
@@ -33,7 +33,7 @@ function UserDetailedInfo({edit}) {
           <p>+13 9234283491</p>
         </div>
       </div>
-      <div className="flex justify-start border-b  border-gray-600 pb-1">
+      {/* <div className="flex justify-start border-b  border-gray-600 pb-1">
         <div className="flex">
           <div>
             <p className="text-base font-semibold   w-28">Status</p>
@@ -42,8 +42,8 @@ function UserDetailedInfo({edit}) {
         <div className="text-gray-500 ">
           <p>Tell anything about you, only in one sentence. </p>
         </div>
-      </div>
-      <div className="flex justify-start border-b  border-gray-600 pb-1">
+      </div> */}
+      {/* <div className="flex justify-start border-b  border-gray-600 pb-1">
         <div className="flex">
           <div>
             <p className="text-base font-semibold   w-24">Detail Address</p>
@@ -52,7 +52,7 @@ function UserDetailedInfo({edit}) {
         <div className="text-gray-500 pl-3">
           <p>Bay Area, San Francisco, CA Bay Area, San Francisco, CA</p>
         </div>
-      </div>
+      </div> */}
       {/* {
         edit ? <>
           <div className="flex justify-center pt-2">

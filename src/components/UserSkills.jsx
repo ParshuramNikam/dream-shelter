@@ -16,7 +16,7 @@ function UserSkills() {
             <div className="ml-5 border-b text-base  border-gray-400 pb-1">
                 <p>Node JS</p>
             </div>
-            <div className="ml-5 border-b  text-base border-gray-400 pb-1">
+            <div className="ml-5 pb-1">
                 <p>MongoDB</p>
             </div>
         </div>
@@ -34,7 +34,7 @@ function UserSkills() {
             <div className="ml-5 border-b text-base  border-gray-400 pb-1 ">
                 <p>Learning New Technologies</p>
             </div>
-            <div className="ml-5 border-b  text-base border-gray-400 pb-1">
+            <div className="ml-5 pb-1">
                 <p>Making YouTube Videos</p>
             </div>
         </div>
@@ -46,7 +46,7 @@ function UserSkills() {
           </h1>
         </div >
         <div className="">
-            <div className="ml-5 border-b text-base border-gray-400 pb-1 ">
+            <div className="ml-5">
                 <p>Dominican University of California, Bay Area, San Francisco, CA</p>
             </div>
             
