@@ -31,6 +31,18 @@ code {
 	background-color: rgb(13, 103, 181);
 }
 
+.banner{
+	/* background-image: url("https://media-exp1.licdn.com/dms/image/C4D16AQHOGTXAwxWr9A/profile-displaybackgroundimage-shrink_350_1400/0/1596362810946?e=1651104000&v=beta&t=O21KMZ5zRis5SKIIjChFY5UUr4n71s1QHg2DXQ-Ot2Q"); */
+	/* background-image: linear-gradient(to right, #8360c3, #2ebf91); */
+	background-image: url("https://media-exp1.licdn.com/dms/image/C4D16AQHOGTXAwxWr9A/profile-displaybackgroundimage-shrink_350_1400/0/1596362810946?e=1651104000&v=beta&t=O21KMZ5zRis5SKIIjChFY5UUr4n71s1QHg2DXQ-Ot2Q");
+	background-repeat: no-repeat, repeat;
+	background-position: center;
+	background-size: cover;
+	border-radius: 20px 20px 0px 0px;
+}
+.bannerbg{
+	border-radius: 20px 20px 20px 20px;
+}
 
 
 

@@ -1,136 +1,53 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGlobe } from "@fortawesome/free-solid-svg-icons";
-import { faInstagram, faGithub, faTwitter, faFacebook, faReddit, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { faBriefcase, faBuildingColumns, faEnvelope, faGlobe, faLocation } from "@fortawesome/free-solid-svg-icons";
+import {
+  faInstagram,
+  faGithub,
+  faTwitter,
+  faFacebook,
+  faReddit,
+  faLinkedin,
+} from "@fortawesome/free-brands-svg-icons";
 import React from "react";
+import { ShareIcon, SearchIcon, CogIcon, LocationMarkerIcon, MailIcon, BriefcaseIcon, PencilAltIcon, PencilIcon } from "@heroicons/react/outline";
 
 const UserLinks = () => {
   return (
-    <div className="max-w:sm block bg-white  h-max px-3 py-5 m-2 border border-gray-200 rounded-lg  overflow-hidden shadow-lg">
-      <div className="flex justify-between border-b  border-gray-600 pb-1">
-        <div className="flex">
-          <div className="mr-2 ">
-            <FontAwesomeIcon
-              icon={faGlobe}
-              className="hover:text-gray-500 text-2xl font-bold cursor-pointer"
-            />
-          </div>
-          <div>
-            <p className="text-base font-semibold hover:text-gray-500 cursor-pointer">
-              Website
-            </p>
-          </div>
-        </div>
-        <div className="text-gray-500 ">
-          <p>www.kshitighelani.com</p>
-        </div>
+    <div className="w-96 block bg-white  px-3 py-3 m-2 border border-gray-200 rounded-lg overflow-hidden shadow-lg">
+      <h1 className="py-2 mx-3 font-bold text-xl">About</h1>
+      <div className="profile-bio m-2">
+        <p className="">
+          <span className="profile-real-name"></span>Tell anything about you,
+          only in one sentence.Tart I love sugar plum I love oat cake. Sweet roll caramels I love jujubes. 📷✈️🏕️
+        </p>
       </div>
-      <div className="flex justify-between border-b  border-gray-600 py-1">
-        <div className="flex">
-          <div className="mr-2 ">
-            <FontAwesomeIcon
-              icon={faGithub}
-              className="hover:text-orange-600 text-2xl font-bold cursor-pointer"
-            />
-          </div>
-          <div>
-            <p className="text-base font-semibold hover:text-orange-600 cursor-pointer">
-              Github
-            </p>
-          </div>
-        </div>
-        <div className="text-gray-500 ">
-          <p>Kshiti_Ghelani</p>
-        </div>
+      <div className="flex gap-3 text-gray-700  pb-2 items-center font-normal text-base">
+      <FontAwesomeIcon
+                icon={faLocation}
+                className="hover:text-cyan-500 text-black text-lg font-bold cursor-pointer"
+              />
+        <p>San Francisco, CA</p>
       </div>
-      <div className="flex justify-between border-b  border-gray-600 py-1">
-        <div className="flex">
-          <div className="mr-2 ">
-            <FontAwesomeIcon
-              icon={faTwitter}
-              className="hover:text-cyan-500 text-2xl font-bold cursor-pointer"
-            />
-          </div>
-          <div>
-            <p className="text-base font-semibold hover:text-cyan-500 cursor-pointer">
-              Twitter
-            </p>
-          </div>
-        </div>
-        <div className="text-gray-500 ">
-          <p>@Kshiti_Ghelani</p>
-        </div>
+      <div className="flex gap-3 text-gray-700  pb-2 items-center font-normal text-base">
+      <FontAwesomeIcon
+                icon={faEnvelope}
+                className="hover:text-cyan-500 text-black text-lg font-bold cursor-pointer"
+              />
+        <p>johndoe@gmail.com</p>
       </div>
-      <div className="flex justify-between border-b  border-gray-600 py-1">
-        <div className="flex">
-          <div className="mr-2 ">
-            <FontAwesomeIcon
-              icon={faInstagram}
-              className="hover:text-rose-700 text-2xl font-bold cursor-pointer"
-            />
-          </div>
-          <div>
-            <p className="text-base font-semibold hover:text-rose-700 cursor-pointer">
-              Instagram
-            </p>
-          </div>
-        </div>
-        <div className="text-gray-500 ">
-          <p>@Kshiti_Ghelani</p>
-        </div>
+      <div className="flex gap-3 text-gray-700  pb-2 items-center font-normal text-base">
+      <FontAwesomeIcon
+                icon={faBriefcase}
+                className="hover:text-cyan-500 text-black text-lg font-bold cursor-pointer"
+              />
+        <p>Manager at  Gleichner, Mueller and Tromp</p>
       </div>
-      <div className="flex justify-between border-b  border-gray-600 py-1">
-        <div className="flex">
-          <div className="mr-2 ">
-            <FontAwesomeIcon
-              icon={faFacebook}
-              className="hover:text-sky-600 text-2xl font-bold cursor-pointer"
-            />
-          </div>
-          <div>
-            <p className="text-base font-semibold hover:text-sky-600 cursor-pointer">
-              Facebook
-            </p>
-          </div>
-        </div>
-        <div className="text-gray-500 ">
-          <p>Kshiti_Ghelani</p>
-        </div>
-      </div>
-      <div className="flex justify-between border-b  border-gray-600 py-1">
-        <div className="flex">
-          <div className="mr-2 ">
-            <FontAwesomeIcon
-              icon={faLinkedin}
-              className="hover:text-sky-700 text-2xl font-bold cursor-pointer"
-            />
-          </div>
-          <div>
-            <p className="text-base font-semibold hover:text-sky-700 cursor-pointer">
-              Linkedin
-            </p>
-          </div>
-        </div>
-        <div className="text-gray-500 ">
-          <p>Kshiti_Ghelani</p>
-        </div>
-      </div>
-      <div className="flex justify-between pt-1">
-        <div className="flex">
-          <div className="mr-2 ">
-            <FontAwesomeIcon
-              icon={faReddit}
-              className="hover:text-red-600 text-2xl font-bold cursor-pointer"
-            />
-          </div>
-          <div>
-            <p className="text-base font-semibold hover:text-red-600 cursor-pointer">
-              Reddit
-            </p>
-          </div>
-        </div>
-        <div className="text-gray-500 ">
-          <p>Kshiti_Ghelani</p>
-        </div>
+      <div className="flex gap-3 text-gray-700  pb-2  font-normal text-base">
+      <FontAwesomeIcon
+                icon={faBuildingColumns}
+                className="hover:text-cyan-500 text-black text-lg font-bold cursor-pointer"
+              />
+        <p>Dominican University of California, Bay Area, San Francisco, CA</p>
       </div>
     </div>
   );

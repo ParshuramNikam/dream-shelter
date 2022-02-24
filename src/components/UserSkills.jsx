@@ -2,8 +2,9 @@ import React from "react";
 
 function UserSkills() {
   return (
-    <div className="grow block bg-white  px-3 py-5 m-2 border border-gray-200 rounded-lg overflow-hidden shadow-lg">
-      <div className="">
+    <div className="w-full block bg-white  px-3 py-5 m-2 border border-gray-200 rounded-lg overflow-hidden shadow-lg">
+      <p>1</p>
+      {/* <div className="">
         <div className="">
           <h1 className="flex justify-center pb-2 font-semibold text-xl">
             Skills 🖊
@@ -51,7 +52,7 @@ function UserSkills() {
             </div>
             
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

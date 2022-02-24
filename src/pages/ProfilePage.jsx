@@ -5,22 +5,21 @@ import UserDetailedInfo from "../components/UserDetailedInfo";
 import AboutUserDetail from "../components/AboutUserDetail";
 import UserSkills from "../components/UserSkills";
 
-const ProfilePage = ({edit}) => {
+const ProfilePage = ({ edit }) => {
   return (
-    <section className=" mx-auto lg:flex flex-row overflow-x-hidden">
-      <div className="sm:flex">
-        <section className="">
-          <UserProfileCard edit={edit} />
-          <UserLinks />
+    <section className="xl:w-10/12 mx-auto lg:flex flex-col overflow-x-hidden">
+      <section>
+        <UserProfileCard edit={edit} />
+      </section>
+      <section className="flex flex-col ">
+        <section className="flex ">
+          <UserDetailedInfo edit={edit} />
+          <UserSkills />
         </section>
-        <section >
-          {/* <Activity /> */}
+        <section className="flex ">
+          <UserLinks />
           <AboutUserDetail />
         </section>
-      </div>
-      <section className="sm:flex lg:block">
-        <UserDetailedInfo edit={edit} />
-        <UserSkills />
       </section>
     </section>
   );
