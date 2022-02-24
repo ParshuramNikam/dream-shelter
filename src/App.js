@@ -14,6 +14,7 @@ import ProfilePage from "./pages/ProfilePage";
 import Messenger from './pages/Messenger';
 
 import ScrollToTop from './components/ScrollToTop';
+import QuestionsPage from './pages/QuestionsPage';
 
 const compoentsList = [
 	{ path: "/", component: <HomePage /> },
@@ -57,6 +58,10 @@ function App() {
 
 				<Route path="/signup">
 					<Signup />
+				</Route>
+
+				<Route path="/signup-questions">
+					<QuestionsPage />
 				</Route>
 
 			</Switch>
