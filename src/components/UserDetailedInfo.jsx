@@ -5,20 +5,20 @@ function UserDetailedInfo({edit}) {
     <div className="w-96 block bg-white  px-3 py-5 m-2 border border-gray-200 rounded-lg overflow-hidden shadow-lg">
       <div className="profile-stats pt-1  pb-2">
         <ul className="flex justify-evenly text-center">
-          <li className=" cursor-pointer border-r  border-gray-600">
-            <span className="profile-stat-count font-bold text-gray-800 hover:text-cyan-700">
+          <li className=" cursor-pointer border-r pr-3 border-gray-600">
+            <span className="profile-stat-count text-xl font-bold text-gray-800 hover:text-cyan-700">
               164
             </span>{" "}
             Posts
           </li>
-          <li className=" cursor-pointer border-r  border-gray-600">
-            <span className="profile-stat-count font-bold text-gray-800 hover:text-cyan-700">
+          <li className=" cursor-pointer border-r pr-3  border-gray-600">
+            <span className="profile-stat-count text-xl font-bold text-gray-800 hover:text-cyan-700">
               188
             </span>{" "}
             Followers
           </li>
           <li className=" cursor-pointer">
-            <span className="profile-stat-count font-bold text-gray-800 hover:text-cyan-700">
+            <span className="profile-stat-count text-xl font-bold text-gray-800 hover:text-cyan-700">
               206
             </span>{" "}
             Following

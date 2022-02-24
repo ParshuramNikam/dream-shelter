@@ -4,6 +4,8 @@ import UserLinks from "../components/UserLinks";
 import UserDetailedInfo from "../components/UserDetailedInfo";
 import AboutUserDetail from "../components/AboutUserDetail";
 import UserSkills from "../components/UserSkills";
+import CreatePost from "../components/home/CreatePost";
+import PostsContainer from "../components/home/PostsContainer";
 
 const ProfilePage = ({ edit }) => {
   return (
@@ -11,14 +13,14 @@ const ProfilePage = ({ edit }) => {
       <section>
         <UserProfileCard edit={edit} />
       </section>
-      <section className="flex flex-col ">
-        <section className="flex ">
+      <section className="flex flex-row ">
+        <section className="flex-col ">
           <UserDetailedInfo edit={edit} />
-          <UserSkills />
-        </section>
-        <section className="flex ">
           <UserLinks />
-          <AboutUserDetail />
+        </section>
+        <section className="flex-col ">
+          <CreatePost />
+          <PostsContainer />
         </section>
       </section>
     </section>
