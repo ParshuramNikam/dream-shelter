@@ -12,7 +12,6 @@ const ProfilePage = ({edit}) => {
         <section className="">
           <UserProfileCard edit={edit} />
           <UserLinks />
-          {/* <UserLinks/> */}
         </section>
         <section >
           {/* <Activity /> */}

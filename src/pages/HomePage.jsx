@@ -3,8 +3,9 @@ import ExploreBlogs from "../components/home/ExploreBlogs";
 import PostCard from "../components/home/PostCard";
 import PostsContainer from "../components/home/PostsContainer";
 import SuggestedUsers from "../components/home/SuggestedUsers";
-import ChatBox from "../components/home/ChatBox";
+import ChatBox from "../components/home/homechatbox/ChatBox";
 import CreatePost from "../components/home/CreatePost";
+import Footer from "../components/Footer";
 
 const HomePage = () => {
   return (
@@ -20,7 +21,8 @@ const HomePage = () => {
         </section>
         <section>
           <SuggestedUsers />
-          <ChatBox />
+          {/* <ChatBox /> */}
+          <Footer/>
         </section>
       </div>
     </section>
