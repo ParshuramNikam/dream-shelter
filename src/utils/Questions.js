@@ -16,17 +16,18 @@ export const inputQuestions = [
     },
 ]
 
+
 export const checkboxQuestions = [
     {
         id: 4,
         type: "checkbox",
         question: "Select your interest.",
-        options: [ "Abroad study", "lorem", "ipsum", "doller" ]
-    }, 
+        options: ["Abroad study", "lorem", "ipsum", "doller"]
+    },
     {
         id: 5,
         type: "checkbox",
         question: "What's the one main activity you want to do with Dream Shelter.",
-        options: [ "abcd", "xyz", "aaaaa", "jaahaj" ]
-    }
+        options: ["abcd", "xyz", "aaaaa", "jaahaj"]
+    },
 ]
