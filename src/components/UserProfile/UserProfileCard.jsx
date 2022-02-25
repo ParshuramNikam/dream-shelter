@@ -5,19 +5,19 @@ import { categories } from "../../dummy-data/data";
 const UserProfileCard = ({ edit }) => {
   return (
     // <div className="max-w:sm block bg-white  h-max px-3 py-5 m-2 border border-gray-200 rounded-lg  overflow-hidden shadow-lg">
-      <div className="bannerbg h-72 bg-white mt-5 ">
-        <div className="banner h-60 w-full">
-          <div className=" mx-auto text-white  relative top-20 right-80 ">
-            <div className="flex justify-center ">
+      <div className="bannerbg h-56 md:h-72 bg-white mt-5 ">
+        <div className="banner h-44 md:h-60 w-full">
+          <div className=" mx-auto text-white  relative top-20 md:top-32 left-7  sm:left-10  ">
+            <div className="flex items-center ">
               <img
-                className="flex h-36 w-36 rounded-full border-4 border-white "
+                className="flex w-28 h-28 md:h-36 md:w-36 rounded-full border-4 border-white "
                 src="https://res.cloudinary.com/minimal-ui/image/upload/v1614655910/upload_minimal/avatar/minimal_avatar.jpg"
                 alt=""
               />
-            </div>
             <div className="ml-3">
               <p className="text-3xl mb-1  font-semibold ">John Doe</p>
               <p className="text-base text-gray-200 font-medium ">Full-Stack Developer</p>
+            </div>
             </div>
           </div>
         </div>
