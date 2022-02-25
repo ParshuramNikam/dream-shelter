@@ -9,17 +9,17 @@ import PostsContainer from "../components/home/PostsContainer";
 
 const ProfilePage = ({ edit }) => {
   return (
-    <section className="xl:w-10/12 mx-auto lg:flex flex-col overflow-x-hidden">
-      <section>
+    <section className="xl:w-10/12 mx-auto p-3 lg:flex flex-col overflow-x-hidden">
+      <section >
         <UserProfileCard edit={edit} />
       </section>
-      <section className="flex flex-row ">
+      <section className="lg:flex flex-row ">
         <section className="flex-col ">
           <UserDetailedInfo edit={edit} />
           <UserLinks />
         </section>
         <section className="flex-col ">
-          <CreatePost />
+          <CreatePost ishidden={false} />
           <PostsContainer />
         </section>
       </section>

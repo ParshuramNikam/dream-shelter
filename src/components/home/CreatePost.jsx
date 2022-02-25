@@ -5,7 +5,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import PostQuestionPopup from "./PostQuestionPopup";
 import { Fragment } from 'react'
 
-function CreatePost() {
+function CreatePost({ishidden}) {
 
   let [isOpen, setIsOpen] = useState(false)
 
@@ -18,8 +18,10 @@ function CreatePost() {
   }
 
 
+
+
   return (
-    <section className="w-100 hidden lg:block  px-3 py-5 m-2 bg-white border border-gray-200 rounded-lg overflow-hidden shadow-lg">
+    <section className={`w-100 ${ishidden ? 'hidden lg:block' : 'block'}  px-3 py-5 m-2 bg-white border border-gray-200 rounded-lg overflow-hidden shadow-lg`}>
       <div className="flex gap-3 relative items-center ">
         <img
           className="h-12 w-12 rounded-full"

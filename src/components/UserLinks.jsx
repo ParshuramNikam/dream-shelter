@@ -13,7 +13,7 @@ import { ShareIcon, SearchIcon, CogIcon, LocationMarkerIcon, MailIcon, Briefcase
 
 const UserLinks = () => {
   return (
-    <div className="w-96 block bg-white  px-3 py-3 m-2 border border-gray-200 rounded-lg overflow-hidden shadow-lg">
+    <div className="w-full lg:w-96 block bg-white  px-3 py-3 m-2 border border-gray-200 rounded-lg overflow-hidden shadow-lg">
       <h1 className="py-2 mx-3 font-bold text-xl">About</h1>
       <div className="profile-bio m-2">
         <p className="">

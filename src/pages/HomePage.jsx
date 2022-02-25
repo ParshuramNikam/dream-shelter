@@ -16,7 +16,7 @@ const HomePage = () => {
           <ExploreBlogs />
         </section>
         <section>
-          <CreatePost />
+          <CreatePost ishidden={true} />
           <PostsContainer />
         </section>
         <section>

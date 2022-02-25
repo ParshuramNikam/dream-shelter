@@ -6,9 +6,9 @@ const UserProfileCard = ({ edit }) => {
   return (
     // <div className="max-w:sm block bg-white  h-max px-3 py-5 m-2 border border-gray-200 rounded-lg  overflow-hidden shadow-lg">
       <div className="bannerbg h-72 bg-white mt-5 ">
-        <div className="banner flex h-60 w-full">
-          <div className="flex  mx-auto text-white justify-center relative top-20 right-80  items-center">
-            <div className="flex ">
+        <div className="banner h-60 w-full">
+          <div className=" mx-auto text-white  relative top-20 right-80 ">
+            <div className="flex justify-center ">
               <img
                 className="flex h-36 w-36 rounded-full border-4 border-white "
                 src="https://res.cloudinary.com/minimal-ui/image/upload/v1614655910/upload_minimal/avatar/minimal_avatar.jpg"
