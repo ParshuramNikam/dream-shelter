@@ -15,6 +15,7 @@ import Messenger from './pages/Messenger';
 
 import ScrollToTop from './components/ScrollToTop';
 import QuestionsPage from './pages/QuestionsPage';
+import { UserAuthContextProvider } from './context/UserAuthContextProvider';
 
 const compoentsList = [
 	{ path: "/", component: <HomePage /> },
@@ -33,39 +34,41 @@ const compoentsList = [
 
 function App() {
 	return (
-		<Router>
-			<ScrollToTop />	{/*  👈 Imp : To always scroll page to top */}
+		<UserAuthContextProvider>
+			<Router>
+				<ScrollToTop />	{/*  👈 Imp : To always scroll page to top */}
 
-			<Switch>
+				<Switch>
 
-				{/* Page Layout already having navbar */}
+					{/* Page Layout already having navbar */}
 
-				{/* Components with page layout */}
-				{
-					compoentsList.map((component, index) =>
-						<Route exact path={component.path} key={index}>
-							<PageLayout>
-								{component.component}
-							</PageLayout>
-						</Route>
-					)
-				}
+					{/* Components with page layout */}
+					{
+						compoentsList.map((component, index) =>
+							<Route exact path={component.path} key={index}>
+								<PageLayout>
+									{component.component}
+								</PageLayout>
+							</Route>
+						)
+					}
 
-				{/* Components without page layout */}
-				<Route path="/login">
-					<Login />
-				</Route>
+					{/* Components without page layout */}
+					<Route path="/login">
+						<Login />
+					</Route>
 
-				<Route path="/signup">
-					<Signup />
-				</Route>
+					<Route path="/signup">
+						<Signup />
+					</Route>
 
-				<Route path="/signup-questions">
-					<QuestionsPage />
-				</Route>
+					<Route path="/signup-questions">
+						<QuestionsPage />
+					</Route>
 
-			</Switch>
-		</Router>
+				</Switch>
+			</Router>
+		</UserAuthContextProvider>
 	);
 }
 

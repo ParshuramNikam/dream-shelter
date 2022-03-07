@@ -6,8 +6,13 @@ import SuggestedUsers from "../components/home/SuggestedUsers";
 import ChatBox from "../components/home/homechatbox/ChatBox";
 import CreatePost from "../components/home/CreatePost";
 import Footer from "../components/Footer";
+import { useUserAuth } from "../context/UserAuthContextProvider";
 
 const HomePage = () => {
+
+  const { user } = useUserAuth();
+  console.log(">>", user && user.email);
+
   return (
     <section className="xl:w-11/12 mx-auto flex justify-center">
       <div className="mx-auto flex">
@@ -22,7 +27,7 @@ const HomePage = () => {
         <section>
           <SuggestedUsers />
           {/* <ChatBox /> */}
-          <Footer/>
+          <Footer />
         </section>
       </div>
     </section>

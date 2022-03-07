@@ -30,7 +30,6 @@ const PostCard = () => {
   const [postOptions, setPostOptions] = useState([]);
 
   useState(()=>{
-    console.log(console.log(location.pathname));
     if(location.pathname=="/bookmarks"){
       setPostOptions([
         "unsave",

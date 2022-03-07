@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react"
+import { UserFnameContext } from "../../pages/QuestionsPage";
 import { checkboxQuestions, inputQuestions } from "../../utils/Questions";
 import CheckboxQuestions from "./CheckboxQuestions";
 import InputQuestion from "./InputQuestion";
 import Intro from "./Intro"
 import NextPrevBtns from "./NextPrevBtns";
 import Outro from "./Outro";
+import SlidingAnimation from "./SlidingAnimation";
 
 
 const AllQuestion = () => {
@@ -48,7 +50,7 @@ const AllQuestion = () => {
 
     const inputOnChangeHandler = (event, answerId) => {
         const newArr = [...inputAnswers];
-        newArr[inputAnswers] = event.target.value;
+        newArr[parseInt(answerId) - 1] = event.target.value;
         setInputAnswers(newArr);
     }
 
@@ -87,7 +89,11 @@ const AllQuestion = () => {
     return (
         <div className="min-h-screen md:w-1/2 p-3">
             {
-                index === 1 ? <Intro nextBtnClickListner={nextBtnClickListner} prevBtnClickListner={prevBtnClickListner} /> : null
+                index === 1 ?
+                    <SlidingAnimation>
+                        <Intro fname={inputAnswers[0]} nextBtnClickListner={nextBtnClickListner} prevBtnClickListner={prevBtnClickListner} />
+                    </SlidingAnimation>
+                    : null
             }
 
             {/* Input Questions */}
@@ -100,11 +106,19 @@ const AllQuestion = () => {
                             <span className='text-red-900 ml-2'>*</span>
                         </h3>
                         <div className="mx-3 my-5">
-                            <input type="text" placeholder='Type your answer here...'
-                                className=' w-full text-lg bg-transparent px-3 py-3 border-b-2 border-b-gray-700 focus:border-b-gray-900 focus:outline-none'
-                                value={inputAnswers[0]}
-                                onChange={(e) => inputOnChangeHandler(e, inputQuestions[0].id)}
-                            />
+                            <UserFnameContext.Consumer>
+                                {
+                                    ({ userFname, setUserFname }) => (
+                                        <input type="text" placeholder='Type your answer here...'
+                                            className=' w-full text-lg bg-transparent px-3 py-3 border-b-2 border-b-gray-700 focus:border-b-gray-900 focus:outline-none'
+                                            value={userFname}
+                                            onChange={(e) => setUserFname(e.target.value)}
+                                            // value={inputAnswers[0]}
+                                            // onChange={(e) => inputOnChangeHandler(e, inputQuestions[0].id)}
+                                        />
+                                    )
+                                }
+                            </UserFnameContext.Consumer>
                         </div>
                     </div>
                     <NextPrevBtns nextBtnClickListner={nextBtnClickListner} prevBtnClickListner={prevBtnClickListner} />
@@ -186,7 +200,7 @@ const AllQuestion = () => {
                     <NextPrevBtns nextBtnClickListner={nextBtnClickListner} prevBtnClickListner={prevBtnClickListner} />
                 </div> : null
             }
-            
+
             {
                 index === 6 ? <div className="flex flex-col h-full justify-center ">
                     <div className="mb-10">
@@ -224,7 +238,7 @@ const AllQuestion = () => {
                 </div> : null
             }
 
-            
+
 
             {/* Outro */}
             {

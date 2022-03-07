@@ -1,20 +1,46 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useUserAuth } from "../context/UserAuthContextProvider";
 
 function Signup() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-	const [passwordToggle, setPasswordToggle] = useState(true);
+    const [cPassword, setCPassword] = useState(""); /* for confirm password */
 
-    const handleSubmit = () => {
-        if (email === "" || password === "") {
+    const [passwordToggle, setPasswordToggle] = useState(true);
+    const [cPasswordToggle, setCPasswordToggle] = useState(true);
+
+    const { signUp } = useUserAuth();
+
+    const history = useHistory();
+
+    const emailPasswordSignUPHandler = async () => {
+
+        if (email === "" || password === "" || cPassword === "") {
             alert("Please!!! Enter all fields!");
             return;
+        } else if (password !== cPassword) {
+            return alert("Confirm password didn't matched!!")
+        }
+
+        try {
+            await signUp(email, password);
+            history.push('/login');
+        } catch (error) {
+            return alert(error)
         }
 
         alert(`Email : ${email} | Password : ${password}`);
-    }
+
+    };
+
+    async function googleSignUpHandler() {
+        alert("Do google validation")
+    };
+
+
 
     return (
         <div className="flex items-center h-screen w-full font-sans bg-indigo-500">
@@ -31,7 +57,9 @@ function Signup() {
                         </span>
                     </Link>
                 </p>
-                <button aria-label="Continue with google" role="button" className="focus:outline-none focus:ring-2 focus:ring-offset-1  py-2.5 px-4 border-2 rounded-lg border-indigo-700 flex items-center w-full mt-10">
+                <button aria-label="Continue with google" role="button" className="focus:outline-none focus:ring-2 focus:ring-offset-1  py-2.5 px-4 border-2 rounded-lg border-indigo-700 flex items-center w-full mt-10"
+                    onClick={googleSignUpHandler}
+                >
                     <img src="/images/google.svg" />
                     <p className="text-base font-medium ml-4 text-gray-700">Continue with Google</p>
                 </button>
@@ -47,6 +75,7 @@ function Signup() {
                         value={email} onChange={(e) => setEmail(e.target.value)}
                     />
                 </div>
+
                 <div className="mt-6  w-full">
                     <lable className="text-sm font-medium leading-none text-gray-800">Password</lable>
                     <div className="">
@@ -61,9 +90,23 @@ function Signup() {
                         </div>
                     </div>
                 </div>
+                <div className="mt-6  w-full">
+                    <lable className="text-sm font-medium leading-none text-gray-800">Confirm Password</lable>
+                    <div className="">
+                        <input aria-label="enter Password" role="input" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2 pr-10"
+                            value={cPassword} type={cPasswordToggle ? 'password' : ''} onChange={(e) => setCPassword(e.target.value)}
+                        />
+                        <div className="float-right mt-1.5 flex items-center">
+                            <input type="checkbox" name="passswordToggle" id="passswordToggle" className="px-1 mr-1/2 cursor-pointer h-3 w-3"
+                                onChange={() => setCPasswordToggle(!cPasswordToggle)}
+                            />
+                            <label htmlFor="passswordToggle" className="text-xs cursor-pointer">Show Password</label>
+                        </div>
+                    </div>
+                </div>
                 <div className="mt-10">
                     <button role="button" aria-label="create my account" className="focus:ring-2 focus:ring-offset focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded-lg hover:bg-indigo-600 py-4 w-full"
-                        onClick={handleSubmit}
+                        onClick={emailPasswordSignUPHandler}
                     >
                         Create my account
                     </button>

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useUserAuth } from "../context/UserAuthContextProvider";
+// import { db } from "../database/firebase.config";
 
 function Login() {
 
@@ -7,14 +9,32 @@ function Login() {
 	const [password, setPassword] = useState("");
 	const [passwordToggle, setPasswordToggle] = useState(true);
 
-	const handleSubmit = () => {
+	const { logIn, loginWithGoogle } = useUserAuth();
+
+	const emailPasswordLoginHandler = async () => {
+
 		if (email === "" || password === "") {
 			alert("Please!!! Enter all fields!");
 			return;
 		}
 
+		try {
+			await logIn(email, password);
+		} catch (error) {
+			return alert(error)
+		}
+
 		alert(`Email : ${email} | Password : ${password}`);
-	}
+
+	};
+
+	async function googleLoginHandler() {
+		try {
+			await loginWithGoogle();
+		} catch (error) {
+			alert(error.message);
+		}
+	};
 
 	return (
 		<div className="flex items-center h-screen w-full font-sans bg-indigo-500">
@@ -31,7 +51,9 @@ function Login() {
 						</span>
 					</Link>
 				</p>
-				<button aria-label="Continue with google" role="button" className="focus:outline-none focus:ring-2 focus:ring-offset-1  py-2.5 px-4 border-2 rounded-lg border-indigo-700 flex items-center w-full mt-10">
+				<button aria-label="Continue with google" role="button" className="focus:outline-none focus:ring-2 focus:ring-offset-1  py-2.5 px-4 border-2 rounded-lg border-indigo-700 flex items-center w-full mt-10"
+					onClick={googleLoginHandler}
+				>
 					<img src="/images/google.svg" />
 					<p className="text-base font-medium ml-4 text-gray-700">Continue with Google</p>
 				</button>
@@ -61,7 +83,7 @@ function Login() {
 							</Link>
 						</div>
 						<div className="float-right mt-1.5 flex items-center">
-							<input type="checkbox" name="passswordToggle" id="passswordToggle" className="px-1 mr-1/2 cursor-pointer h-3 w-3" 
+							<input type="checkbox" name="passswordToggle" id="passswordToggle" className="px-1 mr-1/2 cursor-pointer h-3 w-3"
 								onChange={() => setPasswordToggle(!passwordToggle)}
 							/>
 							<label htmlFor="passswordToggle" className="text-xs cursor-pointer">Show Password</label>
@@ -70,7 +92,7 @@ function Login() {
 				</div>
 				<div className="mt-10">
 					<button role="button" aria-label="create my account" className="focus:ring-2 focus:ring-offset focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded-lg hover:bg-indigo-600 py-4 w-full"
-						onClick={handleSubmit}
+						onClick={emailPasswordLoginHandler}
 					>
 						Log In
 					</button>
