@@ -190,6 +190,7 @@ const UserAuthContextProvider = ({ children }) => {
         return signInWithPopup(auth, googleAuthProvider)
             .then((res) => {
                 console.log(res);
+                return res;
             })
     }
 

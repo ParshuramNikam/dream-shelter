@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useUserAuth } from "../context/UserAuthContextProvider";
 // import { db } from "../database/firebase.config";
 
@@ -10,6 +10,8 @@ function Login() {
 	const [passwordToggle, setPasswordToggle] = useState(true);
 
 	const { logIn, loginWithGoogle } = useUserAuth();
+
+	const history = useHistory();
 
 	const emailPasswordLoginHandler = async () => {
 
@@ -30,7 +32,12 @@ function Login() {
 
 	async function googleLoginHandler() {
 		try {
-			await loginWithGoogle();
+			const res = await loginWithGoogle();
+			if (!res) {
+				alert("Failed");
+			} else {
+				history.push("/");
+			}
 		} catch (error) {
 			alert(error.message);
 		}

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, useHistory } from "react-router-dom";
 import { useUserAuth } from "../context/UserAuthContextProvider";
 
 function Signup() {
@@ -12,7 +11,7 @@ function Signup() {
     const [passwordToggle, setPasswordToggle] = useState(true);
     const [cPasswordToggle, setCPasswordToggle] = useState(true);
 
-    const { signUp } = useUserAuth();
+    const { signUp, loginWithGoogle } = useUserAuth();
 
     const history = useHistory();
 
@@ -37,8 +36,18 @@ function Signup() {
     };
 
     async function googleSignUpHandler() {
-        alert("Do google validation")
-    };
+		try {
+			const res = await loginWithGoogle();
+            if(!res){
+                alert("Failed");
+            }else{
+                history.push("/");
+            }
+		} catch (error) {
+			alert(error.message);
+		}
+	};
+
 
 
 
