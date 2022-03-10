@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState, useContext } from 'react'
-import { collection, addDoc, Timestamp, query, where } from 'firebase/firestore'
+import { collection, addDoc, Timestamp, query, where, onSnapshot } from 'firebase/firestore'
 import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
@@ -143,7 +143,17 @@ const UserAuthContextProvider = ({ children }) => {
                     const usersRef = collection(db, "Users");
                     const queryDoc = await query(usersRef, where("email", "==", res.user.email));
 
-                    if (!queryDoc.empty) {
+                    let users = [];
+                    onSnapshot(queryDoc, (snapshot)=>{
+                        snapshot.docs.forEach(doc => {
+                            user.push({...doc.data(), id:doc.id});
+                        });
+                        console.log(users);
+                    })
+
+                    
+
+                    if (users.length > 0) {
                         console.log("Here............................");
                         alert("User already logged in through google ,.. so not added in firestore");
                     } else {
