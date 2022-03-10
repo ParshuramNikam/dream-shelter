@@ -144,6 +144,7 @@ const UserAuthContextProvider = ({ children }) => {
                     const queryDoc = await query(usersRef, where("email", "==", res.user.email));
 
                     if (!queryDoc.empty) {
+                        console.log("Here............................");
                         alert("User already logged in through google ,.. so not added in firestore");
                     } else {
                         // not found
