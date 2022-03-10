@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState, useContext } from 'react'
+import { collection, addDoc, Timestamp, query, where } from 'firebase/firestore'
 import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
@@ -39,6 +40,8 @@ const errorHandler = (error) => {
         //     variant: 'error',
         // });
         alert("Email Id already register, Please Login !")
+    } else if (errorCode === "auth/popup-closed-by-user") {
+        console.log("popup closed!");
     } else {
         console.log(errorMessage)
         alert(errorMessage);
@@ -62,10 +65,26 @@ const UserAuthContextProvider = ({ children }) => {
                     .then(() => {
                         alert("Check your email!! Verification link sent to you!")
                     });
-                
+
                 console.log(res);
                 alert("Successfully Registered !");
                 alert("Store this data into Firestore DB | email: ", res.user.uid)
+
+                try {
+                    addDoc(collection(db, 'Users'), {
+                        userInfo: {
+                            email: email,
+                        },
+                        interest: [],
+                        activityWantsToDo: [],
+                        emailVerified: false,
+                        created: Timestamp.now()
+                    }).then(() => {
+                        alert("User added in firestore");
+                    })
+                } catch (err) {
+                    alert(err)
+                }
 
                 history.push('/');
 
@@ -98,81 +117,6 @@ const UserAuthContextProvider = ({ children }) => {
                 ) {
                     alert("Successfully Logged In ! - user : " + currentUser.user.uid)
 
-                    // enqueueSnackbar('Successfully Registered !', {
-                    //     variant: 'success',
-                    // });
-
-
-                    // props.changeFlag(true);
-
-                    // const saveUserIntoDb = async (currentUser, data) => {
-                    //     db.collection('registerUsers')
-                    //         .doc(currentUser.user.uid)
-                    //         .set({
-                    //             createdAt: new Date(),
-                    //             firstname: data.firstname,
-                    //             lastname: data.lastname,
-                    //             birthdate: convertDate(data.birthdate),
-                    //             phone: data.phone,
-                    //             email: data.email,
-                    //             city: data.city,
-                    //             gym: data.gym,
-                    //             plan: data.plan,
-                    //             password: data.password,
-                    //             confirmPassword: data.confirmPassword,
-                    //             endDate: null,
-                    //             license: false,
-                    //             startDate: null,
-                    //             type: 'user',
-                    //         });
-                    // };
-
-                    // const sendRequestToAdmin = async (currentUser, data) => {
-                    //     db.collection('licenseRequests')
-                    //         .get()
-                    //         .then((snapshot) => {
-                    //             var userRequest = {
-                    //                 uid: currentUser.user.uid,
-                    //                 firstname: data.firstname,
-                    //                 lastname: data.lastname,
-                    //                 gym: data.gym,
-                    //                 plan: data.plan,
-                    //                 phone: data.phone,
-                    //                 email: data.email,
-                    //                 createdAt: new Date(),
-                    //                 status: false,
-                    //                 approvedOn: null,
-                    //             };
-                    //             if (!snapshot.empty) {
-                    //                 var res = firebaseLooper(snapshot);
-                    //                 db.collection('licenseRequests')
-                    //                     .doc(res[0].id)
-                    //                     .update({
-                    //                         requests:
-                    //                             firebase.firestore.FieldValue.arrayUnion(userRequest),
-                    //                     });
-                    //             }
-                    //         });
-                    // };
-
-                    // saveUserIntoDb(currentUser, userdetails);
-                    // sendRequestToAdmin(currentUser, userdetails);
-
-                    // setUsedetails({
-                    //     firstname: '',
-                    //     lastname: '',
-                    //     birthdate: '',
-                    //     phone: '',
-                    //     email: '',
-                    //     city: '',
-                    //     gym: '',
-                    //     plan: '',
-                    //     password: '',
-                    //     confirmPassword: '',
-                    // });
-
-                    //console.log(currentUser);
-
                 } else {
                     // enqueueSnackbar('Error, Try again later !', {
                     //     variant: 'error',
@@ -188,8 +132,40 @@ const UserAuthContextProvider = ({ children }) => {
     const loginWithGoogle = () => {
         const googleAuthProvider = new GoogleAuthProvider();
         return signInWithPopup(auth, googleAuthProvider)
-            .then((res) => {
+            .then(async (res) => {
                 console.log(res);
+
+                const user = res.user;
+
+                try {
+                    
+                    // const query = await collection('Users').where('email', '==', res.user.email).get();
+                    const usersRef = collection(db, "Users");
+                    const queryDoc = await query(usersRef, where("email", "==", res.user.email));
+
+                    if (!queryDoc.empty) {
+                        alert("User already logged in through google ,.. so not added in firestore");
+                    } else {
+                        // not found
+                        addDoc(collection(db, 'Users'), {
+                            userInfo: {
+                                email: user.email,
+                                photoURL: user.photoURL,
+                            },
+                            interest: [],
+                            activityWantsToDo: [],
+                            emailVerified: true,
+                            created: Timestamp.now()
+                        }).then(() => {
+                            alert("User added in firestore");
+                        })
+                    }
+
+
+                } catch (err) {
+                    alert(err)
+                }
+
                 return res;
             })
     }
