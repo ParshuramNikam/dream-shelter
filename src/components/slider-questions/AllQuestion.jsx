@@ -20,7 +20,7 @@ const AllQuestion = () => {
     const [checkBoxQuestionsAns, setBheckBoxQuestionsAns] = useState([]);
 
     const [cb1, setCb1] = useState([]);
-    const [cb2, setCb2] = useState([]);
+    const [cb2, setCb2] = useState([]); 
 
     useEffect(() => {
         for (let i = 0; i < lastQuestionIndex; i++) {
