@@ -1,21 +1,17 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+import firebase from "firebase";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDKrMSeg67C_PeazfUxJ6z9vaE7HEPTuyU",
-  authDomain: "dream-shelter.firebaseapp.com",
-  projectId: "dream-shelter",
-  storageBucket: "dream-shelter.appspot.com",
-  messagingSenderId: "661840236533",
-  appId: "1:661840236533:web:a298af7a428b436c675abc"
+  apiKey: "AIzaSyBT1ml5HsfLqla844kjnaJq5C80_HWI6Vw",
+  authDomain: "dream-shelter-cce6d.firebaseapp.com",
+  projectId: "dream-shelter-cce6d",
+  storageBucket: "dream-shelter-cce6d.appspot.com",
+  messagingSenderId: "139495408235",
+  appId: "1:139495408235:web:9046a8a2e77ac1d2ac672e"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig)
-const db = getFirestore(app)
-const auth = getAuth();
+firebase.initializeApp(firebaseConfig)
+const db = firebase.firestore()
+const auth = firebase.auth()
 
 export {db, auth}
