@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useUserAuth } from "../context/UserAuthContextProvider";
+import { notifyError, notifyWarning } from "../utils/reactToast";
 
 function Signup() {
 
@@ -17,51 +18,60 @@ function Signup() {
 
     const emailPasswordSignUPHandler = async () => {
 
+        const strongPasswordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
         if (email === "" || password === "" || cPassword === "") {
-            alert("Please!!! Enter all fields!");
+            notifyWarning("Please!!! Enter all fields!");
             return;
         } else if (password !== cPassword) {
-            return alert("Confirm password didn't matched!!")
+            return notifyWarning("Confirm password didn't matched!!")
+        } else if (password.length < 7) {
+            notifyWarning('Password length should be greater than 7')
+            return;
+        } else if(!strongPasswordRegex.test(password)){
+            notifyWarning('password should contain atleast one number and one special character')
+            return;
         }
 
         try {
-            const isSucessfullyLoggedIn = await signUp(email, password);
+            const redirecturl = await signUp(email, password);
             // console.log(">>>>", isSucessfullyLoggedIn);
 			// console.log(">>>>", isSucessfullyLoggedIn===true);
-			if (isSucessfullyLoggedIn) {
-				history.push("/login")
-			} else {
-				console.log("some error occured while signing with email & password");
-			}
+			if (redirecturl === 'signup-questions') {
+				history.push("/signup-questions")
+			} else if(redirecturl === 'login'){
+                history.push("/login")
+            } else if(redirecturl === 'signup'){
+                history.push("/signup")
+            }
+            //  else {
+			// 	notifyError("some error occured while signing with email & password");
+			// }
         } catch (error) {
-            return alert(error)
+            return console.log(error)
         }
 
-        alert(`Email : ${email} | Password : ${password}`);
+        console.log(`Email : ${email} | Password : ${password}`);
 
     };
 
     async function googleSignUpHandler() {
 		try {
-			const isSucessfullyLoggedIn = await loginWithGoogle();
-            // console.log(">>>>",isSucessfullyLoggedIn);
-			if(isSucessfullyLoggedIn){
+			const redirecturl = await loginWithGoogle();
+           
+			if (redirecturl === 'signup-questions') {
+				history.push("/signup-questions")
+			} else if(redirecturl === 'login'){
+                history.push("/login")
+            } else if(redirecturl === 'signup'){
+                history.push("/signup")
+            } else if(redirecturl === 'home'){
 				history.push("/")
-			}else{
-				console.log("some error occured while logging with google");
 			}
-            // if(!res){
-            //     alert("Failed");
-            // }else{
-            //     history.push("/");
-            // }
+          
 		} catch (error) {
-			alert(error.message);
+			console.log(error.message);
 		}
 	};
-
-
-
 
     return (
         <div className="flex items-center h-screen w-full font-sans bg-indigo-500">

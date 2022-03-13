@@ -22,7 +22,7 @@ const compoentsList = [
 	{ path: "/aboutus", component: <AboutUsPage /> },
 	{ path: "/SuggestionPage", component: <SuggestionsPage /> },
 	{ path: "/OtherProfilePage", component: <ProfilePage edit={false} /> },
-	{ path: "/myprofile", component: <ProfilePage edit={true} /> },
+	{ path: "/myprofile/:uid", component: <ProfilePage edit={true} /> },
 	{ path: "/blogs", component: <BlogsPage /> },
 	{ path: "/create-post", component: <CreatePostPage /> },
 	{ path: "/blog/:id", component: <OneBlogPage /> },

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useUserAuth } from "../context/UserAuthContextProvider";
+import { notifyError, notifyWarning } from "../utils/reactToast";
 // import { db } from "../database/firebase.config";
 
 function Login() {
@@ -16,7 +17,7 @@ function Login() {
 	const emailPasswordLoginHandler = async () => {
 
 		if (email === "" || password === "") {
-			alert("Please!!! Enter all fields!");
+			notifyWarning("Please!!! Enter all fields!");
 			return;
 		}
 
@@ -26,29 +27,36 @@ function Login() {
 			// console.log(">>>>", isSucessfullyLoggedIn===true);
 			if (isSucessfullyLoggedIn) {
 				history.push("/")
-			} else {
-				console.log("some error occured while logging with email & password");
 			}
+			//  else {
+			// 	notifyError("some error occured while logging with email & password");
+			// 	return;
+			// }
 		} catch (error) {
-			return alert(error)
+			return console.log(error)
 		}
 
-		alert(`Email : ${email} | Password : ${password}`);
+		console.log(`Email : ${email} | Password : ${password}`);
 
 	};
 
 	async function googleLoginHandler() {
 		try {
-			const isSucessfullyLoggedIn = await loginWithGoogle();
-			// console.log(">>>>", isSucessfullyLoggedIn);
-			// console.log(">>>>", isSucessfullyLoggedIn===true);
-			if (isSucessfullyLoggedIn) {
+			const redirecturl = await loginWithGoogle();
+           alert('redirecturl ',redirecturl )
+			if (redirecturl === 'signup-questions') {
+				history.push("/signup-questions")
+			} else if(redirecturl === 'login'){
+                history.push("/login")
+            } else if(redirecturl === 'signup'){
+                history.push("/signup")
+            } else if(redirecturl === 'home'){
 				history.push("/")
-			} else {
-				console.log("some error occured while logging with google");
-			}
+			}else 
+				history.push('/signup-questions')
+          
 		} catch (error) {
-			alert(error.message);
+			console.log(error.message);
 		}
 	};
 
