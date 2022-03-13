@@ -21,7 +21,14 @@ function Login() {
 		}
 
 		try {
-			await logIn(email, password);
+			const isSucessfullyLoggedIn = await logIn(email, password);
+			// console.log(">>>>", isSucessfullyLoggedIn);
+			// console.log(">>>>", isSucessfullyLoggedIn===true);
+			if (isSucessfullyLoggedIn) {
+				history.push("/")
+			} else {
+				console.log("some error occured while logging with email & password");
+			}
 		} catch (error) {
 			return alert(error)
 		}
@@ -32,11 +39,13 @@ function Login() {
 
 	async function googleLoginHandler() {
 		try {
-			const res = await loginWithGoogle();
-			if (!res) {
-				alert("Failed");
+			const isSucessfullyLoggedIn = await loginWithGoogle();
+			// console.log(">>>>", isSucessfullyLoggedIn);
+			// console.log(">>>>", isSucessfullyLoggedIn===true);
+			if (isSucessfullyLoggedIn) {
+				history.push("/")
 			} else {
-				history.push("/");
+				console.log("some error occured while logging with google");
 			}
 		} catch (error) {
 			alert(error.message);

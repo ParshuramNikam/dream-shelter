@@ -45,21 +45,11 @@ const errorHandler = (error) => {
         console.log("popup closed!");
     } else {
         console.log(errorMessage)
-        alert(errorMessage);
     }
     //console.log(error);
 }
 
 const useAuthContext = createContext();
-
-var actionCodeSettings = {
-    // URL you want to redirect back to. The domain (www.example.com) for this
-    // URL must be in the authorized domains list in the Firebase Console.
-    url: 'http://localhost:3000/login',
-    // This must be true.
-    handleCodeInApp: true,
-    dynamicLinkDomain: 'example.page.link'
-  };
 
 const UserAuthContextProvider = ({ children }) => {
 
@@ -69,9 +59,11 @@ const UserAuthContextProvider = ({ children }) => {
 
     const signUp = (email, password) => {
         return auth.createUserWithEmailAndPassword(email, password)
-            .then((res) => {
+            .then(async (res) => {
                 // send email verification
-                auth.sendSignInLinkToEmail(email,actionCodeSettings)
+                console.log("Sending link ....");
+
+                await auth.currentUser.sendEmailVerification()
                     .then(() => {
                         alert("Check your email!! Verification link sent to you!")
                     });
@@ -80,33 +72,27 @@ const UserAuthContextProvider = ({ children }) => {
                 alert("Successfully Registered !");
                 alert("Store this data into Firestore DB | email: ", res.user.uid)
 
-                try {
-                    db.collection('Users').add({
-                        userInfo: {
-                            email: email,
-                        },
-                        interest: [],
-                        activityWantsToDo: [],
-                        emailVerified: false,
-                        created: firebase.firestore.FieldValue.serverTimestamp()
-                    })
-                    .then(() => {
+                console.log("Adding user to firestore......");
+                await db.collection('Users').doc(res.user.uid).set({
+                    userInfo: {
+                        email: email,
+                    },
+                    interest: [],
+                    activityWantsToDo: [],
+                    emailVerified: false,
+                    created: firebase.firestore.FieldValue.serverTimestamp()
+                }).then(() => {
                         alert("User added in firestore");
+                    }).catch((error) => {
+                        errorHandler(error);
+                        return false;
                     })
-                } catch (err) {
-                    alert(err)
-                }
 
-                history.push('/');
-
-                // if (res.user) {
-                //   enqueueSnackbar('Successfully Logged In !', {
-                //     variant: 'success',
-                //   });
-                // }
+                return true;
             })
             .catch((error) => {
                 errorHandler(error);
+                return false;
             });
     }
 
@@ -119,20 +105,19 @@ const UserAuthContextProvider = ({ children }) => {
                     return alert("Please, Do EMail verification!")
                 }
 
-                history.push('/');
-
                 //save data into db
                 if (
                     currentUser.user &&
                     (currentUser.user.uid !== null || currentUser.user.uid !== undefined)
                 ) {
                     alert("Successfully Logged In ! - user : " + currentUser.user.uid)
-
+                    return true;
                 } else {
                     // enqueueSnackbar('Error, Try again later !', {
                     //     variant: 'error',
                     // });
                     alert('Error, Try again later !')
+                    return false;
                 }
             })
             .catch((error) => {
@@ -144,50 +129,60 @@ const UserAuthContextProvider = ({ children }) => {
         var provider = new firebase.auth.GoogleAuthProvider();
         provider.addScope('profile');
         provider.addScope('email');
-        firebase.auth().signInWithPopup(provider)
+
+        // let isSucessfullyLoggedIn = false;
+
+        return firebase.auth().signInWithPopup(provider)
             .then(async (res) => {
                 console.log(res);
                 var token = res.credential.accessToken;
-                const user = res.user;
+                console.log(res.user.uid);
+
+                console.log(token);
 
                 try {
-                    let users = [];
+                    let usersArr = [];
                     // const query = await collection('Users').where('email', '==', res.user.email).get();
-                    db.collection('Users').where('email','==',res.user.email).get().then(snapshot=>{
-                        snapshot.docs.forEach(doc => {
-                            user.push({...doc.data(), id:doc.id});
-                        });
-                        console.log(users);
-                    })
-                
+                    if (res.user.email) {
+                        await db.collection('Users').where('userInfo.email', '==', res.user.email).get().then(snapshot => {
+                            snapshot.docs.forEach(doc => {
+                                usersArr.push({ ...doc.data(), id: doc.id });
+                            });
+                            console.log("snapshot : ", snapshot);
+                        })
+                    }
+                    console.log("where query users in google login : ", usersArr);
 
-                    if (users.length > 0) {
+                    if (usersArr.length > 0) {
                         console.log("Here............................");
                         alert("User already logged in through google ,.. so not added in firestore");
                     } else {
                         // not found
-                        db.collection('Users').add( {
+                        await db.collection('Users').doc(res.user.uid).set({
                             userInfo: {
-                                email: user.email,
-                                photoURL: user.photoURL,
+                                email: res.user.email,
+                                photoURL: res.user.photoURL,
                             },
                             interest: [],
                             activityWantsToDo: [],
                             emailVerified: true,
-                            created:  firebase.firestore.FieldValue.serverTimestamp()
+                            created: firebase.firestore.FieldValue.serverTimestamp()
                         }).then(() => {
                             alert("User added in firestore");
                         })
                     }
 
+                    return true;
+
 
                 } catch (err) {
-                    alert(err)
-                    console.log("error",err);
+                    errorHandler(err);
+                    console.log("error", err);
+                    return false;
                 }
 
-                return res;
             })
+
     }
 
     const logOut = () => {

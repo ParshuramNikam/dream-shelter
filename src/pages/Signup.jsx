@@ -25,8 +25,14 @@ function Signup() {
         }
 
         try {
-            await signUp(email, password);
-            history.push('/login');
+            const isSucessfullyLoggedIn = await signUp(email, password);
+            // console.log(">>>>", isSucessfullyLoggedIn);
+			// console.log(">>>>", isSucessfullyLoggedIn===true);
+			if (isSucessfullyLoggedIn) {
+				history.push("/login")
+			} else {
+				console.log("some error occured while signing with email & password");
+			}
         } catch (error) {
             return alert(error)
         }
@@ -37,12 +43,18 @@ function Signup() {
 
     async function googleSignUpHandler() {
 		try {
-			const res = await loginWithGoogle();
-            if(!res){
-                alert("Failed");
-            }else{
-                history.push("/");
-            }
+			const isSucessfullyLoggedIn = await loginWithGoogle();
+            // console.log(">>>>",isSucessfullyLoggedIn);
+			if(isSucessfullyLoggedIn){
+				history.push("/")
+			}else{
+				console.log("some error occured while logging with google");
+			}
+            // if(!res){
+            //     alert("Failed");
+            // }else{
+            //     history.push("/");
+            // }
 		} catch (error) {
 			alert(error.message);
 		}
