@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { db } from "../../database/firebase.config";
 import { UserFnameContext } from "../../pages/QuestionsPage";
 import { checkboxQuestions, inputQuestions } from "../../utils/Questions";
-import { notifyWarning } from "../../utils/reactToast";
+import { notifySuccess, notifyWarning } from "../../utils/reactToast";
 import InputQuestion from "./InputQuestion";
 import Intro from "./Intro";
 import NextPrevBtns from "./NextPrevBtns";
@@ -21,6 +22,8 @@ const AllQuestion = () => {
 
   const [cb1, setCb1] = useState([]);
   const [cb2, setCb2] = useState([]);
+
+  const history = useHistory();
 
   useEffect(() => {
     for (let i = 0; i < lastQuestionIndex; i++) {
@@ -75,7 +78,8 @@ const AllQuestion = () => {
           },
           { merge: true }
         );
-      alert("Submited your answers!");
+      notifySuccess("Submited your answers!");
+      history.push('/');
     } catch (err) {
       notifyWarning(err.message);
     }

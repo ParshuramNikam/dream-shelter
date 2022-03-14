@@ -7,16 +7,8 @@ import { auth, db } from "../../database/firebase.config";
 import { categories } from "../../dummy-data/data";
 import firebase from "firebase";
 
-const UserProfileCard = ({ edit }) => {
-  const { user } = useUserAuth();
-  const [currentUser,setCurrentUser]=useState(null)
-  useEffect(()=>{
-    db.collection('Users').where(firebase.firestore.FieldPath.documentId(), '==',auth.currentUser.uid).get().then((snapshot)=>{
-      snapshot.docs.forEach(doc =>{
-        setCurrentUser(doc)
-      })
-    })
-  },[])
+const UserProfileCard = ({ userInfo ,edit }) => {
+  
   return (
     // <div className="max-w:sm block bg-white  h-max px-3 py-5 m-2 border border-gray-200 rounded-lg  overflow-hidden shadow-lg">
       <div className="bannerbg h-56 md:h-72 bg-white mt-5 ">
@@ -29,8 +21,8 @@ const UserProfileCard = ({ edit }) => {
                 alt=""
               />
             <div className="ml-3">
-              <p className="text-3xl mb-1  font-semibold ">John Doe</p>
-              <p className="text-base text-gray-200 font-medium ">Full-Stack Developer</p>
+              <p className="text-3xl mb-1  font-semibold capitalize">{userInfo.fname} {userInfo.lname}</p>
+              <p className="text-base text-gray-200 font-medium ">{ userInfo.jobtitle ? userInfo.jobtitle : "---" }</p>
             </div>
             </div>
           </div>
