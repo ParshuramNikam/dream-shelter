@@ -13,7 +13,7 @@ import { ShareIcon, SearchIcon, CogIcon, LocationMarkerIcon, MailIcon, Briefcase
 import { useState } from "react";
 import EditInfoPopup from "./home/EditInfoPopup";
 
-function UserLinks({ userInfo,ishiden }) {
+function UserLinks({ userDetails, userInfo, ishiden }) {
   let [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
@@ -27,20 +27,20 @@ function UserLinks({ userInfo,ishiden }) {
   return (
     <div className="w-full lg:w-96 block bg-white  px-3 py-3 m-2 border border-gray-200 rounded-lg overflow-hidden shadow-lg">
       <div className="flex justify-between">
-      <h1 className="py-2 mx-3 font-bold text-xl">About</h1>
-      <div className="mt-2">
-        <button
-          type="button"
-          className=" p-1 rounded-full text-gray-800 "
-          onClick={openModal}
-        >
-          <span className="sr-only">Edit</span>
-          <PencilAltIcon
-            className="w-6 h-6 hover:stroke-cyan-800"
-            aria-hidden="true"
-          />
-        </button>
-      </div>
+        <h1 className="py-2 mx-3 font-bold text-xl">About</h1>
+        <div className="mt-2">
+          <button
+            type="button"
+            className=" p-1 rounded-full text-gray-800 "
+            onClick={openModal}
+          >
+            <span className="sr-only">Edit</span>
+            <PencilAltIcon
+              className="w-6 h-6 hover:stroke-cyan-800"
+              aria-hidden="true"
+            />
+          </button>
+        </div>
       </div>
       <div className="profile-bio m-2">
         <p className="">
@@ -80,6 +80,7 @@ function UserLinks({ userInfo,ishiden }) {
       </div>
       <EditInfoPopup
         isOpen={isOpen}
+        userDetails={userDetails}
         setIsOpen={setIsOpen}
         closeModal={closeModal}
       />

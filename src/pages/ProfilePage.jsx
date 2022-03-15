@@ -16,7 +16,7 @@ const ProfilePage = ({ edit,userDetails }) => {
   const [currentUser, setCurrentUser] = useState(userDetails)
 
   const { user } = useUserAuth();
-
+ 
   return (
     <section className="xl:w-10/12 mx-auto p-3 lg:flex flex-col overflow-x-hidden">
       {
@@ -28,7 +28,7 @@ const ProfilePage = ({ edit,userDetails }) => {
             <section className="lg:flex flex-row ">
               <section className="flex-col ">
                 <UserDetailedInfo userInfo={currentUser} edit={edit} />
-                <UserLinks userInfo={currentUser} />
+                <UserLinks userInfo={currentUser} userDetails={userDetails} />
               </section>
               <section className="flex-col ">
                 <CreatePost userInfo={currentUser} ishidden={false} userDetails={userDetails} />

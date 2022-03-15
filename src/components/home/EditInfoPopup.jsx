@@ -3,18 +3,39 @@ import { XIcon } from "@heroicons/react/outline";
 import { Fragment, useState } from "react";
 import { faCircleCheck, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { db } from "../../database/firebase.config";
+import firebase from "firebase";
 
-export default function EditInfoPopup({ isOpen, setIsOpen, closeModal }) {
+export default function EditInfoPopup({ isOpen, userDetails, setIsOpen, closeModal }) {
   // const [question, setQuestion] = useState("");
-  const [fname, setfname] = useState("");
-  const [lname, setlname] = useState("");
-  const [profession, setprofession] = useState("");
-  const [status, setStatus] = useState("");
-  const [address, setaddress] = useState("");
-  const [work, setwork] = useState("");
-  const [college, setcollege] = useState("");
+  const [fname, setfname] = useState(userDetails.fname ? userDetails.fname : "");
+  const [lname, setlname] = useState(userDetails.lname ? userDetails.lname : "");
+  const [profession, setprofession] = useState(userDetails.jobtitle ? userDetails.jobtitle : "");
+  const [aboutYourself, setAboutYourself] = useState(userDetails.about ? userDetails.about : "");
+  const [address, setaddress] = useState(userDetails.location ? userDetails.location : "");
+  // const [work, setwork] = useState(userDetails);
+  const [college, setcollege] = useState(userDetails.collegeName ? userDetails.collegeName : "");
 
-  const submitHandler = () => {
+  const submitHandler = async () => {
+
+    await db
+      .collection("Users")
+      .doc(localStorage.getItem('ds-user-uid'))
+      .update({
+        fname: fname,
+        lname: lname,
+        jobtitle: profession,
+        about: aboutYourself,
+        location: address,
+        collegeName: college  ,
+      })
+      .then(() => {
+        console.log("User about me section updated");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
     // if (question === "") {
     //   alert("Please enter a question.");
     //   return;
@@ -102,13 +123,13 @@ export default function EditInfoPopup({ isOpen, setIsOpen, closeModal }) {
               </div>
               <hr className=" bg-gray-300"></hr>
               <div className="flex justify-evenly my-2">
-                <div className="mt-2 mr-7">Status :</div>
+                <div className="mt-2 mr-1">About You :</div>
                 <div className="">
                   <input
                     className="w-80 border-2 rounded-lg p-2 border-gray-500 text-black "
                     placeholder="Tell About yourself in one line "
-                    value={status}
-                    onChange={(e) => setStatus(e.target.value)}
+                    value={aboutYourself}
+                    onChange={(e) => setAboutYourself(e.target.value)}
                   ></input>
                 </div>
               </div>
@@ -125,7 +146,7 @@ export default function EditInfoPopup({ isOpen, setIsOpen, closeModal }) {
                 </div>
               </div>
               <hr className=" bg-gray-300"></hr>
-              <div className="flex justify-evenly my-2">
+              {/* <div className="flex justify-evenly my-2">
                 <div className="mt-2 ">Working at :</div>
                 <div className="mr-1">
                   <input
@@ -135,7 +156,7 @@ export default function EditInfoPopup({ isOpen, setIsOpen, closeModal }) {
                     onChange={(e) => setwork(e.target.value)}
                   ></input>
                 </div>
-              </div>
+              </div> */}
               <hr className=" bg-gray-300"></hr>
               <div className="flex justify-evenly my-2">
                 <p className="mt-2">Studing at :</p>

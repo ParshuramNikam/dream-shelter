@@ -28,7 +28,7 @@ function App() {
 
 	async function getCurrentUserDetails() {
 
-		await db.collection('Users').where(firebase.firestore.FieldPath.documentId(), '==', localStorage.getItem('ds-user-uid')).get().then(async (snapshot) => {
+		await db.collection('Users').where(firebase.firestore.FieldPath.documentId(), '==', localStorage.getItem('ds-user-uid')).onSnapshot(async (snapshot) => {
 		  await snapshot.docs.forEach(doc => {
 			setUserDetails({ ...doc.data(), id: doc.id })
 			console.log(doc.data());
