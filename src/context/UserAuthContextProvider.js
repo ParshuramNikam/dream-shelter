@@ -72,6 +72,7 @@ const useAuthContext = createContext();
 
 const UserAuthContextProvider = ({ children }) => {
   const [user, setUser] = useState("");
+  const [userDetails, setUserDetails] = useState("");
 
   const history = useHistory();
 
@@ -159,66 +160,7 @@ const UserAuthContextProvider = ({ children }) => {
     return firebase
       .auth()
       .signInWithPopup(provider)
-      .then(async (res) => {
-        console.log(res);
-        var token = res.credential.accessToken;
-        console.log(res.user.uid);
 
-        console.log(token);
-
-        try {
-          let usersArr = [];
-          // const query = await collection('Users').where('email', '==', res.user.email).get();
-          if (res.user.email) {
-            await db
-              .collection("Users")
-              .where("userInfo.email", "==", res.user.email)
-              .get()
-              .then((snapshot) => {
-                snapshot.docs.forEach((doc) => {
-                  usersArr.push({ ...doc.data(), id: doc.id });
-                });
-                console.log("snapshot : ", snapshot);
-              });
-          }
-          console.log("where query users in google login : ", usersArr);
-          var uid = res.user.uid;
-          localStorage.setItem("ds-user-uid", uid);
-          if (usersArr.length > 0) {
-            console.log("Here............................");
-            notifySuccess("Login Successful");
-            console.log(
-              "User already logged in through google ,.. so not added in firestore"
-            );
-            return "home";
-          } else {
-            // not found
-            await db
-              .collection("Users")
-              .doc(res.user.uid)
-              .set({
-                email: res.user.email,
-                photoURL: res.user.photoURL,
-                interest: [],
-                activityWantsToDo: [],
-                emailVerified: true,
-                created: firebase.firestore.FieldValue.serverTimestamp(),
-              })
-              .then(() => {
-                notifyInfo("User added in firestore");
-                notifySuccess("signup Successful");
-                return "signup-questions";
-              })
-              .catch((err) => {
-                alert(err.message);
-              });
-          }
-        } catch (err) {
-          errorHandler(err);
-          console.log("error", err);
-          return "signup";
-        }
-      });
   };
 
   const logOut = () => {
@@ -239,7 +181,7 @@ const UserAuthContextProvider = ({ children }) => {
 
   return (
     <useAuthContext.Provider
-      value={{ user, signUp, logIn, loginWithGoogle, logOut }}
+      value={{ user, setUser, signUp, logIn, loginWithGoogle, logOut }}
     >
       {children}
       <ToastContainer />

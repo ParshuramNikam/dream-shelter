@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useUserAuth } from "../context/UserAuthContextProvider";
-import { notifyError, notifyWarning } from "../utils/reactToast";
+import { db } from "../database/firebase.config";
+import { notifyError, notifyInfo, notifySuccess, notifyWarning } from "../utils/reactToast";
+import firebase from "firebase";
 
 function Signup() {
 
@@ -27,7 +29,7 @@ function Signup() {
         } else if (password.length < 7) {
             notifyWarning('Password length should be greater than 7')
             return;
-        } else if(!strongPasswordRegex.test(password)){
+        } else if (!strongPasswordRegex.test(password)) {
             notifyWarning('password should contain atleast one number and one special character')
             return;
         }
@@ -35,17 +37,17 @@ function Signup() {
         try {
             const redirecturl = await signUp(email, password);
             // console.log(">>>>", isSucessfullyLoggedIn);
-			// console.log(">>>>", isSucessfullyLoggedIn===true);
-			if (redirecturl === 'signup-questions') {
-				history.push("/signup-questions")
-			} else if(redirecturl === 'login'){
+            // console.log(">>>>", isSucessfullyLoggedIn===true);
+            if (redirecturl === 'signup-questions') {
+                history.push("/signup-questions")
+            } else if (redirecturl === 'login') {
                 history.push("/login")
-            } else if(redirecturl === 'signup'){
+            } else if (redirecturl === 'signup') {
                 history.push("/signup")
             }
             //  else {
-			// 	notifyError("some error occured while signing with email & password");
-			// }
+            // 	notifyError("some error occured while signing with email & password");
+            // }
         } catch (error) {
             return console.log(error)
         }
@@ -54,24 +56,136 @@ function Signup() {
 
     };
 
+
     async function googleSignUpHandler() {
-		try {
-			const redirecturl = await loginWithGoogle();
-           
-			if (redirecturl === 'signup-questions') {
-				history.push("/signup-questions")
-			} else if(redirecturl === 'login'){
-                history.push("/login")
-            } else if(redirecturl === 'signup'){
-                history.push("/signup")
-            } else if(redirecturl === 'home'){
-				history.push("/")
-			}
-          
-		} catch (error) {
-			console.log(error.message);
-		}
-	};
+        try {
+            // let res = ".";
+            // const promise = new Promise(function (resolve, reject) {
+            // 	res = loginWithGoogle();
+            // });
+
+
+
+            let res = await loginWithGoogle();
+            // console.log(res.AdditionalUserInfo.isNewUser);
+
+            // .then(async (res) => {
+            console.log(res);
+            var token = res.credential.accessToken;
+            console.log(res.user.uid);
+            console.log(res.user.email);
+
+            console.log(token);
+
+            try {
+
+                // const query = await collection('Users').where('email', '==', res.user.email).get();
+                // if (res.user.email) {
+                await db
+                    .collection("Users")
+                    .where("email", "==", res.user.email)
+                    .get()
+                    .then(async (snapshot) => {
+                        let userData = [];
+                        snapshot.docs.forEach((doc) => {
+                            console.log(doc.data());
+                            userData = [{ ...doc.data(), id: doc.id }];
+                        });
+                        await console.log("snapshot : ", snapshot);
+                        // setUserDetails(snapshot.docs)
+
+                        console.log("where query users in google login : ", userData);
+                        var uid = res.user.uid;
+                        localStorage.setItem("ds-user-uid", uid);
+                        console.log("USER ARRAY : ", userData);
+
+                        console.log("UserData : ", userData);
+
+                        if (userData.length !== 0) {
+                            console.log("Here............................");
+                            notifySuccess("Login Successful");
+                            console.log(
+                                "User already logged in through google ,.. so not added in firestore"
+                            );
+                            console.log("home");
+                            return history.push("/")
+                        }
+                        else {
+                            // not found
+                            await db
+                                .collection("Users")
+                                .doc(res.user.uid)
+                                .set({
+                                    email: res.user.email,
+                                    photoURL: res.user.photoURL,
+                                    interest: [],
+                                    activityWantsToDo: [],
+                                    emailVerified: true,
+                                    created: firebase.firestore.FieldValue.serverTimestamp(),
+                                })
+                                .then(() => {
+                                    notifyInfo("User added in firestore");
+                                    notifySuccess("signup Successful");
+                                    console.log("signup question");
+                                    return history.push("/signup-questions")
+                                })
+                                .catch((err) => {
+                                    alert(err.message);
+                                });
+                        }
+                    })
+
+
+                // }
+            } catch (err) {
+                // errorHandler(err);
+                console.log("error", err);
+                return "signup";
+            }
+            //   });
+
+            // if (res) {
+            // 	console.log("hahah", res);
+            // } else {
+            // 	console.log("not found redirect : ", res);
+            // }
+
+            // const promise = new Promise((resolve, reject) => {
+
+            // 	let res = loginWithGoogle();
+
+            // 	if (res) {
+            // 		resolve(res);
+            // 		console.log("Resolved");
+            // 	}
+            // 	else {
+            // 		reject(Error("Promise rejected .. some error occured in promise in login file"));
+            // 	}
+            // });
+
+
+            // promise.then(res => {
+            // 	console.log("jsjaj", res);
+            // 	alert('res ', res)
+            // 	if (res === 'signup-questions') {
+            // 		history.push("/signup-questions")
+            // 	} else if (res === 'login') {
+            // 		history.push("/login")
+            // 	} else if (res === 'signup') {
+            // 		history.push("/signup")
+            // 	} else if (res === 'home') {
+            // 		history.push("/")
+            // 	} else
+            // 		history.push('/signup-questions')
+            // }, function (error) {
+            // 	console.log({ error: error });
+            // });
+
+
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
 
     return (
         <div className="flex items-center h-screen w-full font-sans bg-indigo-500">
