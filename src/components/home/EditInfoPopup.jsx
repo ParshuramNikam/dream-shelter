@@ -5,7 +5,7 @@ import { faCircleCheck, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function EditInfoPopup({ isOpen, setIsOpen, closeModal }) {
-  const [question, setQuestion] = useState("");
+  // const [question, setQuestion] = useState("");
   const [fname, setfname] = useState("");
   const [lname, setlname] = useState("");
   const [profession, setprofession] = useState("");
@@ -15,15 +15,15 @@ export default function EditInfoPopup({ isOpen, setIsOpen, closeModal }) {
   const [college, setcollege] = useState("");
 
   const submitHandler = () => {
-    if (question === "") {
-      alert("Please enter a question.");
-      return;
-    }
+    // if (question === "") {
+    //   alert("Please enter a question.");
+    //   return;
+    // }
     closeModal(); // to close the model
-    setTimeout(() => {
-      alert("Your Question has been submitted : " + question);
-      setQuestion("");
-    }, 300);
+    // setTimeout(() => {
+    //   alert("Your Question has been submitted : " + question);
+    //   setQuestion("");
+    // }, 300);
   };
 
   return (

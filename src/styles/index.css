@@ -63,6 +63,21 @@ code {
     background: #b6b5b5; 
 }
 
+/* no-posts */
+
+.nopost{
+	/* width: 600px; */
+	background-color: red;
+}
+
+@media only screen and (min-width: 1024px) {
+
+	.nopost{
+		width: 600px;
+		background-color: blue;
+	}
+  }
+
 /* Tailwind css below */
 
 @tailwind base;
