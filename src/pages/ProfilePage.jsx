@@ -11,26 +11,11 @@ import firebase from "firebase";
 import { db, auth } from "../database/firebase.config";
 import { useUserAuth } from "../context/UserAuthContextProvider";
 
-const ProfilePage = ({ edit }) => {
+const ProfilePage = ({ edit,userDetails }) => {
 
-  const [currentUser, setCurrentUser] = useState(null)
+  const [currentUser, setCurrentUser] = useState(userDetails)
 
   const { user } = useUserAuth();
-
-  async function getCurrentUserDetails() {
-
-    await db.collection('Users').where(firebase.firestore.FieldPath.documentId(), '==', localStorage.getItem('ds-user-uid')).get().then(async (snapshot) => {
-      await snapshot.docs.forEach(doc => {
-        setCurrentUser({ ...doc.data(), id: doc.id })
-        console.log(doc.data());
-      })
-    }).then(() => console.log("current user data : ", currentUser))
-      .catch((err) => console.log(err))
-  }
-
-  useEffect(() => {
-    getCurrentUserDetails()
-  }, [])
 
   return (
     <section className="xl:w-10/12 mx-auto p-3 lg:flex flex-col overflow-x-hidden">
@@ -46,7 +31,7 @@ const ProfilePage = ({ edit }) => {
                 <UserLinks userInfo={currentUser} />
               </section>
               <section className="flex-col ">
-                <CreatePost userInfo={currentUser} ishidden={false} />
+                <CreatePost userInfo={currentUser} ishidden={false} userDetails={userDetails} />
                 <PostsContainer />
               </section>
             </section>

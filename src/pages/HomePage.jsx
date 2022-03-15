@@ -8,7 +8,7 @@ import CreatePost from "../components/home/CreatePost";
 import Footer from "../components/Footer";
 import { useUserAuth } from "../context/UserAuthContextProvider";
 
-const HomePage = () => {
+const HomePage = ({userDetails}) => {
 
   const { user } = useUserAuth();
   console.log(">>", user && user.email);
@@ -21,7 +21,7 @@ const HomePage = () => {
           <ExploreBlogs />
         </section>
         <section>
-          <CreatePost ishidden={true} />
+          <CreatePost ishidden={true} userDetails={userDetails} />
           <PostsContainer />
         </section>
         <section>

@@ -74,6 +74,10 @@ const UserAuthContextProvider = ({ children }) => {
   const [user, setUser] = useState("");
   const [userDetails, setUserDetails] = useState("");
 
+  // const getuserdetails=()=>{
+
+  // }
+
   const history = useHistory();
 
   const signUp = (email, password) => {
@@ -173,7 +177,9 @@ const UserAuthContextProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
       setUser(currentUser);
+      console.log("running");
     });
+
     return () => {
       unsubscribe();
     };

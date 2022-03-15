@@ -1,9 +1,9 @@
 import Navbar from "../navbar/Navbar"
 
-const PageLayout = ({children}) => {
+const PageLayout = ({children,userDetails}) => {
     return (
         <div>
-            <Navbar/>
+            <Navbar userDetails={userDetails}/>
             {children}
         </div>
     )
