@@ -3,14 +3,24 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { storage } from "../../database/firebase.config";
 import { db } from "../../database/firebase.config";
+import firebase from "firebase";
 
 const UserProfileCard = ({ userInfo, edit, setfname }) => {
   const [bannerUrl, setBannerUrl] = useState(
-    "url(https://media-exp1.licdn.com/dms/image/C4D16AQHOGTXAwxWr9A/profile-displaybackgroundimage-shrink_350_1400/0/1596362810946?e=1651104000&v=beta&t=O21KMZ5zRis5SKIIjChFY5UUr4n71s1QHg2DXQ-Ot2Q)"
-  );
+    `url(${userInfo.bannerURL})`
+    // "url(https://media-exp1.licdn.com/dms/image/C4D16AQHOGTXAwxWr9A/profile-displaybackgroundimage-shrink_350_1400/0/1596362810946?e=1651104000&v=beta&t=O21KMZ5zRis5SKIIjChFY5UUr4n71s1QHg2DXQ-Ot2Q)"
+    );
 
   const [profileImage, setProfileImage] = useState(null);
   const [bannerImage, setBannerImage] = useState(null);
+
+  useEffect(()=>{
+    if(userInfo.bannerURL!==""){
+      setBannerUrl(`url(${userInfo.bannerURL})`);
+      console.log("url updated succesfully!");
+      console.log(bannerUrl);
+    }
+  },[])
 
   async function uploadBannerImage(e) {
     console.log(e.target.files[0]);
@@ -18,74 +28,48 @@ const UserProfileCard = ({ userInfo, edit, setfname }) => {
       setBannerImage(e.target.files[0]);
 
       //firebase image upload
-        if (bannerImage) {
-          await storage.ref(`BannerImages/${e.target.files[0].name}`)
-        .put(bannerImage).then(()=>{
-          storage.ref("bannerImages")
-          .child(bannerImage.name)
-          .getDownloadURL()
-          .then(async (url) => {
-            console.log(url);
 
-            await db
-              .collection("Users")
-              .doc(localStorage.getItem("ds-user-uid"))
-              .update({
-                bannerURL: url,
-              })
-              .then(() => {
-                console.log("banner image uploaded successfully");
-              })
-              .catch((error) => {
-                console.log("storageerror",error);
-              });
+      let bucketName = `${localStorage.getItem('ds-user-uid')}/bannerImages`;
+      let file = bannerImage;
+      let storageRef = await firebase
+        .storage()
+        .ref(`${bucketName}/${e.target.files[0].name}`);
+      // const uploadTask = await storageRef.put(file);
+      await storageRef.put(file).on(firebase.storage.TaskEvent.STATE_CHANGED, async () => {
+        let bannerImageURL = await storageRef.getDownloadURL();
+        console.log(bannerImageURL);
+        setBannerUrl(`url(${userInfo.bannerURL})`);
+        await db
+          .collection("Users")
+          .doc(localStorage.getItem("ds-user-uid"))
+          .update({
+            bannerURL: bannerImageURL,
+          })
+          .then(() => {
+            console.log("banner image uploaded successfully");
+          })
+          .catch((error) => {
+            console.log("storageerror", error);
           });
-        });
-        }
-        // uploadTask.on(
-        //   "state_changed",
-        //   (snapshot) => {},
-        //   (error) => {
-        //     console.log("snapshoterror",error);
-        //   },
-        //   () => {
-        //     storage
-        //       .ref("bannerImages")
-        //       .child(bannerImage.name)
-        //       .getDownloadURL()
-        //       .then(async (url) => {
-        //         console.log(url);
-
-        //         await db
-        //           .collection("Users")
-        //           .doc(localStorage.getItem("ds-user-uid"))
-        //           .update({
-        //             bannerImage: url,
-        //           })
-        //           .then(() => {
-        //             console.log("banner image uploaded successfully");
-        //           })
-        //           .catch((error) => {
-        //             console.log("storageerror",error);
-        //           });
-        //       });
-        //   }
-        // );
+      });
     }
   }
 
-  useEffect(() => {
-    if (userInfo.bannerURL !== "") {
-      setBannerUrl(`url(${userInfo.bannerURL})`);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (userInfo.bannerURL !== "") {
+  //     setBannerUrl(`url(${userInfo.bannerURL})`);
+  //   }
+  // }, []);
 
   return (
     // <div className="max-w:sm block bg-white  h-max px-3 py-5 m-2 border border-gray-200 rounded-lg  overflow-hidden shadow-lg">
     <div className="bannerbg h-56 md:h-72 bg-white mt-5 ">
+      <img src={"https://firebasestorage.googleapis.com/v0/b/dream-shelter-cce6d.appspot.com/o/mXurXKv2r5Us1FwIJlJdPFaYFZf1%2FbannerImages%2FScreenshot%20(16).png?alt=media&token=2569520b-c343-4c31-8943-e588341e6665"} alt="lasd" />
       <div
         className="banner h-44 md:h-60 w-full"
         style={{ backgroundImage: bannerUrl }}
+
+        // style={{backgroundImage: (bannerUrl!=="" ? bannerUrl : 'url(https://media-exp1.licdn.com/dms/image/C4D16AQHOGTXAwxWr9A/profile-displaybackgroundimage-shrink_350_1400/0/1596362810946?e=1651104000&v=beta&t=O21KMZ5zRis5SKIIjChFY5UUr4n71s1QHg2DXQ-Ot2Q)')}}
       >
         <div
           className="flex flex-wrap justify-end relative top-4 right-4
