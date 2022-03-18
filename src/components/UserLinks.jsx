@@ -12,8 +12,14 @@ import React from "react";
 import { ShareIcon, SearchIcon, CogIcon, LocationMarkerIcon, MailIcon, BriefcaseIcon, PencilAltIcon, PencilIcon } from "@heroicons/react/outline";
 import { useState } from "react";
 import EditInfoPopup from "./home/EditInfoPopup";
+import firebase from "firebase";
+import { db } from "../database/firebase.config";
+import { useEffect } from "react";
+import { isEditable } from "@testing-library/user-event/dist/utils";
+import { useParams } from "react-router-dom";
+// import { db } from "../../database/firebase.config";
 
-function UserLinks({ userDetails, userInfo, ishiden }) {
+ function UserLinks({ userDetails, userInfo, ishiden }) {
   let [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
@@ -24,12 +30,46 @@ function UserLinks({ userDetails, userInfo, ishiden }) {
     setIsOpen(true);
   }
 
+  const [currentUserDetails, setCurrentUserDetails]=useState({
+    userDetails
+  })
+
+  const {uid}=useParams(); 
+  const [isEditable,setIsEditable] = useState(false);
+
+
+  useEffect(()=>{
+    db
+    .collection("Users")
+    .where(
+      firebase
+      .firestore.FieldPath.documentId(),
+      "==",
+      localStorage.getItem("ds-user-uid")
+    )
+    .onSnapshot(async (snapshot) => {
+      const changes = snapshot.docChanges()
+      changes.forEach(change=>{
+        if (change.type==='added') {
+          setCurrentUserDetails(change.doc)
+          console.log("user detials changes success")
+          console.log(change.doc);
+        }
+      } )
+    }) 
+    if(uid===localStorage.getItem('ds-user-uid')){
+      setIsEditable(true); 
+     } 
+  },[])
+
   return (
     <div className="w-full lg:w-96 block bg-white  px-3 py-3 m-2 border border-gray-200 rounded-lg overflow-hidden shadow-lg">
       <div className="flex justify-between">
         <h1 className="py-2 mx-3 font-bold text-xl">About</h1>
         <div className="mt-2">
-          <button
+          {
+            isEditable &&
+            <button
             type="button"
             className=" p-1 rounded-full text-gray-800 "
             onClick={openModal}
@@ -40,6 +80,8 @@ function UserLinks({ userDetails, userInfo, ishiden }) {
               aria-hidden="true"
             />
           </button>
+
+          }
         </div>
       </div>
       <div className="profile-bio m-2">
@@ -80,7 +122,7 @@ function UserLinks({ userDetails, userInfo, ishiden }) {
       </div>
       <EditInfoPopup
         isOpen={isOpen}
-        userDetails={userDetails}
+        userDetails={userInfo}
         setIsOpen={setIsOpen}
         closeModal={closeModal}
       />

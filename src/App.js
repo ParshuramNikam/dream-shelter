@@ -19,6 +19,7 @@ import { UserAuthContextProvider } from './context/UserAuthContextProvider';
 import { useState } from 'react';
 import { db } from './database/firebase.config';
 import firebase from 'firebase';
+import { useEffect } from 'react';
 
 function App() {
 
@@ -37,7 +38,7 @@ function App() {
 		  .catch((err) => console.log(err))
 	  }
 
-	  useState(()=>{
+	  useEffect(()=>{ 
 		getCurrentUserDetails()
 	  },[]) 
 
@@ -46,7 +47,7 @@ function App() {
 		{ path: "/aboutus", component: <AboutUsPage /> },
 		{ path: "/SuggestionPage", component: <SuggestionsPage /> },
 		{ path: "/OtherProfilePage", component: <ProfilePage edit={false} /> },
-		{ path: "/myprofile/:uid", component: <ProfilePage edit={true} userDetails={userDetails} /> },
+		{ path: "/myprofile/:uid", component: <ProfilePage edit={true}  userDetails={userDetails} /> },
 		{ path: "/blogs", component: <BlogsPage /> },
 		{ path: "/create-post", component: <CreatePostPage /> },
 		{ path: "/blog/:id", component: <OneBlogPage /> },

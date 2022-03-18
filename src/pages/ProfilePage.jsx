@@ -10,34 +10,45 @@ import { useEffect, useState } from "react";
 import firebase from "firebase";
 import { db, auth } from "../database/firebase.config";
 import { useUserAuth } from "../context/UserAuthContextProvider";
+import { useParams } from "react-router-dom";
 
-const ProfilePage = ({ edit,userDetails }) => {
+const ProfilePage = ({ edit, userDetails }) => {
+  const { uid } = useParams();
+  const [isEditable, setIsEditable] = useState(false);
 
-  const [currentUser, setCurrentUser] = useState(userDetails)
+  useEffect(() => {
+    if (uid === localStorage.getItem("ds-user-uid")) {
+      setIsEditable(true);
+    }
+  });
 
-  const { user } = useUserAuth();
- 
   return (
     <section className="xl:w-10/12 mx-auto p-3 lg:flex flex-col overflow-x-hidden">
-      {
-        currentUser !== null
-          ? <>
-            <section >
-              <UserProfileCard userInfo={currentUser} edit={edit} />
+      {userDetails !== null ? (
+        <>
+          <section>
+            <UserProfileCard userInfo={userDetails} edit={edit} />
+          </section>
+          <section className="lg:flex flex-row ">
+            <section className="flex-col ">
+              <UserDetailedInfo userInfo={userDetails} edit={edit} />
+              <UserLinks userInfo={userDetails} userDetails={userDetails} />
             </section>
-            <section className="lg:flex flex-row ">
-              <section className="flex-col ">
-                <UserDetailedInfo userInfo={currentUser} edit={edit} />
-                <UserLinks userInfo={currentUser} userDetails={userDetails} />
-              </section>
-              <section className="flex-col ">
-                <CreatePost userInfo={currentUser} ishidden={false} userDetails={userDetails} />
-                <PostsContainer />
-              </section>
+            <section className="flex-col ">
+              {isEditable && (
+                <CreatePost
+                  userInfo={userDetails}
+                  ishidden={true}
+                  userDetails={userDetails}
+                />
+              )}
+              <PostsContainer />
             </section>
-          </>
-          : "Loading..."
-      }
+          </section>
+        </>
+      ) : (
+        "Loading..."
+      )}
     </section>
   );
 };

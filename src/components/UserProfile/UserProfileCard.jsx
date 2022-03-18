@@ -4,21 +4,38 @@ import { Link } from "react-router-dom";
 import { storage } from "../../database/firebase.config";
 import { db } from "../../database/firebase.config";
 import firebase from "firebase";
+import { useParams } from "react-router-dom";
 
 const UserProfileCard = ({ userInfo, edit, setfname }) => {
   const [bannerUrl, setBannerUrl] = useState(
-    `url(${userInfo.bannerURL})`
-    // "url(https://media-exp1.licdn.com/dms/image/C4D16AQHOGTXAwxWr9A/profile-displaybackgroundimage-shrink_350_1400/0/1596362810946?e=1651104000&v=beta&t=O21KMZ5zRis5SKIIjChFY5UUr4n71s1QHg2DXQ-Ot2Q)"
+    // `url(${userInfo.bannerURL})`
+    "url(https://media-exp1.licdn.com/dms/image/C4D16AQHOGTXAwxWr9A/profile-displaybackgroundimage-shrink_350_1400/0/1596362810946?e=1651104000&v=beta&t=O21KMZ5zRis5SKIIjChFY5UUr4n71s1QHg2DXQ-Ot2Q)"
     );
+
+    const [profileUrl, setProfileUrl] = useState(
+      `url(${userInfo.profileURL})`
+          );
 
   const [profileImage, setProfileImage] = useState(null);
   const [bannerImage, setBannerImage] = useState(null);
+
+  const {uid}=useParams(); 
+
+  const [isEditable,setIsEditable] = useState(false);
 
   useEffect(()=>{
     if(userInfo.bannerURL!==""){
       setBannerUrl(`url(${userInfo.bannerURL})`);
       console.log("url updated succesfully!");
       console.log(bannerUrl);
+    }
+    if(userInfo.profileURL!==""){
+      setProfileUrl(`url(${userInfo.profileURL})`);
+      console.log("url updated succesfully!");
+      console.log(profileUrl);
+    }
+    if(uid===localStorage.getItem('ds-user-uid')){
+     setIsEditable(true); 
     }
   },[])
 
@@ -55,6 +72,39 @@ const UserProfileCard = ({ userInfo, edit, setfname }) => {
     }
   }
 
+  async function uploadProfileImage(e) {
+    console.log(e.target.files[0]);
+    if (e.target.files[0]) {
+      setProfileImage(e.target.files[0]);
+
+      //firebase image upload
+
+      let bucketName = `${localStorage.getItem('ds-user-uid')}/profileImages`;
+      let file = profileImage;
+      let storageRef = await firebase
+        .storage()
+        .ref(`${bucketName}/${e.target.files[0].name}`);
+      // const uploadTask = await storageRef.put(file);
+      await storageRef.put(file).on(firebase.storage.TaskEvent.STATE_CHANGED, async () => {
+        let profileImageURL = await storageRef.getDownloadURL();
+        console.log(profileImageURL);
+        setProfileUrl(`url(${userInfo.profileURL})`);
+        await db
+          .collection("Users")
+          .doc(localStorage.getItem("ds-user-uid"))
+          .update({
+            photoURL: profileImageURL,
+          })
+          .then(() => {
+            console.log("profile image uploaded successfully");
+          })
+          .catch((error) => {
+            console.log("storageerror", error);
+          });
+      });
+    }
+  }
+
   // useEffect(() => {
   //   if (userInfo.bannerURL !== "") {
   //     setBannerUrl(`url(${userInfo.bannerURL})`);
@@ -64,38 +114,41 @@ const UserProfileCard = ({ userInfo, edit, setfname }) => {
   return (
     // <div className="max-w:sm block bg-white  h-max px-3 py-5 m-2 border border-gray-200 rounded-lg  overflow-hidden shadow-lg">
     <div className="bannerbg h-56 md:h-72 bg-white mt-5 ">
-      <img src={"https://firebasestorage.googleapis.com/v0/b/dream-shelter-cce6d.appspot.com/o/mXurXKv2r5Us1FwIJlJdPFaYFZf1%2FbannerImages%2FScreenshot%20(16).png?alt=media&token=2569520b-c343-4c31-8943-e588341e6665"} alt="lasd" />
+      {/* <img src={profileUrl} alt="lasd" /> */}
       <div
         className="banner h-44 md:h-60 w-full"
         style={{ backgroundImage: bannerUrl }}
 
         // style={{backgroundImage: (bannerUrl!=="" ? bannerUrl : 'url(https://media-exp1.licdn.com/dms/image/C4D16AQHOGTXAwxWr9A/profile-displaybackgroundimage-shrink_350_1400/0/1596362810946?e=1651104000&v=beta&t=O21KMZ5zRis5SKIIjChFY5UUr4n71s1QHg2DXQ-Ot2Q)')}}
       >
-        <div
-          className="flex flex-wrap justify-end relative top-4 right-4
-        "
-        >
-          <label
-            type="label"
-            className=" right-14 cursor-pointer p-1 rounded-full text-cyan-700 bg-white hover:text-cyan-900  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-          >
-            <span className="sr-only">Edit Profile</span>
-            <input
-              type="file"
-              multiple="multiple"
-              className="hidden"
-              accept="accept"
-              onChange={(e) => {
-                uploadBannerImage(e);
-              }}
-              name="profileImageInput"
-            />
-            <PencilIcon
-              className="p-0.5 w-6 h-6 hover:stroke-white-300"
-              aria-hidden="true"
-            />
-          </label>
-        </div>
+       {
+         isEditable && 
+         <div
+         className="flex flex-wrap justify-end relative top-4 right-4
+       "
+       >
+         <label
+           type="label"
+           className=" right-14 cursor-pointer p-1 rounded-full text-cyan-700 bg-white hover:text-cyan-900  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+         >
+           <span className="sr-only">Edit Profile</span>
+           <input
+             type="file"
+             multiple="multiple"
+             className="hidden"
+             accept="accept"
+             onChange={(e) => {
+               uploadBannerImage(e);
+             }}
+             name="profileImageInput"
+           />
+           <PencilIcon
+             className="p-0.5 w-6 h-6 hover:stroke-white-300"
+             aria-hidden="true"
+           />
+         </label>
+       </div>
+       }
         <div className=" mx-auto text-white  relative top-20 md:top-28 left-7  sm:left-10  ">
           <div className="flex items-center ">
             <img
@@ -108,7 +161,9 @@ const UserProfileCard = ({ userInfo, edit, setfname }) => {
               }
               alt=""
             />
-            <label
+            {
+              isEditable && 
+              <label
               type="label"
               className="relative bottom-12 right-12 cursor-pointer p-1 rounded-full text-cyan-700 bg-white hover:text-cyan-900  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
             >
@@ -118,12 +173,16 @@ const UserProfileCard = ({ userInfo, edit, setfname }) => {
                 class="hidden"
                 multiple="multiple"
                 accept="accept"
+                onChange={(e) => {
+                  uploadProfileImage(e);
+                }}
               />
               <PencilIcon
                 className="p-0.5 w-5 h-5 hover:stroke-white-300"
                 aria-hidden="true"
               />
             </label>
+            }
 
             <div className="">
               <p className="text-3xl mb-1  font-semibold capitalize">
