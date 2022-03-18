@@ -102,6 +102,7 @@ const UserAuthContextProvider = ({ children }) => {
             interest: [],
             activityWantsToDo: [],
             emailVerified: false,
+            photoURL: "https://firebasestorage.googleapis.com/v0/b/dream-shelter-cce6d.appspot.com/o/common%2Favatar.png?alt=media&token=72157de7-fdf6-4b11-a76a-623c61b4e0f9",
             created: firebase.firestore.FieldValue.serverTimestamp(),
           })
           .then(() => {

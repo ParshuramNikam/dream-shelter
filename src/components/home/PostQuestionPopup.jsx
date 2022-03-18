@@ -3,6 +3,7 @@ import { XIcon } from '@heroicons/react/outline';
 import { Fragment, useState } from 'react'
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { db } from '../../database/firebase.config';
 
 export default function PostQuestionPopup({ isOpen, setIsOpen, closeModal }) {
 
@@ -14,8 +15,22 @@ export default function PostQuestionPopup({ isOpen, setIsOpen, closeModal }) {
             return;
         }
         closeModal();   // to close the model
-        setTimeout(() => {
+        setTimeout(async() => {
             alert("Your Question has been submitted : " + question);
+            await db
+            .collection("Questions")
+            .doc()
+            .set({
+              question: question,
+              questionAskedBy: localStorage.getItem('ds-user-uid'),
+              answers: []
+            })
+            .then(() => {
+              console.log("User about me section updated");
+            })
+            .catch((error) => {
+              console.log(error);
+            });
             setQuestion("");
         }, 300);
     }
