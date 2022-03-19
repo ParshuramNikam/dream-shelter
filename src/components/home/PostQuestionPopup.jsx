@@ -9,6 +9,7 @@ export default function PostQuestionPopup({ isOpen, setIsOpen, closeModal }) {
 
     const [question, setQuestion] = useState("");
 
+    const [questionCategoryList,setQuestionCategoryList] = useState("");
     const submitHandler = () => {
         if (question === "") {
             alert("Please enter a question.")
@@ -23,7 +24,9 @@ export default function PostQuestionPopup({ isOpen, setIsOpen, closeModal }) {
             .set({
               question: question,
               questionAskedBy: localStorage.getItem('ds-user-uid'),
-              answers: []
+              answers: [],
+              createdAt: new Date(),
+              questionCategoryList: questionCategoryList.trim().replaceAll(' ','').split(',')
             })
             .then(() => {
               console.log("User about me section updated");
@@ -72,6 +75,11 @@ export default function PostQuestionPopup({ isOpen, setIsOpen, closeModal }) {
                                     placeholder='Enter your Question...'
                                     value={question}
                                     onChange={(e) => setQuestion(e.target.value)}
+                                ></textarea>
+                                <textarea className="w-full border-2 rounded-lg p-2 mt-3 border-gray-500 text-black cursor-text p2 h-12"
+                                    placeholder='Seperate hashtags with ,'
+                                    value={questionCategoryList}
+                                    onChange={(e) => setQuestionCategoryList(e.target.value)}
                                 ></textarea>
                             </div>
                             <div className="mt-4">

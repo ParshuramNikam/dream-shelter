@@ -1,6 +1,6 @@
-import { Fragment, useState,useEffect } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 
 import {
   BellIcon,
@@ -15,9 +15,16 @@ import {
 } from "@heroicons/react/outline";
 import classNames from "classnames";
 import { Link } from "react-router-dom";
+import { db } from "../../database/firebase.config";
 
-
-const PostCard = () => {
+const PostCard = ({
+  index,
+  questionId,
+  question,
+  answers,
+  questionAskedBy,
+  questionCategoryList,
+}) => {
   const location = useLocation();
   const [like, setLike] = useState(false);
 
@@ -27,23 +34,29 @@ const PostCard = () => {
     share: false,
   });
 
+  // Question asked by user details
+  const [qAskedByUserDetails, setQAskedByUserDetails] = useState(null);
+
   const [postOptions, setPostOptions] = useState([]);
 
-  useState(()=>{
-    if(location.pathname=="/bookmarks"){
-      setPostOptions([
-        "unsave",
-        "copy link",
-      ])
-      }else if(location.pathname=="/"){
-        setPostOptions([
-          "save",
-          "copy link",
-          "unfollow",
-        ])
-      }
-    },[])
-
+  useEffect(() => {
+    db.collection("Users")
+      .doc(questionAskedBy.toString())
+      .get()
+      .then((userDetails) => {
+        const userData = userDetails.data();
+        const userId = userDetails.id;
+        setQAskedByUserDetails({ userData, userId });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    if (location.pathname == "/bookmarks") {
+      setPostOptions(["unsave", "copy link"]);
+    } else if (location.pathname == "/") {
+      setPostOptions(["save", "copy link", "unfollow"]);
+    }
+  }, []);
 
   const postBtnClickAction = (btn) => {
     btn = btn.toLowerCase();
@@ -64,29 +77,47 @@ const PostCard = () => {
     }
   };
 
-  
-
   return (
-    <div className="pt-2 flex justify-center h-ma">
+    <div key={index} className="pt-2 flex justify-center h-ma">
       {/* CARD */}
       <div className="post_card max-w-2xl rounded-lg overflow-hidden shadow-lg py-2 bg-white border border-gray-200">
         {/* Post header 👇 */}
         <div className="flex  items-center justify-between px-4 pt-2">
           <Link to={"/OtherProfilePage"}>
-            
-              <div className="flex  items-center">
-                <img
-                  className="w-10 mt-1 rounded-full"
-                  src="https://shortner-urls.herokuapp.com/BeKgZyu"
-                  alt="Avatar"
-                />
+            <div className="flex  items-center">
+              <img
+                className="w-10 mt-1 rounded-full"
+                // src="https://shortner-urls.herokuapp.com/BeKgZyu"
+                src={
+                  qAskedByUserDetails &&
+                  qAskedByUserDetails.userData &&
+                  qAskedByUserDetails.userData.photoURL
+                    ? qAskedByUserDetails.userData.photoURL
+                    : "https://shortner-urls.herokuapp.com/BeKgZyu"
+                }
+                alt="Avatar"
+              />
 
-                <div className="text-xs ml-2">
-                  <p className="font-bold ">John Doe</p>
-                  <p>Khopoli - Maharashtra</p>
-                </div>
+              <div className="text-xs ml-2">
+                <p className="font-bold ">
+                  {qAskedByUserDetails &&
+                  qAskedByUserDetails.userData &&
+                  qAskedByUserDetails.userData.fname &&
+                  qAskedByUserDetails.userData.lname
+                    ? qAskedByUserDetails.userData.fname +
+                      " " +
+                      qAskedByUserDetails.userData.lname
+                    : ""}
+                </p>
+                <p>
+                  {qAskedByUserDetails &&
+                  qAskedByUserDetails.userData &&
+                  qAskedByUserDetails.userData.location
+                    ? qAskedByUserDetails.userData.location
+                    : ""}
+                </p>
               </div>
-            
+            </div>
           </Link>
 
           {/* Post header menu -> three dots */}
@@ -149,7 +180,7 @@ const PostCard = () => {
         {/* Post Question answer */}
         <div className="px-6 py-4">
           <div className="font-bold text-xl mb-2">
-            Lorem ipsum dolor sit amet.
+            {question ? question : ""}
           </div>
           <p className="text-gray-700 text-base">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima
@@ -164,15 +195,11 @@ const PostCard = () => {
 
         {/* Tages */}
         <div className="px-6 pt-4 pb-2">
-          <span className="inline-block rounded-full px-3 py-1 text-sm font-semibold bg-gray-100 text-gray-700 mr-2 mb-2">
-            #photography
-          </span>
-          <span className="inline-block rounded-full px-3 py-1 text-sm font-semibold bg-gray-100 text-gray-700 mr-2 mb-2">
-            #travel
-          </span>
-          <span className="inline-block rounded-full px-3 py-1 text-sm font-semibold bg-gray-100 text-gray-700 mr-2 mb-2">
-            #winter
-          </span>
+          {questionCategoryList && questionCategoryList.map((category,index)=>
+        <span key={index} className="inline-block rounded-full px-3 py-1 text-sm font-semibold bg-gray-100 text-gray-700 mr-2 mb-2">
+          #{category}
+      </span>
+          )}
         </div>
 
         <div className="px-3 py-1 grid grid-cols-3">
