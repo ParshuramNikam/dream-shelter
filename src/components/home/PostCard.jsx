@@ -16,6 +16,7 @@ import {
 import classNames from "classnames";
 import { Link } from "react-router-dom";
 import { db } from "../../database/firebase.config";
+import firebase from "firebase";
 
 const PostCard = ({
   index,
@@ -24,6 +25,8 @@ const PostCard = ({
   answers,
   questionAskedBy,
   questionCategoryList,
+  likeCount,
+  likedByUsers,
 }) => {
   const location = useLocation();
   const [like, setLike] = useState(false);
@@ -38,6 +41,7 @@ const PostCard = ({
   const [qAskedByUserDetails, setQAskedByUserDetails] = useState(null);
 
   const [postOptions, setPostOptions] = useState([]);
+  const [currentLikes, setCurrentLikes] = useState(likeCount);
 
   useEffect(() => {
     db.collection("Users")
@@ -58,11 +62,43 @@ const PostCard = ({
     }
   }, []);
 
-  const postBtnClickAction = (btn) => {
+  const postBtnClickAction = async (btn) => {
     btn = btn.toLowerCase();
     switch (btn) {
       case "like":
-        setPostBtnClick({ ...postBtnClick, like: !postBtnClick.like });
+        await setPostBtnClick({ ...postBtnClick, like: !postBtnClick.like });
+        if (postBtnClick.like) {
+          await setCurrentLikes(currentLikes - 1);
+          await db
+            .collection("Questions")
+            .doc(questionId)
+            .update({
+              likedByUsers: firebase.firestore.FieldValue.arrayRemove(
+                localStorage.getItem("ds-user-uid")
+              ),
+            });
+          await db
+            .collection("Questions")
+            .doc(questionId)
+            .update({
+              likeCount: firebase.firestore.FieldValue.increment(-1),
+            });
+        } else {
+          await setCurrentLikes(currentLikes + 1);
+         await db.collection("Questions")
+            .doc(questionId)
+            .update({
+              likedByUsers: firebase.firestore.FieldValue.arrayUnion(
+                localStorage.getItem("ds-user-uid")
+              ),
+            });
+          await db
+            .collection("Questions")
+            .doc(questionId)
+            .update({
+              likeCount: firebase.firestore.FieldValue.increment(1),
+            });
+        }
         break;
       case "comment":
         // setPostBtnClick({...postBtnClick, comment: !postBtnClick.comment});
@@ -80,7 +116,7 @@ const PostCard = ({
   return (
     <div key={index} className="pt-2 flex justify-center h-ma">
       {/* CARD */}
-      <div className="post_card max-w-2xl rounded-lg overflow-hidden shadow-lg py-2 bg-white border border-gray-200">
+      <div className="post_card w-full rounded-lg overflow-hidden shadow-lg py-2 bg-white border border-gray-200">
         {/* Post header 👇 */}
         <div className="flex  items-center justify-between px-4 pt-2">
           <Link to={"/OtherProfilePage"}>
@@ -183,23 +219,21 @@ const PostCard = ({
             {question ? question : ""}
           </div>
           <p className="text-gray-700 text-base">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima
-            aliquid odio tenetur atque! Enim aperiam reiciendis commodi et
-            deleniti sit. Ut amet ducimus accusamus. Quia.
-            <br />
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Voluptatibus quia, Nonea! Maiores et perferendis eaque,
-            exercitationem praesentium nihil.
+            {answers && answers[0] ? answers[0] : "no answeres yet!!"}
           </p>
         </div>
 
         {/* Tages */}
         <div className="px-6 pt-4 pb-2">
-          {questionCategoryList && questionCategoryList.map((category,index)=>
-        <span key={index} className="inline-block rounded-full px-3 py-1 text-sm font-semibold bg-gray-100 text-gray-700 mr-2 mb-2">
-          #{category}
-      </span>
-          )}
+          {questionCategoryList &&
+            questionCategoryList.map((category, index) => (
+              <span
+                key={index}
+                className="inline-block rounded-full px-3 py-1 text-sm font-semibold bg-gray-100 text-gray-700 mr-2 mb-2"
+              >
+                #{category}
+              </span>
+            ))}
         </div>
 
         <div className="px-3 py-1 grid grid-cols-3">
@@ -207,12 +241,13 @@ const PostCard = ({
             className="flex items-center justify-center hover:bg-gray-100 px-3 py-2 rounded-md cursor-pointer"
             onClick={() => postBtnClickAction("like")}
           >
+            {currentLikes + " "}
             <HeartIcon
               className={`h-6 w-6 text-indigo-500 ${
                 postBtnClick.like ? "fill-indigo-300" : ""
               } `}
             />
-            <p className="ml-2">Like</p>
+            <p className="ml-2">{postBtnClick.like ? 'Unlike': 'Like'}</p>
           </button>
           <button
             className="flex items-center justify-center hover:bg-gray-100 px-3 py-2 rounded-md cursor-pointer"

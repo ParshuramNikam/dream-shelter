@@ -34,6 +34,8 @@ const PostsContainer = () => {
           answers={questionDetails.oneDoc.answers}
           questionAskedBy={questionDetails.oneDoc.questionAskedBy}
           questionCategoryList={questionDetails.oneDoc.questionCategoryList}
+          likeCount={questionDetails.oneDoc.likeCount}
+          likedByUsers={questionDetails.oneDoc.likedByUsers}
         />
       ))}
 

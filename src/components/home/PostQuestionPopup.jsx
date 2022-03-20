@@ -25,6 +25,8 @@ export default function PostQuestionPopup({ isOpen, setIsOpen, closeModal }) {
               question: question,
               questionAskedBy: localStorage.getItem('ds-user-uid'),
               answers: [],
+              likeCount: 0,
+              likedByUsers: [],
               createdAt: new Date(),
               questionCategoryList: questionCategoryList.trim().replaceAll(' ','').split(',')
             })
