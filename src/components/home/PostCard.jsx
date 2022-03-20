@@ -13,13 +13,13 @@ import {
   XCircleIcon,
   PencilAltIcon,
   XIcon,
+  ChatAlt2Icon,
 } from "@heroicons/react/outline";
 import classNames from "classnames";
 import { Link } from "react-router-dom";
 import { db } from "../../database/firebase.config";
 import firebase from "firebase";
 import { notifySuccess, notifyWarning } from "../../utils/reactToast.js";
-
 
 const PostCard = ({
   index,
@@ -31,7 +31,6 @@ const PostCard = ({
   likeCount,
   likedByUsers,
 }) => {
-
   const location = useLocation();
 
   const [postBtnClick, setPostBtnClick] = useState({
@@ -44,13 +43,17 @@ const PostCard = ({
 
   // Question asked by user details
   const [qAskedByUserDetails, setQAskedByUserDetails] = useState(null);
-  const [firstAnsGivenByUserDeatils, setFirstAnsGivenByUserDeatils] = useState(null);
+  const [firstAnsGivenByUserDeatils, setFirstAnsGivenByUserDeatils] =
+    useState(null);
 
   const [postOptions, setPostOptions] = useState([]);
   const [currentLikes, setCurrentLikes] = useState(likeCount);
 
   useEffect(() => {
-    if (likedByUsers && likedByUsers.includes(localStorage.getItem('ds-user-uid').toString())) {
+    if (
+      likedByUsers &&
+      likedByUsers.includes(localStorage.getItem("ds-user-uid").toString())
+    ) {
       setPostBtnClick({ ...postBtnClick, like: true });
     }
 
@@ -84,7 +87,6 @@ const PostCard = ({
         });
     }
 
-
     if (location.pathname == "/bookmarks") {
       setPostOptions(["unsave", "copy link"]);
     } else if (location.pathname == "/") {
@@ -115,7 +117,8 @@ const PostCard = ({
             });
         } else {
           await setCurrentLikes(currentLikes + 1);
-          await db.collection("Questions")
+          await db
+            .collection("Questions")
             .doc(questionId)
             .update({
               likedByUsers: firebase.firestore.FieldValue.arrayUnion(
@@ -147,26 +150,26 @@ const PostCard = ({
     console.log("Your answer is : ", signedInUserAnswer);
 
     if (signedInUserAnswer === "") {
-      return notifyWarning("Please, enter your answer!")
+      return notifyWarning("Please, enter your answer!");
     }
 
-    await db.collection("Questions")
+    await db
+      .collection("Questions")
       .doc(questionId)
       .update({
-        answers: firebase.firestore.FieldValue.arrayUnion(
-          {
-            answer: signedInUserAnswer,
-            answeredBy: localStorage.getItem('ds-user-uid')
-          }
-        ),
-      }).then(() => {
+        answers: firebase.firestore.FieldValue.arrayUnion({
+          answer: signedInUserAnswer,
+          answeredBy: localStorage.getItem("ds-user-uid"),
+        }),
+      })
+      .then(() => {
         setSignedInUserAnswer("");
         setPostBtnClick({ ...postBtnClick, answer: false });
         console.log("new answer added to array in db");
-        notifySuccess("Your answer submitted successfully!")
-      }).catch((err) => console.log(err))
-
-  }
+        notifySuccess("Your answer submitted successfully!");
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div key={index} className="pt-2 flex justify-center h-max">
@@ -181,8 +184,8 @@ const PostCard = ({
                 // src="https://shortner-urls.herokuapp.com/BeKgZyu"
                 src={
                   qAskedByUserDetails &&
-                    qAskedByUserDetails.userData &&
-                    qAskedByUserDetails.userData.photoURL
+                  qAskedByUserDetails.userData &&
+                  qAskedByUserDetails.userData.photoURL
                     ? qAskedByUserDetails.userData.photoURL
                     : "https://shortner-urls.herokuapp.com/BeKgZyu"
                 }
@@ -192,18 +195,18 @@ const PostCard = ({
               <div className="text-xs ml-2">
                 <p className="font-bold ">
                   {qAskedByUserDetails &&
-                    qAskedByUserDetails.userData &&
-                    qAskedByUserDetails.userData.fname &&
-                    qAskedByUserDetails.userData.lname
+                  qAskedByUserDetails.userData &&
+                  qAskedByUserDetails.userData.fname &&
+                  qAskedByUserDetails.userData.lname
                     ? qAskedByUserDetails.userData.fname +
-                    " " +
-                    qAskedByUserDetails.userData.lname
+                      " " +
+                      qAskedByUserDetails.userData.lname
                     : ""}
                 </p>
                 <p>
                   {qAskedByUserDetails &&
-                    qAskedByUserDetails.userData &&
-                    qAskedByUserDetails.userData.location
+                  qAskedByUserDetails.userData &&
+                  qAskedByUserDetails.userData.location
                     ? qAskedByUserDetails.userData.location
                     : ""}
                 </p>
@@ -276,38 +279,35 @@ const PostCard = ({
             </div>
           </Link>
           <p className="text-gray-700 text-base">
-            {answers && answers[0]
-              ? <div>
-                {
-                  firstAnsGivenByUserDeatils &&
-                    firstAnsGivenByUserDeatils.userData &&
-                    firstAnsGivenByUserDeatils.userData.photoURL
-                    ? <>
-                      <div className="flex gap-3 items-center">
-                        <img className="w-6 mt-1 rounded-full"
-                          src={firstAnsGivenByUserDeatils.userData.photoURL} alt="ansBy"
-                        />
-                        <p className="text-sm">
-                          {
-                            firstAnsGivenByUserDeatils.userData.fname && firstAnsGivenByUserDeatils.userData.fname
-                          }
+            {answers && answers[0] ? (
+              <div>
+                {firstAnsGivenByUserDeatils &&
+                firstAnsGivenByUserDeatils.userData &&
+                firstAnsGivenByUserDeatils.userData.photoURL ? (
+                  <>
+                    <div className=" flex gap-3 ">
+                      <img
+                        className="w-8 h-8 mt-1 rounded-full"
+                        src={firstAnsGivenByUserDeatils.userData.photoURL}
+                        alt="ansBy"
+                      />
+                      <div className="bg-gray-100 w-full mr-1 my-1 p-1 rounded-tr rounded-br rounded-bl">
+                        <p className="text-sm font-semibold text-black">
+                          {firstAnsGivenByUserDeatils.userData.fname &&
+                            firstAnsGivenByUserDeatils.userData.fname}
                           &nbsp;
-                          {
-                            firstAnsGivenByUserDeatils.userData.lname && firstAnsGivenByUserDeatils.userData.lname
-                          }
+                          {firstAnsGivenByUserDeatils.userData.lname &&
+                            firstAnsGivenByUserDeatils.userData.lname}
                         </p>
+                        <p className="">{answers[0].answer}</p>
                       </div>
-                      <p className="mt-2">
-                        {
-                          answers[0].answer
-                        }
-                      </p>
-                    </>
-                    : null
-                }
+                    </div>
+                  </>
+                ) : null}
               </div>
-              : "no answeres yet!!"
-            }
+            ) : (
+              "no answeres yet!!"
+            )}
           </p>
         </div>
 
@@ -324,49 +324,68 @@ const PostCard = ({
             ))}
         </div>
 
-        <div className="px-3 py-1 grid grid-cols-3">
+        <div className="px-3 py-1 grid grid-cols-4">
           <button
-            className="flex items-center justify-center hover:bg-gray-100 px-3 py-2 rounded-md cursor-pointer"
+            className="flex items-center justify-center hover:bg-gray-100 px-1 py-2 rounded-md cursor-pointer"
             onClick={() => postBtnClickAction("like")}
           >
-            {currentLikes + " "}
+            <span className="font-semibold">{currentLikes}</span> &nbsp;&nbsp;
             <HeartIcon
-              className={`h-6 w-6 text-indigo-500 ${postBtnClick.like ? "fill-indigo-300" : ""
-                } `}
+              className={`h-6 w-6 text-black  ${
+                postBtnClick.like
+                  ? "fill-rose-600 text-rose-600 outline-none"
+                  : "hover:text-gray-600"
+              } `}
             />
-            <p className="ml-2">{postBtnClick.like ? 'Unlike' : 'Like'}</p>
+            {/* <p className="ml-2">{postBtnClick.like ? 'Unlike' : 'Like'}</p> */}
+          </button>
+            <button
+              className="flex items-center justify-center hover:bg-gray-100 px-3 py-2 rounded-md cursor-pointer"
+              // onClick={() => postBtnClickAction("answer")}
+            >
+          <Link className="" to={"/question/" + questionId}>
+              <ChatAlt2Icon className="h-6 w-6 text-black hover:text-gray-600" />
+          </Link>
+            </button>
+          <button
+            className="flex items-center justify-center hover:bg-gray-100 px-3 py-2 rounded-md cursor-pointer"
+            onClick={() => postBtnClickAction("share")}
+          >
+            <ShareIcon className="h-6 w-6 text-black hover:text-gray-600" />
           </button>
           <button
             className="flex items-center justify-center hover:bg-gray-100 px-3 py-2 rounded-md cursor-pointer"
             onClick={() => postBtnClickAction("answer")}
           >
-            <PencilAltIcon className="h-6 w-6 text-indigo-500" />
-            <p className="ml-2">Answer</p>
-          </button>
-          <button
-            className="flex items-center justify-center hover:bg-gray-100 px-3 py-2 rounded-md cursor-pointer"
-            onClick={() => postBtnClickAction("share")}
-          >
-            <ShareIcon className="h-6 w-6 text-indigo-500" />
-            <p className="ml-2">Share</p>
+            <PencilAltIcon className="h-6 w-6 text-black hover:text-gray-600" />
           </button>
         </div>
 
-        <div className={`${!postBtnClick.answer ? 'hidden' : null} transition-all duration-150 ease-linear m-3 border-t-2 border-t-gray-300`}>
-          <textarea name="answerTextArea" id="answerTextArea"
+        <div
+          className={`${
+            !postBtnClick.answer ? "hidden" : null
+          } transition-all duration-150 ease-linear m-3 border-t-2 border-t-gray-300`}
+        >
+          <textarea
+            name="answerTextArea"
+            id="answerTextArea"
             placeholder="Write your answer..."
             className="w-full mt-4 p-2 h-20 focus:outline-none focus:border-gray-900 rounded-md border-2 border-gray-600 "
             value={signedInUserAnswer}
             onChange={(e) => setSignedInUserAnswer(e.target.value)}
           />
           <div className="flex justify-between items-center">
-            <button className="mt-0.5 px-3 py-2 text-white rounded bg-indigo-500 hover:bg-indigo-600"
+            <button
+              className="mt-0.5 px-3 py-2 text-white rounded bg-indigo-500 hover:bg-indigo-600"
               onClick={answerSubmitHandler}
             >
               Submit answer
             </button>
-            <button className=" mt-1.5 cursor-pointer hover:text-indigo-700 text-indigo-500 rounded "
-              onClick={() => setPostBtnClick({ ...postBtnClick, answer: false })}
+            <button
+              className=" mt-1.5 cursor-pointer hover:text-indigo-700 text-indigo-500 rounded "
+              onClick={() =>
+                setPostBtnClick({ ...postBtnClick, answer: false })
+              }
             >
               <XCircleIcon className="w-8 h-8" />
             </button>
