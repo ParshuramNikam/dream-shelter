@@ -20,34 +20,36 @@ import { useState } from 'react';
 import { db } from './database/firebase.config';
 import firebase from 'firebase';
 import { useEffect } from 'react';
+import OneQuestionPage from './pages/OneQuestionPage';
 
 function App() {
 
-	const [userDetails, setUserDetails]=useState({
-		
+	const [userDetails, setUserDetails] = useState({
+
 	})
 
 	async function getCurrentUserDetails() {
 
 		await db.collection('Users').where(firebase.firestore.FieldPath.documentId(), '==', localStorage.getItem('ds-user-uid')).onSnapshot(async (snapshot) => {
-		  await snapshot.docs.forEach(doc => {
-			setUserDetails({ ...doc.data(), id: doc.id })
-			console.log(doc.data());
-		  })
-		}).then(() => {console.log("current user data : ", userDetails)})
-		  .catch((err) => console.log(err))
-	  }
+			await snapshot.docs.forEach(doc => {
+				setUserDetails({ ...doc.data(), id: doc.id })
+				console.log(doc.data());
+			})
+		}).then(() => { console.log("current user data : ", userDetails) })
+			.catch((err) => console.log(err))
+	}
 
-	  useEffect(()=>{ 
+	useEffect(() => {
 		getCurrentUserDetails()
-	  },[]) 
+	}, [])
 
 	const compoentsList = [
 		{ path: "/", component: <HomePage userDetails={userDetails} /> },
+		{ path: "/question/:questionId", component: <OneQuestionPage userDetails={userDetails} /> },
 		{ path: "/aboutus", component: <AboutUsPage /> },
 		{ path: "/SuggestionPage", component: <SuggestionsPage /> },
 		{ path: "/OtherProfilePage", component: <ProfilePage edit={false} /> },
-		{ path: "/myprofile/:uid", component: <ProfilePage edit={true}  userDetails={userDetails} /> },
+		{ path: "/myprofile/:uid", component: <ProfilePage edit={true} userDetails={userDetails} /> },
 		{ path: "/blogs", component: <BlogsPage /> },
 		{ path: "/create-post", component: <CreatePostPage /> },
 		{ path: "/blog/:id", component: <OneBlogPage /> },
@@ -56,7 +58,7 @@ function App() {
 		{ path: "/bookmarks", component: <BookmarksPage /> },
 		{ path: "/messenger", component: <Messenger /> }
 	]
-	
+
 
 	return (
 		<UserAuthContextProvider>
