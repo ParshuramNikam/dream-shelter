@@ -55,7 +55,7 @@ import { useParams } from "react-router-dom";
           console.log("user detials changes success")
           console.log(change.doc);
         }
-      } )
+      } ) 
     }) 
     if(uid===localStorage.getItem('ds-user-uid')){
       setIsEditable(true); 
