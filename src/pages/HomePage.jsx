@@ -20,7 +20,7 @@ const HomePage = ({userDetails}) => {
           <Categories />
           <ExploreBlogs />
         </section>
-        <section>
+        <section className="grow">
           <CreatePost ishidden={true} userDetails={userDetails} />
           <PostsContainer />
         </section>

@@ -78,8 +78,12 @@ code {
 	}
   }
 
+
 /* Tailwind css below */
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+

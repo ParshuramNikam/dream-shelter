@@ -79,7 +79,7 @@ export default function PostQuestionPopup({ isOpen, setIsOpen, closeModal }) {
                                     onChange={(e) => setQuestion(e.target.value)}
                                 ></textarea>
                                 <textarea className="w-full border-2 rounded-lg p-2 mt-3 border-gray-500 text-black cursor-text p2 h-12"
-                                    placeholder='Seperate hashtags with ,'
+                                    placeholder='ex: college, Visa, Abroad Studies '
                                     value={questionCategoryList}
                                     onChange={(e) => setQuestionCategoryList(e.target.value)}
                                 ></textarea>

@@ -2,6 +2,7 @@ import NoPosts from "../UserProfile/NoPosts";
 import PostCard from "./PostCard";
 import { createContext, useEffect, useState, useContext } from "react";
 import { db } from "../../database/firebase.config";
+import QuestionLoadingSkeleton from "./QuestionLoadingSkeleton";
 
 const PostsContainer = () => {
   const [questionArray, setQuestionArray] = useState([]);
@@ -23,29 +24,31 @@ const PostsContainer = () => {
   }, []);
 
   return (
-    <section className="overflow-y-auto px-2">
-      {/* <NoPosts /> */}
+    questionArray.length>0
+    ? <section className="overflow-y-auto px-2 w-full">
+    {/* <NoPosts /> */}
 
-      {questionArray.map((questionDetails, index) => (
-        <PostCard
-          index={index}
-          questionId={questionDetails.docId}
-          question={questionDetails.oneDoc.question}
-          answers={questionDetails.oneDoc.answers}
-          questionAskedBy={questionDetails.oneDoc.questionAskedBy}
-          questionCategoryList={questionDetails.oneDoc.questionCategoryList}
-          likeCount={questionDetails.oneDoc.likeCount}
-          likedByUsers={questionDetails.oneDoc.likedByUsers}
-        />
-      ))}
+    {questionArray.map((questionDetails, index) => (
+      <PostCard
+        index={index}
+        questionId={questionDetails.docId}
+        question={questionDetails.oneDoc.question}
+        answers={questionDetails.oneDoc.answers}
+        questionAskedBy={questionDetails.oneDoc.questionAskedBy}
+        questionCategoryList={questionDetails.oneDoc.questionCategoryList}
+        likeCount={questionDetails.oneDoc.likeCount}
+        likedByUsers={questionDetails.oneDoc.likedByUsers}
+      />
+    ))}
 
-      {/* <PostCard/>
-            <PostCard/>
-            <PostCard/>
-            <PostCard/>
-            <PostCard/>
-            <PostCard/> */}
-    </section>
+    {/* <PostCard/>
+          <PostCard/>
+          <PostCard/>
+          <PostCard/>
+          <PostCard/>
+          <PostCard/> */}
+  </section>
+  :<QuestionLoadingSkeleton/>
   );
 };
 

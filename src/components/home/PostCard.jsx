@@ -264,13 +264,6 @@ const PostCard = ({
           </Menu>
         </div>
 
-        {/* Post image 👇 */}
-        <img
-          className="mt-3 object-cover w-full h-56 rounded-sm"
-          src="https://shortner-urls.herokuapp.com/OxyrAsn"
-          alt="Nature"
-        />
-
         {/* Post Question answer */}
         <div className="px-6 py-4">
           <Link to={"/question/" + questionId}>
@@ -349,15 +342,15 @@ const PostCard = ({
             </button>
           <button
             className="flex items-center justify-center hover:bg-gray-100 px-3 py-2 rounded-md cursor-pointer"
-            onClick={() => postBtnClickAction("share")}
-          >
-            <ShareIcon className="h-6 w-6 text-black hover:text-gray-600" />
-          </button>
-          <button
-            className="flex items-center justify-center hover:bg-gray-100 px-3 py-2 rounded-md cursor-pointer"
             onClick={() => postBtnClickAction("answer")}
           >
             <PencilAltIcon className="h-6 w-6 text-black hover:text-gray-600" />
+          </button>
+          <button
+            className="flex items-center justify-center hover:bg-gray-100 px-3 py-2 rounded-md cursor-pointer"
+            onClick={() => postBtnClickAction("share")}
+          >
+            <ShareIcon className="h-6 w-6 text-black hover:text-gray-600" />
           </button>
         </div>
 

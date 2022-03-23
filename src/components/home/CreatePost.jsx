@@ -23,9 +23,9 @@ function CreatePost({ ishidden,userDetails }) {
 
   return (
     <section
-      className={`w-100 ${
+      className={` ${
         ishidden ? "hidden lg:block" : "block"
-      }  px-3 py-5 m-2 bg-white border border-gray-200 rounded-lg overflow-hidden shadow-lg`}
+      }  px-3 py-5 m-2 bg-white border border-gray-200 rounded-lg overflow-hidden shadow-lg `}
     >
       <div className="flex gap-3 relative items-center ">
         <img
