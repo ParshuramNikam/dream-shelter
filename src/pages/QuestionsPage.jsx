@@ -1,5 +1,6 @@
 import React from 'react'
-import Question from '../components/slider-questions/AllQuestion'
+import AllQuestions from '../components/slider-questions/AllQuestion'
+import AllQuestion2 from '../components/slider-questions/AllQuestion2';
 import Welcome from '../components/slider-questions/Welcome'
 
 // Page to ask some queston to uer after succesfull signup :-
@@ -11,11 +12,12 @@ const QuestionsPage = () => {
   const [userFname, setUserFname] = React.useState("");
 
   return (
-    <UserFnameContext.Provider value={ {userFname, setUserFname} }>
+    <UserFnameContext.Provider value={{ userFname, setUserFname }}>
 
       <section className="flex">
         <Welcome />
-        <Question />
+        {/* <AllQuestions /> */}
+        <AllQuestion2 />
       </section>
 
     </UserFnameContext.Provider>

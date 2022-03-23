@@ -24,31 +24,35 @@ const PostsContainer = () => {
   }, []);
 
   return (
-    questionArray.length>0
-    ? <section className="overflow-y-auto px-2 w-full">
-    {/* <NoPosts /> */}
+    questionArray.length > 0
+      ? <section className="overflow-y-auto px-2 w-full">
+        {/* <NoPosts /> */}
+        
+        {questionArray.map((questionDetails, index) => (
+          <PostCard
+            index={index}
+            questionId={questionDetails.docId}
+            question={questionDetails.oneDoc.question}
+            answers={questionDetails.oneDoc.answers}
+            questionAskedBy={questionDetails.oneDoc.questionAskedBy}
+            questionCategoryList={questionDetails.oneDoc.questionCategoryList}
+            likeCount={questionDetails.oneDoc.likeCount}
+            likedByUsers={questionDetails.oneDoc.likedByUsers}
+          />
+        ))}
 
-    {questionArray.map((questionDetails, index) => (
-      <PostCard
-        index={index}
-        questionId={questionDetails.docId}
-        question={questionDetails.oneDoc.question}
-        answers={questionDetails.oneDoc.answers}
-        questionAskedBy={questionDetails.oneDoc.questionAskedBy}
-        questionCategoryList={questionDetails.oneDoc.questionCategoryList}
-        likeCount={questionDetails.oneDoc.likeCount}
-        likedByUsers={questionDetails.oneDoc.likedByUsers}
-      />
-    ))}
-
-    {/* <PostCard/>
+        {/* <PostCard/>
           <PostCard/>
           <PostCard/>
           <PostCard/>
           <PostCard/>
           <PostCard/> */}
-  </section>
-  :<QuestionLoadingSkeleton/>
+      </section>
+      : <>
+        <QuestionLoadingSkeleton />
+        <QuestionLoadingSkeleton />
+        <QuestionLoadingSkeleton />
+      </>
   );
 };
 

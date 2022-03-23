@@ -55,15 +55,15 @@ export default function EditInfoPopup({ isOpen, userDetails, setIsOpen, closeMod
           className="sm:mx-3 fixed z-10 overflow-y-scroll top-32 sm:top-5 w-full left-0 "
           onClose={closeModal}
         >
-          <div class="flex items-center justify-center min-height-100vh pt-4 pb-20 text-center sm:block sm:p-0">
-            <div class="fixed inset-0 transition-opacity">
-              <div class="absolute inset-0 bg-gray-900 opacity-75" />
+          <div className="flex items-center justify-center min-height-100vh pt-4 pb-20 text-center sm:block sm:p-0">
+            <div className="fixed inset-0 transition-opacity">
+              <div className="absolute inset-0 bg-gray-900 opacity-75" />
             </div>
-            <span class="hidden sm:inline-block sm:align-middle sm:h-screen">
+            <span className="hidden sm:inline-block sm:align-middle sm:h-screen">
               &#8203;
             </span>
             <div
-              class="m-3 p-5 inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all  sm:align-middle w-full sm:max-w-lg sm:w-full"
+              className="m-3 p-5 inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all  sm:align-middle w-full sm:max-w-lg sm:w-full"
               role="dialog"
               aria-modal="true"
               aria-labelledby="modal-headline"

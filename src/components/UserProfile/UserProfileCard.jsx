@@ -54,8 +54,11 @@ const UserProfileCard = ({ userInfo, edit, setfname }) => {
       // const uploadTask = await storageRef.put(file);
       await storageRef.put(file).on(firebase.storage.TaskEvent.STATE_CHANGED, async () => {
         let bannerImageURL = await storageRef.getDownloadURL();
+        // bannerImageURL.then((result) => {
+        //   console.log(result);
+        // });
         console.log(bannerImageURL);
-        setBannerUrl(`url(${userInfo.bannerURL})`);
+        setBannerUrl(`url(${bannerImageURL})`);
         await db
           .collection("Users")
           .doc(localStorage.getItem("ds-user-uid"))
@@ -64,6 +67,7 @@ const UserProfileCard = ({ userInfo, edit, setfname }) => {
           })
           .then(() => {
             console.log("banner image uploaded successfully");
+            // setBannerUrl()
           })
           .catch((error) => {
             console.log("storageerror", error);
@@ -170,7 +174,7 @@ const UserProfileCard = ({ userInfo, edit, setfname }) => {
               <span className="sr-only">Edit Profile</span>
               <input
                 type="file"
-                class="hidden"
+                className="hidden"
                 multiple="multiple"
                 accept="accept"
                 onChange={(e) => {

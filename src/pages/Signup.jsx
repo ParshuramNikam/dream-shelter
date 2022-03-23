@@ -121,6 +121,13 @@ function Signup() {
                                     interest: [],
                                     activityWantsToDo: [],
                                     emailVerified: true,
+                                    followed: 0,
+                                    followers: 0,
+                                    blogs: 0,
+                                    questionsAsked: 0,
+                                    collegeName: "",
+                                    bannerURL: "",
+                                    jobtitle: "",
                                     created: firebase.firestore.FieldValue.serverTimestamp(),
                                 })
                                 .then(() => {

@@ -32,6 +32,20 @@ const AllQuestion = () => {
   }, []);
 
   const nextBtnClickListner = () => {
+    if (index === 2 && fname==="") {
+      console.log("Please enter your first name");
+      notifyWarning("Please enter your first name >"+ fname+"<")
+      return;
+    }
+    else if (index === 2 && inputAnswers[1]==="") {
+      console.log("index 2 is here...");
+      notifyWarning("Please enter your first name")
+      return;
+    }
+    else if (index === 3) {
+      console.log("index 3 is here...");
+    }
+
     if (index !== lastQuestionIndex) {
       setIndex(index + 1);
     } else {
@@ -40,6 +54,16 @@ const AllQuestion = () => {
   };
 
   const prevBtnClickListner = () => {
+    if (index === 1) {
+      console.log("index 1 is here...");
+    }
+    else if (index === 2) {
+      console.log("index 2 is here...");
+    }
+    else if (index === 3) {
+      console.log("index 3 is here...");
+    }
+
     if (index !== 1) {
       setIndex(index - 1);
     } else {
@@ -91,17 +115,6 @@ const AllQuestion = () => {
     setInputAnswers(newArr);
   };
 
-  const checkBoxOnChangeHandler = (event, answerId) => {
-    const newArr = [...inputAnswers];
-    newArr[answerId] = event.target.value;
-    setInputAnswers(newArr);
-  };
-
-  // not used yet
-  const filterArr = async (removeItem, arr) => {
-    const filteredArrItems = await arr.filter((item) => item !== removeItem);
-    return filteredArrItems;
-  };
 
   // const toggleHandler = (item) => () => {
   //     setPeopleInfo((state) => ({
@@ -154,8 +167,8 @@ const AllQuestion = () => {
                       setUserFname(e.target.value);
                       setfnme(e.target.value);
                     }}
-                    // value={inputAnswers[0]}
-                    // onChange={(e) => inputOnChangeHandler(e, inputQuestions[0].id)}
+                  // value={inputAnswers[0]}
+                  // onChange={(e) => inputOnChangeHandler(e, inputQuestions[0].id)}
                   />
                 )}
               </UserFnameContext.Consumer>

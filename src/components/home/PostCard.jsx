@@ -1,6 +1,7 @@
 import { Fragment, useState, useEffect } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { useLocation } from "react-router-dom";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 import {
   BellIcon,
@@ -48,6 +49,10 @@ const PostCard = ({
 
   const [postOptions, setPostOptions] = useState([]);
   const [currentLikes, setCurrentLikes] = useState(likeCount);
+
+  // for clipboard
+  const [value, setValue] = useState("http://localhost:3000/question/" + questionId);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     if (
@@ -139,7 +144,7 @@ const PostCard = ({
         break;
       case "share":
         // setPostBtnClick({...postBtnClick, answer: !postBtnClick.answer});
-        alert("Share btn cliked");
+        alert("Increase share count only once");
         break;
       default:
         break;
@@ -184,8 +189,8 @@ const PostCard = ({
                 // src="https://shortner-urls.herokuapp.com/BeKgZyu"
                 src={
                   qAskedByUserDetails &&
-                  qAskedByUserDetails.userData &&
-                  qAskedByUserDetails.userData.photoURL
+                    qAskedByUserDetails.userData &&
+                    qAskedByUserDetails.userData.photoURL
                     ? qAskedByUserDetails.userData.photoURL
                     : "https://shortner-urls.herokuapp.com/BeKgZyu"
                 }
@@ -195,18 +200,18 @@ const PostCard = ({
               <div className="text-xs ml-2">
                 <p className="font-bold ">
                   {qAskedByUserDetails &&
-                  qAskedByUserDetails.userData &&
-                  qAskedByUserDetails.userData.fname &&
-                  qAskedByUserDetails.userData.lname
+                    qAskedByUserDetails.userData &&
+                    qAskedByUserDetails.userData.fname &&
+                    qAskedByUserDetails.userData.lname
                     ? qAskedByUserDetails.userData.fname +
-                      " " +
-                      qAskedByUserDetails.userData.lname
+                    " " +
+                    qAskedByUserDetails.userData.lname
                     : ""}
                 </p>
                 <p>
                   {qAskedByUserDetails &&
-                  qAskedByUserDetails.userData &&
-                  qAskedByUserDetails.userData.location
+                    qAskedByUserDetails.userData &&
+                    qAskedByUserDetails.userData.location
                     ? qAskedByUserDetails.userData.location
                     : ""}
                 </p>
@@ -271,12 +276,12 @@ const PostCard = ({
               {question ? question : ""}
             </div>
           </Link>
-          <p className="text-gray-700 text-base">
+          <div className="text-gray-700 text-base">
             {answers && answers[0] ? (
               <div>
                 {firstAnsGivenByUserDeatils &&
-                firstAnsGivenByUserDeatils.userData &&
-                firstAnsGivenByUserDeatils.userData.photoURL ? (
+                  firstAnsGivenByUserDeatils.userData &&
+                  firstAnsGivenByUserDeatils.userData.photoURL ? (
                   <>
                     <div className=" flex gap-3 ">
                       <img
@@ -301,7 +306,7 @@ const PostCard = ({
             ) : (
               "no answeres yet!!"
             )}
-          </p>
+          </div>
         </div>
 
         {/* Tages */}
@@ -324,40 +329,48 @@ const PostCard = ({
           >
             <span className="font-semibold">{currentLikes}</span> &nbsp;&nbsp;
             <HeartIcon
-              className={`h-6 w-6 text-black  ${
-                postBtnClick.like
-                  ? "fill-rose-600 text-rose-600 outline-none"
-                  : "hover:text-gray-600"
-              } `}
+              className={`h-6 w-6 text-black  ${postBtnClick.like
+                ? "fill-rose-600 text-rose-600 outline-none"
+                : "hover:text-gray-600"
+                } `}
             />
             {/* <p className="ml-2">{postBtnClick.like ? 'Unlike' : 'Like'}</p> */}
           </button>
-            <button
-              className="flex items-center justify-center hover:bg-gray-100 px-3 py-2 rounded-md cursor-pointer"
-              // onClick={() => postBtnClickAction("answer")}
-            >
-          <Link className="" to={"/question/" + questionId}>
+          <button
+            className="flex items-center justify-center hover:bg-gray-100 px-3 py-2 rounded-md cursor-pointer"
+          // onClick={() => postBtnClickAction("answer")}
+          >
+            <Link className="" to={"/question/" + questionId}>
               <ChatAlt2Icon className="h-6 w-6 text-black hover:text-gray-600" />
-          </Link>
-            </button>
+            </Link>
+          </button>
           <button
             className="flex items-center justify-center hover:bg-gray-100 px-3 py-2 rounded-md cursor-pointer"
             onClick={() => postBtnClickAction("answer")}
           >
             <PencilAltIcon className="h-6 w-6 text-black hover:text-gray-600" />
           </button>
-          <button
-            className="flex items-center justify-center hover:bg-gray-100 px-3 py-2 rounded-md cursor-pointer"
-            onClick={() => postBtnClickAction("share")}
+
+          <CopyToClipboard
+            options={{ message: "" }}
+            text={value}
+            onCopy={() => {
+              setCopied(true);
+              notifySuccess("Link copied to clipboard!")
+            }}
           >
-            <ShareIcon className="h-6 w-6 text-black hover:text-gray-600" />
-          </button>
+            <button
+              className="flex items-center justify-center hover:bg-gray-100 px-3 py-2 rounded-md cursor-pointer"
+              onClick={() => postBtnClickAction("share")}
+            >
+              <ShareIcon className="h-6 w-6 text-black hover:text-gray-600" />
+            </button>
+          </CopyToClipboard>
         </div>
 
         <div
-          className={`${
-            !postBtnClick.answer ? "hidden" : null
-          } transition-all duration-150 ease-linear m-3 border-t-2 border-t-gray-300`}
+          className={`${!postBtnClick.answer ? "hidden" : null
+            } transition-all duration-150 ease-linear m-3 border-t-2 border-t-gray-300`}
         >
           <textarea
             name="answerTextArea"

@@ -103,6 +103,13 @@ const UserAuthContextProvider = ({ children }) => {
             activityWantsToDo: [],
             emailVerified: false,
             photoURL: "https://firebasestorage.googleapis.com/v0/b/dream-shelter-cce6d.appspot.com/o/common%2Favatar.png?alt=media&token=72157de7-fdf6-4b11-a76a-623c61b4e0f9",
+            followed: 0,
+            followers: 0,
+            blogs: 0,
+            questionsAsked: 0,
+            collegeName: "",
+            bannerURL: "",
+            jobtitle: "",
             created: firebase.firestore.FieldValue.serverTimestamp(),
           })
           .then(() => {
@@ -130,7 +137,7 @@ const UserAuthContextProvider = ({ children }) => {
       .signInWithEmailAndPassword(email, password)
       .then((currentUser) => {
         if (!currentUser.user.emailVerified) {
-          return notifyWarning("Please, Do EMail verification!");
+          return notifyWarning("Please, Do email verification!");
         }
 
         //save data into db
