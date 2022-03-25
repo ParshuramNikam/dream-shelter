@@ -32,17 +32,18 @@ function Login() {
 		}
 
 		try {
-			const isSucessfullyLoggedIn = await logIn(email, password);
+			const redirectURL = await logIn(email, password);
 			// console.log(">>>>", isSucessfullyLoggedIn);
 			// console.log(">>>>", isSucessfullyLoggedIn===true);
-			if (isSucessfullyLoggedIn) {
+			if (redirectURL === 'signup-questions') {
+				history.push("/signup-questions")
+			}else if(redirectURL === 'login'){
+				history.push("/login")
+			}else if(redirectURL === 'home'){
 				history.push("/")
 			}
-			//  else {
-			// 	notifyError("some error occured while logging with email & password");
-			// 	return;
-			// }
 		} catch (error) {
+			notifyError("some error occured while logging with email & password");
 			return console.log(error)
 		}
 
@@ -75,7 +76,7 @@ function Login() {
 				// const query = await collection('Users').where('email', '==', res.user.email).get();
 				// if (res.user.email) {
 				await db
-					.collection("Users")
+					.collection("users")
 					.where("email", "==", res.user.email)
 					.get()
 					.then(async (snapshot) => {

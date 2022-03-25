@@ -51,7 +51,9 @@ const PostCard = ({
   const [currentLikes, setCurrentLikes] = useState(likeCount);
 
   // for clipboard
-  const [value, setValue] = useState("http://localhost:3000/question/" + questionId);
+  const [value, setValue] = useState(
+    "http://localhost:3000/question/" + questionId
+  );
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
@@ -63,12 +65,13 @@ const PostCard = ({
     }
 
     // userDetails of the user who asked this question
-    db.collection("Users")
-      .doc(questionAskedBy.toString())
+    db.collection("users")
+      .doc("PrAFinyKta5nDcwAWybe")
       .get()
       .then((userDetails) => {
-        const userData = userDetails.data();
-        const userId = userDetails.id;
+        console.log(userDetails.data());
+        const userData = userDetails.data()[questionAskedBy];
+        const userId = questionAskedBy;
         setQAskedByUserDetails({ userData, userId });
       })
       .catch((error) => {
@@ -103,39 +106,56 @@ const PostCard = ({
     btn = btn.toLowerCase();
     switch (btn) {
       case "like":
+        console.log(questionId);
         await setPostBtnClick({ ...postBtnClick, like: !postBtnClick.like });
         if (postBtnClick.like) {
           await setCurrentLikes(currentLikes - 1);
           await db
-            .collection("Questions")
-            .doc(questionId)
-            .update({
-              likedByUsers: firebase.firestore.FieldValue.arrayRemove(
-                localStorage.getItem("ds-user-uid")
-              ),
-            });
+            .collection("questions")
+            .doc("cIvPTU5LDcmCAQsq4nJO")
+            .update(
+              {
+                [questionId.concat(".likedByUsers")]:
+                  firebase.firestore.FieldValue.arrayRemove(
+                    localStorage.getItem("ds-user-uid")
+                  ),
+              },
+              { merge: true }
+            ).catch((e)=>{
+              console.log(e);
+            })
           await db
-            .collection("Questions")
-            .doc(questionId)
+            .collection("questions")
+            .doc("cIvPTU5LDcmCAQsq4nJO")
             .update({
-              likeCount: firebase.firestore.FieldValue.increment(-1),
-            });
+              [questionId.concat(".likeCount")]: firebase.firestore.FieldValue.increment(-1),
+            }).catch((e)=>{
+              console.log(e);
+            })
         } else {
           await setCurrentLikes(currentLikes + 1);
           await db
-            .collection("Questions")
-            .doc(questionId)
-            .update({
-              likedByUsers: firebase.firestore.FieldValue.arrayUnion(
-                localStorage.getItem("ds-user-uid")
-              ),
-            });
+            .collection("questions")
+            .doc("cIvPTU5LDcmCAQsq4nJO")
+            .update(
+              {
+                [questionId.concat(".likedByUsers")]:
+                  firebase.firestore.FieldValue.arrayUnion(
+                    localStorage.getItem("ds-user-uid")
+                  ),
+              },
+              { merge: true }
+            ).catch((e)=>{
+              console.log(e);
+            })
           await db
-            .collection("Questions")
-            .doc(questionId)
+            .collection("questions")
+            .doc('cIvPTU5LDcmCAQsq4nJO')
             .update({
-              likeCount: firebase.firestore.FieldValue.increment(1),
-            });
+              [questionId.concat(".likeCount")]: firebase.firestore.FieldValue.increment(1),
+            }).catch((e)=>{
+              console.log(e);
+            })
         }
         break;
       case "answer":
@@ -189,8 +209,8 @@ const PostCard = ({
                 // src="https://shortner-urls.herokuapp.com/BeKgZyu"
                 src={
                   qAskedByUserDetails &&
-                    qAskedByUserDetails.userData &&
-                    qAskedByUserDetails.userData.photoURL
+                  qAskedByUserDetails.userData &&
+                  qAskedByUserDetails.userData.photoURL
                     ? qAskedByUserDetails.userData.photoURL
                     : "https://shortner-urls.herokuapp.com/BeKgZyu"
                 }
@@ -200,18 +220,18 @@ const PostCard = ({
               <div className="text-xs ml-2">
                 <p className="font-bold ">
                   {qAskedByUserDetails &&
-                    qAskedByUserDetails.userData &&
-                    qAskedByUserDetails.userData.fname &&
-                    qAskedByUserDetails.userData.lname
+                  qAskedByUserDetails.userData &&
+                  qAskedByUserDetails.userData.fname &&
+                  qAskedByUserDetails.userData.lname
                     ? qAskedByUserDetails.userData.fname +
-                    " " +
-                    qAskedByUserDetails.userData.lname
+                      " " +
+                      qAskedByUserDetails.userData.lname
                     : ""}
                 </p>
                 <p>
                   {qAskedByUserDetails &&
-                    qAskedByUserDetails.userData &&
-                    qAskedByUserDetails.userData.location
+                  qAskedByUserDetails.userData &&
+                  qAskedByUserDetails.userData.location
                     ? qAskedByUserDetails.userData.location
                     : ""}
                 </p>
@@ -280,8 +300,8 @@ const PostCard = ({
             {answers && answers[0] ? (
               <div>
                 {firstAnsGivenByUserDeatils &&
-                  firstAnsGivenByUserDeatils.userData &&
-                  firstAnsGivenByUserDeatils.userData.photoURL ? (
+                firstAnsGivenByUserDeatils.userData &&
+                firstAnsGivenByUserDeatils.userData.photoURL ? (
                   <>
                     <div className=" flex gap-3 ">
                       <img
@@ -329,16 +349,17 @@ const PostCard = ({
           >
             <span className="font-semibold">{currentLikes}</span> &nbsp;&nbsp;
             <HeartIcon
-              className={`h-6 w-6 text-black  ${postBtnClick.like
-                ? "fill-rose-600 text-rose-600 outline-none"
-                : "hover:text-gray-600"
-                } `}
+              className={`h-6 w-6 text-black  ${
+                postBtnClick.like
+                  ? "fill-rose-600 text-rose-600 outline-none"
+                  : "hover:text-gray-600"
+              } `}
             />
             {/* <p className="ml-2">{postBtnClick.like ? 'Unlike' : 'Like'}</p> */}
           </button>
           <button
             className="flex items-center justify-center hover:bg-gray-100 px-3 py-2 rounded-md cursor-pointer"
-          // onClick={() => postBtnClickAction("answer")}
+            // onClick={() => postBtnClickAction("answer")}
           >
             <Link className="" to={"/question/" + questionId}>
               <ChatAlt2Icon className="h-6 w-6 text-black hover:text-gray-600" />
@@ -356,7 +377,7 @@ const PostCard = ({
             text={value}
             onCopy={() => {
               setCopied(true);
-              notifySuccess("Link copied to clipboard!")
+              notifySuccess("Link copied to clipboard!");
             }}
           >
             <button
@@ -369,8 +390,9 @@ const PostCard = ({
         </div>
 
         <div
-          className={`${!postBtnClick.answer ? "hidden" : null
-            } transition-all duration-150 ease-linear m-3 border-t-2 border-t-gray-300`}
+          className={`${
+            !postBtnClick.answer ? "hidden" : null
+          } transition-all duration-150 ease-linear m-3 border-t-2 border-t-gray-300`}
         >
           <textarea
             name="answerTextArea"

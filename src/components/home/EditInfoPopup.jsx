@@ -1,14 +1,14 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { faCircleCheck, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { db } from "../../database/firebase.config";
 import firebase from "firebase";
 
-export default function EditInfoPopup({ isOpen, userDetails, setIsOpen, closeModal }) {
+export default function EditInfoPopup({ isOpen, userDetails, setIsOpen, closeModal, setFetchData,fetchData }) {
   // const [question, setQuestion] = useState("");
-  const [fname, setfname] = useState(userDetails.fname ? userDetails.fname : "");
+  const [fname, setfname] = useState(userDetails.fname);
   const [lname, setlname] = useState(userDetails.lname ? userDetails.lname : "");
   const [profession, setprofession] = useState(userDetails.jobtitle ? userDetails.jobtitle : "");
   const [aboutYourself, setAboutYourself] = useState(userDetails.about ? userDetails.about : "");
@@ -16,20 +16,34 @@ export default function EditInfoPopup({ isOpen, userDetails, setIsOpen, closeMod
   // const [work, setwork] = useState(userDetails);
   const [college, setcollege] = useState(userDetails.collegeName ? userDetails.collegeName : "");
 
+  useEffect(() => {
+    setfname(userDetails.fname)
+    setlname(userDetails.lname)
+    setprofession(userDetails.jobTitle)
+    setAboutYourself(userDetails.about)
+    setaddress(userDetails.location)
+    setcollege(userDetails.collegeName)
+  }, [userDetails])
+  
+
   const submitHandler = async () => {
 
     await db
-      .collection("Users")
-      .doc(localStorage.getItem('ds-user-uid'))
+      .collection("users")
+      .doc('PrAFinyKta5nDcwAWybe')
       .update({
-        fname: fname,
-        lname: lname,
-        jobtitle: profession,
-        about: aboutYourself,
-        location: address,
-        collegeName: college  ,
-      })
+        // [localStorage.getItem('ds-user-uid')]:
+        [localStorage.getItem("ds-user-uid").concat(".fname")]: fname,
+        [localStorage.getItem("ds-user-uid").concat(".lname")]: lname,
+        [localStorage.getItem("ds-user-uid").concat(".location")]: address,
+        [localStorage.getItem("ds-user-uid").concat(".jobTitle")]: profession,
+        [localStorage.getItem("ds-user-uid").concat(".collegeName")]: college,
+        [localStorage.getItem("ds-user-uid").concat(".about")]: aboutYourself,
+
+      },{merge: true}
+      )
       .then(() => {
+        setFetchData(!fetchData)
         console.log("User about me section updated");
       })
       .catch((error) => {
@@ -52,10 +66,10 @@ export default function EditInfoPopup({ isOpen, userDetails, setIsOpen, closeMod
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog
           as="div"
-          className="sm:mx-3 fixed z-10 overflow-y-scroll top-32 sm:top-5 w-full left-0 "
+          className="sm:mx-3 fixed z-10 overflow-y-scroll top-12 sm:top-5 w-full left-0 "
           onClose={closeModal}
         >
-          <div className="flex items-center justify-center min-height-100vh pt-4 pb-20 text-center sm:block sm:p-0">
+          <div className="flex items-center justify-center  pt-4 pb-20 text-center sm:block sm:p-0 overflow-auto">
             <div className="fixed inset-0 transition-opacity">
               <div className="absolute inset-0 bg-gray-900 opacity-75" />
             </div>

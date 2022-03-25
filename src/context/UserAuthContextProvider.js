@@ -94,10 +94,15 @@ const UserAuthContextProvider = ({ children }) => {
 
         console.log(res);
         console.log("Successfully Registered !");
+        const mydocID=res.user.uid.toString();
         await db
-          .collection("Users")
-          .doc(res.user.uid)
-          .set({
+          .collection("users")
+          .doc('PrAFinyKta5nDcwAWybe')
+          .set(
+          {
+            [res.user.uid]:{
+            fname: "",
+            lname: "",
             email: email,
             interest: [],
             activityWantsToDo: [],
@@ -105,13 +110,17 @@ const UserAuthContextProvider = ({ children }) => {
             photoURL: "https://firebasestorage.googleapis.com/v0/b/dream-shelter-cce6d.appspot.com/o/common%2Favatar.png?alt=media&token=72157de7-fdf6-4b11-a76a-623c61b4e0f9",
             followed: 0,
             followers: 0,
-            blogs: 0,
-            questionsAsked: 0,
+            noOfBlogs: 0,
+            noOfQuestionsAsked: 0,
             collegeName: "",
             bannerURL: "",
-            jobtitle: "",
-            created: firebase.firestore.FieldValue.serverTimestamp(),
-          })
+            jobTitle: "",
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            isSignupQuestionSubmitted: false,
+            location: "",
+            status: "",
+            }
+          }, { merge: true})
           .then(() => {
             console.log("User added in firestore");
           })
@@ -123,7 +132,7 @@ const UserAuthContextProvider = ({ children }) => {
         localStorage.setItem("ds-user-uid", uid);
 
         notifySuccess("Signup Successful");
-        return "signup-questions";
+        return "login";
       })
       .catch((error) => {
         errorHandler(error);
@@ -136,9 +145,16 @@ const UserAuthContextProvider = ({ children }) => {
     return auth
       .signInWithEmailAndPassword(email, password)
       .then((currentUser) => {
-        if (!currentUser.user.emailVerified) {
-          return notifyWarning("Please, Do email verification!");
-        }
+        //we need to check this...
+        // if (!currentUser.user.emailVerified) {
+        //   return notifyWarning("Please, Do email verification!");
+        // } 
+        db.collection('users').get().then(snapshot=>{
+          console.log(snapshot);
+          snapshot.docs.forEach(doc=>{
+            console.log(doc.data());
+          })
+        })
 
         //save data into db
         if (
@@ -148,13 +164,17 @@ const UserAuthContextProvider = ({ children }) => {
           console.log(
             "Successfully Logged In ! - user : " + currentUser.user.uid
           );
-          return true;
+          if(!currentUser.user.isSignupQuestionSubmitted){
+            return "signup-questions"
+          }else{
+            return "home"
+          }
         } else {
           // enqueueSnackbar('Error, Try again later !', {
           //     variant: 'error',
           // });
           notifyError("Error, Try again later !");
-          return false;
+          return "login";
         }
       })
       .catch((error) => {
@@ -178,13 +198,14 @@ const UserAuthContextProvider = ({ children }) => {
   const logOut = () => {
     return auth.signOut().then(() => {
       notifySuccess("Signout Successful");
-      localStorage.removeItem('ds-user-uid')
+      // localStorage.removeItem('ds-user-uid')
     });
   };
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
       setUser(currentUser);
+      console.log("current user",currentUser);
       console.log("running");
     });
 

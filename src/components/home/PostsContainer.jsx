@@ -5,54 +5,63 @@ import { db } from "../../database/firebase.config";
 import QuestionLoadingSkeleton from "./QuestionLoadingSkeleton";
 
 const PostsContainer = () => {
+  const [questionIds, setQuestionIds] = useState([]);
   const [questionArray, setQuestionArray] = useState([]);
   useEffect(() => {
-    db.collection("Questions")
-      .orderBy("createdAt", "desc")
+    db.collection("questions")
+      .doc("cIvPTU5LDcmCAQsq4nJO")
+      // .orderBy("createdAt", "desc")
       .get()
-      .then((snapshot) => {
-        snapshot.docs.forEach(async (doc) => {
-          console.log(doc.id);
-          const oneDoc = await doc.data();
-          const docId = await doc.id;
-          console.log(oneDoc, docId);
-          await setQuestionArray((questionArray) =>
-            questionArray.concat({ oneDoc, docId })
-          );
+      .then(async (snapshot) => {
+        console.log(snapshot.data());
+        await setQuestionIds(Object.keys(snapshot.data()));
+        await Object.keys(snapshot.data()).forEach((id) => {
+          setQuestionArray((prevQuestionArray) => [
+            ...prevQuestionArray,
+            { questionId: id, questionDetails: snapshot.data()[id] },
+          ]);
         });
+        // snapshot.docs.forEach(async (doc) => {
+        //   let userData = [];
+        // 		snapshot.docs.forEach((doc) => {
+        // 			console.log(doc.data());
+        // 			userData = [{ ...doc.data(), id: doc.id }];
+        // 		});
+        //     console.log(userData)
+        // });
       });
   }, []);
 
-  return (
-    questionArray.length > 0
-      ? <section className="overflow-y-auto px-2 w-full">
-        {/* <NoPosts /> */}
-        
-        {questionArray.map((questionDetails, index) => (
-          <PostCard
-            index={index}
-            questionId={questionDetails.docId}
-            question={questionDetails.oneDoc.question}
-            answers={questionDetails.oneDoc.answers}
-            questionAskedBy={questionDetails.oneDoc.questionAskedBy}
-            questionCategoryList={questionDetails.oneDoc.questionCategoryList}
-            likeCount={questionDetails.oneDoc.likeCount}
-            likedByUsers={questionDetails.oneDoc.likedByUsers}
-          />
-        ))}
+  return questionArray.length > 0 ? (
+    <section className="overflow-y-auto px-2 w-full">
+      {/* <NoPosts /> */}
 
-        {/* <PostCard/>
+      {questionArray.map((question, index) => (
+        <PostCard
+          index={index}
+          questionId={question.questionId}
+          question={question.questionDetails.question}
+          answers={question.questionDetails.answers}
+          questionAskedBy={question.questionDetails.questionAskedBy}
+          questionCategoryList={question.questionDetails.questionCategoryList}
+          likeCount={question.questionDetails.likeCount}
+          likedByUsers={question.questionDetails.likedByUsers}
+        />
+      ))}
+
+      {/* <PostCard/>
           <PostCard/>
           <PostCard/>
           <PostCard/>
           <PostCard/>
           <PostCard/> */}
-      </section>
-      : <>
-        <QuestionLoadingSkeleton />
-        <QuestionLoadingSkeleton />
-        <QuestionLoadingSkeleton />
-      </>
+    </section>
+  ) : (
+    <>
+      <QuestionLoadingSkeleton />
+      <QuestionLoadingSkeleton />
+      <QuestionLoadingSkeleton />
+    </>
   );
 };
 

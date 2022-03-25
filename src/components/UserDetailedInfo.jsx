@@ -20,7 +20,7 @@ function UserDetailedInfo({ userInfo, edit }) {
         <ul className="flex justify-evenly text-center">
           <li className=" cursor-pointer border-r pr-3 border-gray-600">
             <span className="profile-stat-count text-3xl font-bold text-gray-800 hover:text-cyan-700">
-              {userInfo.questionsAsked && userInfo.questionsAsked}
+              {userInfo.noOfQuestionsAsked && userInfo.noOfQuestionsAsked}
             </span>{" "}
             Posts
           </li>
