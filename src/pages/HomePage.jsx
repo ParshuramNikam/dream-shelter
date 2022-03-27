@@ -22,7 +22,7 @@ const HomePage = ({userDetails}) => {
         </section>
         <section className="grow">
           <CreatePost ishidden={true} userDetails={userDetails} />
-          <PostsContainer />
+          <PostsContainer userDetails={userDetails} />
         </section>
         <section>
           <SuggestedUsers />

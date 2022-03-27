@@ -94,33 +94,37 @@ const UserAuthContextProvider = ({ children }) => {
 
         console.log(res);
         console.log("Successfully Registered !");
-        const mydocID=res.user.uid.toString();
+        const mydocID = res.user.uid.toString();
         await db
           .collection("users")
-          .doc('PrAFinyKta5nDcwAWybe')
+          .doc("PrAFinyKta5nDcwAWybe")
           .set(
-          {
-            [res.user.uid]:{
-            fname: "",
-            lname: "",
-            email: email,
-            interest: [],
-            activityWantsToDo: [],
-            emailVerified: false,
-            photoURL: "https://firebasestorage.googleapis.com/v0/b/dream-shelter-cce6d.appspot.com/o/common%2Favatar.png?alt=media&token=72157de7-fdf6-4b11-a76a-623c61b4e0f9",
-            followed: 0,
-            followers: 0,
-            noOfBlogs: 0,
-            noOfQuestionsAsked: 0,
-            collegeName: "",
-            bannerURL: "",
-            jobTitle: "",
-            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-            isSignupQuestionSubmitted: false,
-            location: "",
-            status: "",
-            }
-          }, { merge: true})
+            {
+              [res.user.uid]: {
+                fname: "",
+                lname: "",
+                email: email,
+                interest: [],
+                activityWantsToDo: [],
+                emailVerified: false,
+                photoURL:
+                  "https://firebasestorage.googleapis.com/v0/b/dream-shelter-cce6d.appspot.com/o/common%2Favatar.png?alt=media&token=72157de7-fdf6-4b11-a76a-623c61b4e0f9",
+                followed: 0,
+                followers: 0,
+                noOfBlogs: 0,
+                noOfQuestionsAsked: 0,
+                collegeName: "",
+                bannerURL: "",
+                jobTitle: "",
+                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                isSignupQuestionSubmitted: false,
+                location: "",
+                status: "",
+                notifications: [],
+              },
+            },
+            { merge: true }
+          )
           .then(() => {
             console.log("User added in firestore");
           })
@@ -148,13 +152,15 @@ const UserAuthContextProvider = ({ children }) => {
         //we need to check this...
         // if (!currentUser.user.emailVerified) {
         //   return notifyWarning("Please, Do email verification!");
-        // } 
-        db.collection('users').get().then(snapshot=>{
-          console.log(snapshot);
-          snapshot.docs.forEach(doc=>{
-            console.log(doc.data());
-          })
-        })
+        // }
+        db.collection("users")
+          .get()
+          .then((snapshot) => {
+            console.log(snapshot);
+            snapshot.docs.forEach((doc) => {
+              console.log(doc.data());
+            });
+          });
 
         //save data into db
         if (
@@ -164,10 +170,10 @@ const UserAuthContextProvider = ({ children }) => {
           console.log(
             "Successfully Logged In ! - user : " + currentUser.user.uid
           );
-          if(!currentUser.user.isSignupQuestionSubmitted){
-            return "signup-questions"
-          }else{
-            return "home"
+          if (!currentUser.user.isSignupQuestionSubmitted) {
+            return "signup-questions";
+          } else {
+            return "home";
           }
         } else {
           // enqueueSnackbar('Error, Try again later !', {
@@ -189,10 +195,7 @@ const UserAuthContextProvider = ({ children }) => {
 
     // let isSucessfullyLoggedIn = false;
 
-    return firebase
-      .auth()
-      .signInWithPopup(provider)
-
+    return firebase.auth().signInWithPopup(provider);
   };
 
   const logOut = () => {
@@ -205,7 +208,7 @@ const UserAuthContextProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
       setUser(currentUser);
-      console.log("current user",currentUser);
+      console.log("current user", currentUser);
       console.log("running");
     });
 

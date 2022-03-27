@@ -27,7 +27,7 @@ import OneQuestionPage from "./pages/OneQuestionPage";
 
 function App() {
   const [userDetails, setUserDetails] = useState({});
-  // const { user } = useUserAuth();
+  // const { setUser } = useUserAuth();
 
   async function getCurrentUserDetails() {
     const userid = localStorage.getItem("ds-user-uid");
@@ -38,6 +38,7 @@ function App() {
         await snapshot.docs.forEach((doc) => {
           if (doc.data()[userid]) {
             setUserDetails({ ...doc.data()[userid], id: doc.id });
+            // setUser({ ...doc.data()[userid], id: doc.id });
             console.log(doc.data()[userid]);
           }
         });

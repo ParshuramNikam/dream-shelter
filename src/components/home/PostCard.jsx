@@ -21,6 +21,8 @@ import { Link } from "react-router-dom";
 import { db } from "../../database/firebase.config";
 import firebase from "firebase";
 import { notifySuccess, notifyWarning } from "../../utils/reactToast.js";
+import { useUserAuth } from "../../context/UserAuthContextProvider";
+import { createUID } from "../../utils/createUID";
 
 const PostCard = ({
   index,
@@ -31,6 +33,7 @@ const PostCard = ({
   questionCategoryList,
   likeCount,
   likedByUsers,
+  userDetails,
 }) => {
   const location = useLocation();
 
@@ -41,6 +44,7 @@ const PostCard = ({
   });
 
   const [signedInUserAnswer, setSignedInUserAnswer] = useState("");
+  const { user } = useUserAuth();
 
   // Question asked by user details
   const [qAskedByUserDetails, setQAskedByUserDetails] = useState(null);
@@ -121,17 +125,42 @@ const PostCard = ({
                   ),
               },
               { merge: true }
-            ).catch((e)=>{
+            )
+            .catch((e) => {
               console.log(e);
-            })
+            });
           await db
             .collection("questions")
             .doc("cIvPTU5LDcmCAQsq4nJO")
             .update({
-              [questionId.concat(".likeCount")]: firebase.firestore.FieldValue.increment(-1),
-            }).catch((e)=>{
-              console.log(e);
+              [questionId.concat(".likeCount")]:
+                firebase.firestore.FieldValue.increment(-1),
             })
+            .catch((e) => {
+              console.log(e);
+            });
+
+          await db
+            .collection("users")
+            .doc("PrAFinyKta5nDcwAWybe")
+            .update({
+              [questionAskedBy.concat(".notifications")]:
+                firebase.firestore.FieldValue.arrayRemove({
+                  id: createUID(),
+                  type: "like",
+                  userId: user.uid,
+                  desc: "Liked your question",
+                  fname: userDetails.fname,
+                  lname: userDetails.lname,
+                  photoURL: userDetails.photoURL,
+                  location: userDetails.location,
+                  questionId: questionId,
+                  question: question,
+                }),
+            })
+            .catch((er) => {
+              console.log(er);
+            });
         } else {
           await setCurrentLikes(currentLikes + 1);
           await db
@@ -145,17 +174,43 @@ const PostCard = ({
                   ),
               },
               { merge: true }
-            ).catch((e)=>{
+            )
+            .catch((e) => {
               console.log(e);
-            })
+            });
           await db
             .collection("questions")
-            .doc('cIvPTU5LDcmCAQsq4nJO')
+            .doc("cIvPTU5LDcmCAQsq4nJO")
             .update({
-              [questionId.concat(".likeCount")]: firebase.firestore.FieldValue.increment(1),
-            }).catch((e)=>{
-              console.log(e);
+              [questionId.concat(".likeCount")]:
+                firebase.firestore.FieldValue.increment(1),
             })
+            .catch((e) => {
+              console.log(e);
+            });
+
+          console.log("questionAskedByUser " + questionAskedBy);
+          await db
+            .collection("users")
+            .doc("PrAFinyKta5nDcwAWybe")
+            .update({
+              [questionAskedBy.concat(".notifications")]: {
+                [createUID()]: {
+                  type: "like",
+                  userId: user.uid,
+                  desc: "Liked your question",
+                  fname: userDetails.fname,
+                  lname: userDetails.lname,
+                  photoURL: userDetails.photoURL,
+                  location: userDetails.location,
+                  questionId: questionId,
+                  question: question,
+                },
+              },
+            })
+            .catch((er) => {
+              console.log(er);
+            });
         }
         break;
       case "answer":

@@ -4,7 +4,7 @@ import { createContext, useEffect, useState, useContext } from "react";
 import { db } from "../../database/firebase.config";
 import QuestionLoadingSkeleton from "./QuestionLoadingSkeleton";
 
-const PostsContainer = () => {
+const PostsContainer = ({userDetails}) => {
   const [questionIds, setQuestionIds] = useState([]);
   const [questionArray, setQuestionArray] = useState([]);
   useEffect(() => {
@@ -39,6 +39,7 @@ const PostsContainer = () => {
       {questionArray.map((question, index) => (
         <PostCard
           index={index}
+          userDetails={userDetails}
           questionId={question.questionId}
           question={question.questionDetails.question}
           answers={question.questionDetails.answers}
