@@ -7,9 +7,9 @@ import ChatBox from "../components/home/homechatbox/ChatBox";
 import CreatePost from "../components/home/CreatePost";
 import Footer from "../components/Footer";
 import { useUserAuth } from "../context/UserAuthContextProvider";
+import { useState } from "react";
 
-const HomePage = ({userDetails}) => {
-
+const HomePage = ({ userDetails,setRefreshPost,refreshPost }) => {
   const { user } = useUserAuth();
   console.log(">>", user && user.email);
 
@@ -21,8 +21,18 @@ const HomePage = ({userDetails}) => {
           <ExploreBlogs />
         </section>
         <section className="grow">
-          <CreatePost ishidden={true} userDetails={userDetails} />
-          <PostsContainer userDetails={userDetails} />
+          <CreatePost
+            ishidden={true}
+            userDetails={userDetails}
+            refreshPost={refreshPost}
+            setRefreshPost={setRefreshPost}
+          />
+          <PostsContainer
+            userDetails={userDetails}
+            refreshPost={refreshPost}
+            isProfilePage={false}
+            setRefreshPost={setRefreshPost}
+          />
         </section>
         <section>
           <SuggestedUsers />

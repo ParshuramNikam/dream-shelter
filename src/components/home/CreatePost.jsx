@@ -10,7 +10,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import PostQuestionPopup from "./PostQuestionPopup";
 import { Fragment } from "react";
 
-function CreatePost({ ishidden,userDetails }) {
+function CreatePost({ ishidden, userDetails, refreshPost, setRefreshPost }) {
   let [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
@@ -30,7 +30,11 @@ function CreatePost({ ishidden,userDetails }) {
       <div className="flex gap-3 relative items-center ">
         <img
           className="h-12 w-12 rounded-full"
-          src={userDetails.photoURL !== "" ? userDetails.photoURL:"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" }
+          src={
+            userDetails.photoURL !== ""
+              ? userDetails.photoURL
+              : "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+          }
           alt=""
         />
         <div
@@ -44,6 +48,8 @@ function CreatePost({ ishidden,userDetails }) {
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         closeModal={closeModal}
+        refreshPost={refreshPost}
+        setRefreshPost={setRefreshPost}
       />
     </section>
   );

@@ -27,6 +27,7 @@ import OneQuestionPage from "./pages/OneQuestionPage";
 
 function App() {
   const [userDetails, setUserDetails] = useState({});
+  const [refreshPost, setRefreshPost] = useState(true);
   // const { setUser } = useUserAuth();
 
   async function getCurrentUserDetails() {
@@ -55,7 +56,7 @@ function App() {
   }, []);
 
   const compoentsList = [
-    { path: "/", component: <HomePage userDetails={userDetails} /> },
+    { path: "/", component: <HomePage userDetails={userDetails} refreshPost={refreshPost} setRefreshPost={setRefreshPost} /> },
     {
       path: "/question/:questionId",
       component: <OneQuestionPage userDetails={userDetails} />,
@@ -86,7 +87,7 @@ function App() {
           {/* Components with page layout */}
           {compoentsList.map((component, index) => (
             <Route exact path={component.path} key={index}>
-              <PageLayout userDetails={userDetails}>
+              <PageLayout userDetails={userDetails} setRefreshPost={setRefreshPost} refreshPost={refreshPost} >
                 {component.component}
               </PageLayout>
             </Route>

@@ -20,7 +20,7 @@ const navBarItems = [
   { title: "BookMarks", icon: "BookmarkAltIcon", path: "/bookmarks" },
 ];
 
-const Navbar = ({userDetails}) => {
+const Navbar = ({ userDetails, refreshPost, setRefreshPost }) => {
   const [toggleSearchBox, setToggleSearchBox] = useState(false);
 
   const { user, logOut } = useUserAuth();
@@ -28,10 +28,12 @@ const Navbar = ({userDetails}) => {
   const history = useHistory();
 
   const logOutHandler = () => {
-    logOut().then(() => {
-      history.push("/login");
-    }).catch((err) => alert("Signout Error : " + err))
-  }
+    logOut()
+      .then(() => {
+        history.push("/login");
+      })
+      .catch((err) => alert("Signout Error : " + err));
+  };
 
   return (
     <>
@@ -64,8 +66,9 @@ const Navbar = ({userDetails}) => {
                   setToggleSearchBox(!toggleSearchBox);
                   console.log("toggle search box is " + !toggleSearchBox);
                 }}
-                className={`lg:hidden ${toggleSearchBox ? "hidden" : ""
-                  } bg-gray-200 ml-2  p-1.5 rounded border-2 bordler-gray-500 text-gray-800 m-1.5 focus:outline-none`}
+                className={`lg:hidden ${
+                  toggleSearchBox ? "hidden" : ""
+                } bg-gray-200 ml-2  p-1.5 rounded border-2 bordler-gray-500 text-gray-800 m-1.5 focus:outline-none`}
               >
                 <SearchIcon className=" text-gray-600 h-4 w-4 stroke-2 stroke-black k" />
               </button>
@@ -73,8 +76,9 @@ const Navbar = ({userDetails}) => {
           </div>
 
           <div
-            className={`my-auto ${toggleSearchBox ? "block w-100 mx-auto" : "hidden"
-              } lg:block`}
+            className={`my-auto ${
+              toggleSearchBox ? "block w-100 mx-auto" : "hidden"
+            } lg:block`}
           >
             <NavSearchBar
               toggleSearchBox={toggleSearchBox}
@@ -91,19 +95,25 @@ const Navbar = ({userDetails}) => {
                   title={item.title}
                   icon={item.icon}
                   path={item.path}
+                  refreshPost={refreshPost}
+                  setRefreshPost={setRefreshPost}
                 />
               ))}
             </div>
 
             {/* Profile dropdown */}
-            {
-              user && <Menu as="div" className="ml-3 relative">
+            {user && (
+              <Menu as="div" className="ml-3 relative">
                 <div>
                   <Menu.Button className="bg-gray-200 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                     <span className="sr-only">Open user menu</span>
                     <img
                       className="h-10 w-10 rounded-full"
-                      src={userDetails.photoURL !== "" ? userDetails.photoURL:"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" }
+                      src={
+                        userDetails.photoURL !== ""
+                          ? userDetails.photoURL
+                          : "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      }
                       alt=""
                     />
                   </Menu.Button>
@@ -121,7 +131,9 @@ const Navbar = ({userDetails}) => {
                     <Menu.Item>
                       {({ active }) => (
                         <Link
-                          to={`/myprofile/${localStorage.getItem('ds-user-uid')}`}
+                          to={`/myprofile/${localStorage.getItem(
+                            "ds-user-uid"
+                          )}`}
                           className={classNames(
                             active ? "bg-gray-100" : "",
                             "block px-4 py-2 text-sm text-gray-700"
@@ -147,7 +159,7 @@ const Navbar = ({userDetails}) => {
                   </Menu.Items>
                 </Transition>
               </Menu>
-            }
+            )}
           </div>
         </div>
       </nav>

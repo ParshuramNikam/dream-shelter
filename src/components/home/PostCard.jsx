@@ -59,6 +59,8 @@ const PostCard = ({
     "http://localhost:3000/question/" + questionId
   );
   const [copied, setCopied] = useState(false);
+  const [removeNotification, setRemoveNotification] = useState([]);
+  const [tempNotificationArray, setTempNotificationArray] = useState([]);
 
   useEffect(() => {
     if (
@@ -140,26 +142,77 @@ const PostCard = ({
               console.log(e);
             });
 
+          // await db
+          //   .collection("users")
+          //   .doc("PrAFinyKta5nDcwAWybe")
+          //   .update({
+          //     [questionAskedBy.concat(".notifications")]:
+          //       firebase.firestore.FieldValue.arrayRemove({
+          //         id: createUID(),
+          //         type: "like",
+          //         userId: user.uid,
+          //         desc: "Liked your question",
+          //         fname: userDetails.fname,
+          //         lname: userDetails.lname,
+          //         photoURL: userDetails.photoURL,
+          //         location: userDetails.location,
+          //         questionId: questionId,
+          //         question: question,
+          //       }),
+          //   })
+          //   .catch((er) => {
+          //     console.log(er);
+          //   });
+
+          //get user notification
           await db
             .collection("users")
             .doc("PrAFinyKta5nDcwAWybe")
-            .update({
-              [questionAskedBy.concat(".notifications")]:
-                firebase.firestore.FieldValue.arrayRemove({
-                  id: createUID(),
-                  type: "like",
-                  userId: user.uid,
-                  desc: "Liked your question",
-                  fname: userDetails.fname,
-                  lname: userDetails.lname,
-                  photoURL: userDetails.photoURL,
-                  location: userDetails.location,
-                  questionId: questionId,
-                  question: question,
-                }),
+            .get()
+            .then((snapshot) => {
+              console.log(snapshot.data()[questionAskedBy].notifications);
+              // setTempNotificationArray(
+              //   snapshot
+              //     .data()
+              //     [questionAskedBy].notifications.filter((notification) => {
+              //       return (
+              //         notification.type !== "like" &&
+              //         notification.questionId !== questionId &&
+              //         notification.userId !== user.uid
+              //       );
+              //     })
+              snapshot
+                .data()
+                [questionAskedBy].notifications.forEach(
+                  async (notification) => {
+                    if (
+                      notification.type === "like" &&
+                      notification.questionId === questionId &&
+                      notification.userId === user.uid
+                    ) {
+                      setRemoveNotification((prevRemoveNotication) => [
+                        ...prevRemoveNotication,
+                        notification,
+                      ]);
+                    }
+                  }
+                )
             })
-            .catch((er) => {
-              console.log(er);
+            .then(() => {
+              console.log("remove this : ", removeNotification);
+              db.collection("user")
+                .doc("PrAFinyKta5nDcwAWybe")
+                .update(
+                  {
+                    [questionAskedBy.concat(".notifications")]:
+                      firebase.firestore.FieldValue.arrayRemove(removeNotification[0])
+                  },
+                  { merge: true }
+                );
+              
+            })
+            .catch((e) => {
+              console.log(e);
             });
         } else {
           await setCurrentLikes(currentLikes + 1);
@@ -194,8 +247,9 @@ const PostCard = ({
             .collection("users")
             .doc("PrAFinyKta5nDcwAWybe")
             .update({
-              [questionAskedBy.concat(".notifications")]: {
-                [createUID()]: {
+              [questionAskedBy.concat(".notifications")]:
+                firebase.firestore.FieldValue.arrayUnion({
+                  notificationId: createUID(),
                   type: "like",
                   userId: user.uid,
                   desc: "Liked your question",
@@ -205,8 +259,7 @@ const PostCard = ({
                   location: userDetails.location,
                   questionId: questionId,
                   question: question,
-                },
-              },
+                }),
             })
             .catch((er) => {
               console.log(er);

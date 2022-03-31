@@ -1,16 +1,22 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { db } from "../../database/firebase.config";
 import { createUID } from "../../utils/createUID";
 import firebase from "firebase";
 
-export default function PostQuestionPopup({ isOpen, setIsOpen, closeModal }) {
+export default function PostQuestionPopup({
+  isOpen,
+  setIsOpen,
+  closeModal,
+  setRefreshPost,
+  refreshPost,
+}) {
   const [question, setQuestion] = useState("");
-
   const [questionCategoryList, setQuestionCategoryList] = useState("");
+
   const submitHandler = () => {
     if (question === "") {
       alert("Please enter a question.");
@@ -20,6 +26,8 @@ export default function PostQuestionPopup({ isOpen, setIsOpen, closeModal }) {
     setTimeout(async () => {
       alert("Your Question has been submitted : " + question);
       const questionID = await createUID();
+      console.log("refresh post " + refreshPost);
+      setRefreshPost(!refreshPost);
       await db
         .collection("questions")
         .doc("cIvPTU5LDcmCAQsq4nJO")
@@ -44,17 +52,21 @@ export default function PostQuestionPopup({ isOpen, setIsOpen, closeModal }) {
           console.log(error);
         });
       //to increase noOfQuestionsAsked in user collection
-      await db.collection("users").doc("PrAFinyKta5nDcwAWybe").update({
-        [localStorage.getItem('ds-user-uid').concat(".noOfQuestionsAsked")]: firebase.firestore.FieldValue.increment(1),
-      }).then(()=>{
-        console.log("count updated successfully")
-
-      })
-      .catch((e)=>{
-        console.log(e);
-      })
+      await db
+        .collection("users")
+        .doc("PrAFinyKta5nDcwAWybe")
+        .update({
+          [localStorage.getItem("ds-user-uid").concat(".noOfQuestionsAsked")]:
+            firebase.firestore.FieldValue.increment(1),
+        })
+        .then(() => {
+          console.log("count updated successfully");
+        })
+        .catch((e) => {
+          console.log(e);
+        });
       setQuestion("");
-      setQuestionCategoryList("")
+      setQuestionCategoryList("");
     }, 300);
   };
 

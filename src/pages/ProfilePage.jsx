@@ -15,6 +15,7 @@ import { useParams } from "react-router-dom";
 const ProfilePage = ({ edit, userDetails }) => {
   const { uid } = useParams();
   const [isEditable, setIsEditable] = useState(false);
+  const [refreshPost,setRefreshPost]=useState(true);
 
   useEffect(() => {
     if (uid === localStorage.getItem("ds-user-uid")) {
@@ -42,7 +43,7 @@ const ProfilePage = ({ edit, userDetails }) => {
                   userDetails={userDetails}
                 />
               )}
-              <PostsContainer />
+              <PostsContainer isProfilePage={true} userDetails={userDetails} refreshPost={refreshPost} />
             </section>
           </section>
         </>

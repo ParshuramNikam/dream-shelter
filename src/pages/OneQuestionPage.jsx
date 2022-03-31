@@ -68,7 +68,6 @@ const OneQuestionPage = ({ question, answers }) => {
             console.log(uniqueIds)
           uniqueIds.map((userId) => {
             db.collection("Users")
-              .doc(userId)
               .get()
               .then(async (doc) => {
                 const userData = await doc.data();
