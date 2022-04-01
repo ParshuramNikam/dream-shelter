@@ -83,15 +83,15 @@ function Signup() {
         // const query = await collection('Users').where('email', '==', res.user.email).get();
         // if (res.user.email) {
         await db
-          .collection("Users")
-          .where("email", "==", res.user.email)
+          .collection("users")
+         .doc('PrAFinyKta5nDcwAWybe')
           .get()
           .then(async (snapshot) => {
-            let userData = [];
-            snapshot.docs.forEach((doc) => {
-              console.log(doc.data());
-              userData = [{ ...doc.data(), id: doc.id }];
-            });
+            let userData = {id: res.user.uid, userDetails: snapshot.data()[res.user.uid]};
+            // snapshot.docs.forEach((doc) => {
+            //   console.log(doc.data());
+            //   userData = [{ ...doc.data(), id: doc.id }];
+            // });
             await console.log("snapshot : ", snapshot);
             // setUserDetails(snapshot.docs)
 
@@ -102,7 +102,7 @@ function Signup() {
 
             console.log("UserData : ", userData);
 
-            if (userData.length !== 0) {
+            if (userData.userDetails ) {
               console.log("Here............................");
               notifySuccess("Login Successful");
               console.log(
@@ -114,7 +114,7 @@ function Signup() {
               // not found
               await db
                 .collection("users")
-                .doc(res.user.uid)
+                .doc("PrAFinyKta5nDcwAWybe")
                 .set(
                   {
                     [res.user.uid]: {

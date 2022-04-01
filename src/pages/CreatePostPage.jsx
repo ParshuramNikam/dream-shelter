@@ -1,10 +1,10 @@
 import React from 'react'
 import CreatePost from '../components/reactQuill/CreatePost'
 
-const CreatePostPage = () => {
+const CreatePostPage = ({userDetails}) => {
     return (
         <div>
-            <CreatePost />
+            <CreatePost userDetails={userDetails} />
         </div>
     )
 }

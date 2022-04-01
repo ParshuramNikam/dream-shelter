@@ -4,14 +4,20 @@ import EditorToolbar, { modules, formats } from "./EditorToolbar";
 import "react-quill/dist/quill.snow.css";
 import "./TextEditor.css";
 import UploadImage from "./UploadImage";
+import { db, storage } from "../../database/firebase.config";
+import { createUID } from "../../utils/createUID";
+import firebase from "firebase";
+import UserDetailedInfo from "../UserDetailedInfo";
 // import axios from 'axios';
 
-function Add() {
+function Add({userDetails}) {
   const [userInfo, setuserInfo] = useState({
     title: "",
     description: "",
     information: "",
   });
+  const [blogPostTags, setBlogPostTags] = useState(null);
+  const [banner, setBanner] = useState(null);
 
   const [showDropDown, setShowDropDown] = useState(false);
 
@@ -34,10 +40,50 @@ function Add() {
     });
   };
   const [isError, setError] = useState(null);
+
   const addDetails = async (event) => {
+    const id = createUID();
     try {
       event.preventDefault();
       const { title, description } = userInfo;
+      const blogTags = blogPostTags.trim().replaceAll(" ", "").split(",");
+
+      let bucketName = `${localStorage.getItem(
+        "ds-user-uid"
+      )}/blogPostBannerImages`;
+      let file = banner;
+      let storageRef = await storage.ref(`${bucketName}/${id}`);
+      // const uploadTask = await storageRef.put(file);
+      await storageRef
+        .put(file)
+        .on(firebase.storage.TaskEvent.STATE_CHANGED, async () => {
+          let bannerImageURL = await storageRef.fullPath;
+          // bannerImageURL.then((result) => {
+          //   console.log(result);
+          // });
+          console.log(bannerImageURL);
+        });
+
+      await db
+        .collection("blogPosts")
+        .doc("suMBrSmkTuc5f4vwPdYC")
+        .update({
+          [id]: {
+            blogUserId: localStorage.getItem('ds-user-uid'),
+            title: title,
+            description: description,
+            tags: await blogPostTags.trim().replaceAll(" ", "").split(","),
+            createdAt: new Date(),
+            fname: userDetails.fname,
+            lname: userDetails.lname,
+            photoURL: userDetails.photoURL,
+          },
+        })
+        .then(() => {
+          console.log("Blog post added succesfully!");
+        })
+        .catch((err) => console.log(err));
+
       alert(title + "    " + description);
       //   event.persist();
       //   if(userInfo.description.length < 50){
@@ -87,7 +133,15 @@ function Add() {
                   </label>
                 </div>
 
-                <UploadImage /> 
+                <UploadImage banner={banner} setBanner={setBanner} />
+
+                <div>Enter tags for your blog:</div>
+                <textarea
+                  className="w-full border-2 rounded-lg p-2 mt-3 border-gray-500 text-black cursor-text p2 h-12"
+                  placeholder="ex: college, Visa, Abroad Studies "
+                  value={blogPostTags}
+                  onChange={(e) => setBlogPostTags(e.target.value)}
+                ></textarea>
 
                 <div className="clearfix"></div>
                 <div className="form-group col-md-12 editor">
@@ -99,14 +153,23 @@ function Add() {
                   <br />
                   <div className="bg-white">
                     <EditorToolbar toolbarId={"t1"} />
+                   
                     <ReactQuill
+                      theme="snow"
+                      value={userInfo.description}
+                      onChange={ondescription}
+                      placeholder={"Describe here..."}
+                    ></ReactQuill>
+                    
+                    {/* below code for editor with images and other options */}
+                    {/* <ReactQuill
                       theme="snow"
                       value={userInfo.description}
                       onChange={ondescription}
                       placeholder={"Describe here..."}
                       modules={modules("t1")}
                       formats={formats}
-                    />
+                    /> */}
                   </div>
                 </div>
 
