@@ -73,7 +73,7 @@ function Add({userDetails}) {
             title: title,
             description: description,
             tags: await blogPostTags.trim().replaceAll(" ", "").split(","),
-            createdAt: new Date(),
+            createdAt: Date.now(),
             fname: userDetails.fname,
             lname: userDetails.lname,
             photoURL: userDetails.photoURL,

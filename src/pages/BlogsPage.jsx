@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import BlogPost from "../components/blogspot/BlogPost";
 import { blogList } from "../dummy-data/data";
-import { db } from "../database/firebase.config.js";
+import { db, storage } from "../database/firebase.config.js";
 
 const BlogsPage = ({userDetails}) => {
   const [blogPosts, setBlogPosts] = useState([]);
+
   useEffect(() => {
     db.collection("blogPosts")
       .doc("suMBrSmkTuc5f4vwPdYC")
@@ -19,6 +20,7 @@ const BlogsPage = ({userDetails}) => {
           ]);
         });
       });
+
   }, []);
 
   return (
@@ -54,6 +56,7 @@ const BlogsPage = ({userDetails}) => {
               title={blog.blogDetails.title}
               subCategory={blog.blogDetails.tags}
               description={blog.blogDetails.description}
+              authorId={blog.blogDetails.blogUserId}
               authorName={blog.blogDetails.fname+" "+blog.blogDetails.lname}
               authorAvatar={blog.blogDetails.photoURL}
             //   cover={blog.blogDetails.bane}
