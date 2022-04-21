@@ -8,8 +8,8 @@ const firebaseConfig = {
   projectId: "dream-shelter-cce6d",
   storageBucket: "dream-shelter-cce6d.appspot.com",
   messagingSenderId: "139495408235",
-  appId: "1:139495408235:web:9046a8a2e77ac1d2ac672e"
-};
+  appId: "1:139495408235:web:9046a8a2e77ac1d2ac672e" 
+}; 
 
 firebase.initializeApp(firebaseConfig)
 const db = firebase.firestore()
